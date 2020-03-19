@@ -16,32 +16,26 @@
 
 package org.activiti.runtime.api.model.impl;
 
+import static java.util.Arrays.asList;
+import java.util.Date;
 import org.activiti.api.task.model.Task;
+import static org.activiti.api.task.model.Task.TaskStatus.*;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.impl.persistence.entity.IdentityLinkEntityImpl;
 import org.activiti.engine.task.IdentityLink;
 import org.activiti.engine.task.IdentityLinkType;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
-import java.util.Date;
-
-import static java.util.Arrays.asList;
-import static org.activiti.api.task.model.Task.TaskStatus.ASSIGNED;
-import static org.activiti.api.task.model.Task.TaskStatus.CANCELLED;
-import static org.activiti.api.task.model.Task.TaskStatus.CREATED;
-import static org.activiti.api.task.model.Task.TaskStatus.SUSPENDED;
 import static org.activiti.runtime.api.model.impl.MockTaskBuilder.taskBuilder;
 import static org.activiti.runtime.api.model.impl.MockTaskBuilder.taskEntityBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class APITaskConverterTest {
 
     @InjectMocks
@@ -49,11 +43,6 @@ public class APITaskConverterTest {
 
     @Mock
     private TaskService taskService;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void should_convertTask_when_allFieldsAreSet() {

@@ -1,7 +1,6 @@
 package org.activiti.engine.impl.cmd;
 
 import java.util.List;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.interceptor.Command;

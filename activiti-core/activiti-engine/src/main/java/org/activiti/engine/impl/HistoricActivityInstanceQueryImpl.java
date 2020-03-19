@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@
 package org.activiti.engine.impl;
 
 import java.util.List;
-
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricActivityInstanceQuery;
@@ -112,12 +111,12 @@ public class HistoricActivityInstanceQueryImpl extends AbstractQuery<HistoricAct
     this.finished = false;
     return this;
   }
-  
+
   public HistoricActivityInstanceQuery deleteReason(String deleteReason) {
     this.deleteReason = deleteReason;
     return this;
   }
-  
+
   public HistoricActivityInstanceQuery deleteReasonLike(String deleteReasonLike) {
     this.deleteReasonLike = deleteReasonLike;
     return this;
@@ -130,7 +129,7 @@ public class HistoricActivityInstanceQueryImpl extends AbstractQuery<HistoricAct
     this.tenantId = tenantId;
     return this;
   }
-  
+
   public String getTenantId() {
     return tenantId;
   }
@@ -142,7 +141,7 @@ public class HistoricActivityInstanceQueryImpl extends AbstractQuery<HistoricAct
     this.tenantIdLike = tenantIdLike;
     return this;
   }
-  
+
   public String getTenantIdLike() {
     return tenantIdLike;
   }
@@ -151,10 +150,10 @@ public class HistoricActivityInstanceQueryImpl extends AbstractQuery<HistoricAct
     this.withoutTenantId = true;
     return this;
   }
-  
+
   public boolean isWithoutTenantId() {
     return withoutTenantId;
-  }  
+  }
 
   // ordering
   // /////////////////////////////////////////////////////////////////
@@ -269,5 +268,5 @@ public class HistoricActivityInstanceQueryImpl extends AbstractQuery<HistoricAct
   public String getDeleteReasonLike() {
     return deleteReasonLike;
   }
-  
+
 }

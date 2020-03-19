@@ -1,14 +1,8 @@
 package org.activiti.core.common.spring.security.policies;
 
+import java.util.*;
 import org.activiti.api.runtime.shared.security.SecurityManager;
 import org.activiti.core.common.spring.security.policies.conf.SecurityPoliciesProperties;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public abstract class BaseSecurityPoliciesManagerImpl implements SecurityPoliciesManager {
 

@@ -16,13 +16,12 @@
 
 package org.activiti.runtime.api.model.impl;
 
+import static java.util.Collections.singletonMap;
 import org.activiti.api.process.model.BPMNSignal;
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.delegate.event.impl.ActivitiSignalEventImpl;
-import org.junit.Test;
-
-import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class ToSignalConverterTest {
 

@@ -18,20 +18,20 @@ package org.activiti.application;
 
 import java.io.IOException;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.Mock;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
-
+@ExtendWith(MockitoExtension.class)
 public class ApplicationDiscoveryTest {
 
     private ApplicationDiscovery applicationDiscovery;
@@ -39,9 +39,8 @@ public class ApplicationDiscoveryTest {
     @Mock
     private ResourcePatternResolver resourceLoader;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        initMocks(this);
         applicationDiscovery = new ApplicationDiscovery(resourceLoader, "classpath:/applications/");
     }
 

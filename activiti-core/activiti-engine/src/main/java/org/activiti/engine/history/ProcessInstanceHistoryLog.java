@@ -2,7 +2,6 @@ package org.activiti.engine.history;
 
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.runtime.ProcessInstance;
 

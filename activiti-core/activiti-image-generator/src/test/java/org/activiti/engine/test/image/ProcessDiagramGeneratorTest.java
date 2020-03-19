@@ -3,8 +3,8 @@ package org.activiti.engine.test.image;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import static java.util.Collections.emptyList;
 import java.util.List;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.ProcessEngines;
@@ -20,9 +20,8 @@ import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.anim.dom.SVGOMDocument;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.apache.commons.io.IOUtils;
-
-import static java.util.Collections.emptyList;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class ProcessDiagramGeneratorTest extends PluggableActivitiTestCase {
 

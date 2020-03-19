@@ -13,9 +13,10 @@
 
 package org.activiti.engine.impl.bpmn.helper;
 
-import org.activiti.bpmn.model.*;
+import java.util.*;
 import org.activiti.bpmn.model.Error;
 import org.activiti.bpmn.model.Process;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.BpmnError;
 import org.activiti.engine.delegate.DelegateExecution;
@@ -28,8 +29,6 @@ import org.activiti.engine.impl.util.CollectionUtil;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 import org.activiti.engine.impl.util.ReflectUtil;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
 
 /**
  * This class is responsible for finding and executing error handlers for BPMN Errors.

@@ -18,7 +18,6 @@ package org.activiti.api.runtime.event.impl;
 
 import java.util.Objects;
 import java.util.UUID;
-
 import org.activiti.api.model.shared.event.RuntimeEvent;
 
 public abstract class RuntimeEventImpl<ENTITY_TYPE, EVENT_TYPE extends Enum<?>> implements RuntimeEvent<ENTITY_TYPE, EVENT_TYPE> {
@@ -124,7 +123,7 @@ public abstract class RuntimeEventImpl<ENTITY_TYPE, EVENT_TYPE extends Enum<?>> 
     protected void setEntity(ENTITY_TYPE entity) {
         this.entity = entity;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -176,14 +175,14 @@ public abstract class RuntimeEventImpl<ENTITY_TYPE, EVENT_TYPE extends Enum<?>> 
             return false;
         }
         RuntimeEventImpl other = (RuntimeEventImpl) obj;
-        return Objects.equals(businessKey, other.businessKey) 
+        return Objects.equals(businessKey, other.businessKey)
                 && Objects.equals(entity, other.entity)
-                && Objects.equals(id, other.id) 
-                && Objects.equals(parentProcessInstanceId, other.parentProcessInstanceId) 
-                && Objects.equals(processDefinitionId, other.processDefinitionId) 
-                && Objects.equals(processDefinitionKey, other.processDefinitionKey) 
-                && Objects.equals(processDefinitionVersion, other.processDefinitionVersion) 
-                && Objects.equals(processInstanceId, other.processInstanceId) 
+                && Objects.equals(id, other.id)
+                && Objects.equals(parentProcessInstanceId, other.parentProcessInstanceId)
+                && Objects.equals(processDefinitionId, other.processDefinitionId)
+                && Objects.equals(processDefinitionKey, other.processDefinitionKey)
+                && Objects.equals(processDefinitionVersion, other.processDefinitionVersion)
+                && Objects.equals(processInstanceId, other.processInstanceId)
                 && Objects.equals(timestamp, other.timestamp);
     }
 

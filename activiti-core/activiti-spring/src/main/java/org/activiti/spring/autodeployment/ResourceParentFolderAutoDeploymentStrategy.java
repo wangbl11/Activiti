@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import org.activiti.core.common.spring.project.ApplicationUpgradeContextService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.DeploymentBuilder;
@@ -28,7 +27,7 @@ import org.springframework.core.io.Resource;
 /**
  * Implementation of {@link AutoDeploymentStrategy} that performs a separate deployment for each set of {@link Resource}s that share the same parent folder. The namehint is used to prefix the names of
  * deployments. If the parent folder for a {@link Resource} cannot be determined, the resource's name is used.
- * 
+ *
 
  */
 public class ResourceParentFolderAutoDeploymentStrategy extends AbstractAutoDeploymentStrategy {

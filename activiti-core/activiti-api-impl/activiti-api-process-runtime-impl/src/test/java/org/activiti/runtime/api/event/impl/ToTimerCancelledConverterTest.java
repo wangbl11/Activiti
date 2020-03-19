@@ -16,21 +16,20 @@
 
 package org.activiti.runtime.api.event.impl;
 
+import java.util.Optional;
 import org.activiti.api.process.model.events.BPMNTimerCancelledEvent;
 import org.activiti.api.runtime.model.impl.BPMNTimerImpl;
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class ToTimerCancelledConverterTest {
 
     @InjectMocks
@@ -38,11 +37,6 @@ public class ToTimerCancelledConverterTest {
 
     @Mock
     private BPMNTimerConverter bpmnTimerConverter;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void shouldReturnConvertedEventsWhenInternalEvenIsRelatedToTimers() {

@@ -16,19 +16,9 @@
 package org.activiti.runtime.api.impl;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-
-import org.activiti.api.process.model.payloads.ReceiveMessagePayload;
-import org.activiti.api.process.model.payloads.SetProcessVariablesPayload;
-import org.activiti.api.process.model.payloads.SignalPayload;
-import org.activiti.api.process.model.payloads.StartMessagePayload;
-import org.activiti.api.process.model.payloads.StartProcessPayload;
+import org.activiti.api.process.model.payloads.*;
 import org.activiti.common.util.DateFormatterProvider;
 import org.activiti.engine.ActivitiException;
 import org.activiti.spring.process.ProcessExtensionService;

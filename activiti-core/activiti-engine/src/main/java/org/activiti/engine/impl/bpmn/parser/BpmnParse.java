@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,25 +15,12 @@ package org.activiti.engine.impl.bpmn.parser;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.activiti.bpmn.constants.BpmnXMLConstants;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.exceptions.XMLException;
-import org.activiti.bpmn.model.BoundaryEvent;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.Event;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.FlowNode;
-import org.activiti.bpmn.model.GraphicInfo;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.SequenceFlow;
-import org.activiti.bpmn.model.SubProcess;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.delegate.event.impl.ActivitiEventSupport;
@@ -43,11 +30,7 @@ import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.util.io.InputStreamSource;
-import org.activiti.engine.impl.util.io.ResourceStreamSource;
-import org.activiti.engine.impl.util.io.StreamSource;
-import org.activiti.engine.impl.util.io.StringStreamSource;
-import org.activiti.engine.impl.util.io.UrlStreamSource;
+import org.activiti.engine.impl.util.io.*;
 import org.activiti.validation.ProcessValidator;
 import org.activiti.validation.ValidationError;
 import org.slf4j.Logger;
@@ -55,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Specific parsing of one BPMN 2.0 XML file, created by the {@link BpmnParser}.
- * 
+ *
 
 
  */
@@ -108,7 +91,7 @@ public class BpmnParse implements BpmnXMLConstants {
 
   /**
    * Mapping containing values stored during the first phase of parsing since other elements can reference these messages.
-   * 
+   *
    * All the map's elements are defined outside the process definition(s), which means that this map doesn't need to be re-initialized for each new process definition.
    */
   protected Map<String, String> prefixs = new HashMap<String, String>();
@@ -185,7 +168,7 @@ public class BpmnParse implements BpmnXMLConstants {
           }
         }
       }
-      
+
       bpmnModel.setSourceSystemId(sourceSystemId);
       bpmnModel.setEventSupport(new ActivitiEventSupport());
 
@@ -265,7 +248,7 @@ public class BpmnParse implements BpmnXMLConstants {
     }
     this.streamSource = streamSource;
   }
-  
+
   public BpmnParse setSourceSystemId(String sourceSystemId) {
     this.sourceSystemId = sourceSystemId;
     return this;
@@ -355,7 +338,7 @@ public class BpmnParse implements BpmnXMLConstants {
           LOGGER.warn("Invalid reference in diagram interchange definition: " + bpmnReference + " does not reference a flow node");
         }
       }
-      
+
       for (String bpmnReference : bpmnModel.getFlowLocationMap().keySet()) {
         if (bpmnModel.getFlowElement(bpmnReference) == null) {
           // ACT-1625: don't warn when artifacts are referenced from DI
@@ -376,7 +359,7 @@ public class BpmnParse implements BpmnXMLConstants {
         ProcessDefinitionEntity processDefinition = getProcessDefinition(process.getId());
         if (processDefinition != null) {
           processDefinition.setGraphicalNotationDefined(true);
-          
+
           for (String edgeId : bpmnModel.getFlowLocationMap().keySet()) {
             if (bpmnModel.getFlowElement(edgeId) != null) {
               createBPMNEdge(edgeId, bpmnModel.getFlowLocationGraphicInfo(edgeId));
@@ -397,7 +380,7 @@ public class BpmnParse implements BpmnXMLConstants {
         waypoints.add((int) waypointInfo.getY());
       }
       sequenceFlow.setWaypoints(waypoints);
-      
+
     } else if (bpmnModel.getArtifact(key) != null) {
       // it's an association, so nothing to do
     } else {

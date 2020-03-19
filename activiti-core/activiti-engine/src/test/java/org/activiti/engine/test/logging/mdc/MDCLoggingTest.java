@@ -1,15 +1,11 @@
 package org.activiti.engine.test.logging.mdc;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-
-import org.activiti.engine.impl.test.PluggableActivitiTestCase;
-import org.activiti.engine.logging.LogMDC;
-import org.activiti.engine.test.Deployment;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import org.activiti.engine.impl.test.PluggableActivitiTestCase;
+import org.activiti.engine.logging.LogMDC;
+import org.activiti.engine.test.Deployment;
 import org.slf4j.LoggerFactory;
 
 public class MDCLoggingTest extends PluggableActivitiTestCase {
@@ -37,7 +33,7 @@ public class MDCLoggingTest extends PluggableActivitiTestCase {
         console.setName("MemoryAppender");
 
         rootLogger.addAppender(console);
-    
+
     LogMDC.setMDCEnabled(true);
   }
 

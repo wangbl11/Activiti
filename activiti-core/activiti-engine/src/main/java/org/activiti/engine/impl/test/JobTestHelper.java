@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ package org.activiti.engine.impl.test;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Callable;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ManagementService;
 import org.activiti.engine.ProcessEngineConfiguration;
@@ -46,7 +45,7 @@ public class JobTestHelper {
 
     AsyncExecutor asyncExecutor = processEngineConfiguration.getAsyncExecutor();
     asyncExecutor.start();
-    
+
     try {
       Timer timer = new Timer();
       InteruptTask task = new InteruptTask(Thread.currentThread());
@@ -77,18 +76,18 @@ public class JobTestHelper {
       }
     }
   }
-  
+
   public static void waitForJobExecutorToProcessAllJobsAndExecutableTimerJobs(ProcessEngineConfiguration processEngineConfiguration, ManagementService managementService, long maxMillisToWait, long intervalMillis) {
     waitForJobExecutorToProcessAllJobsAndExecutableTimerJobs(processEngineConfiguration, managementService, maxMillisToWait, intervalMillis, true);
   }
-  
+
   public static void waitForJobExecutorToProcessAllJobsAndExecutableTimerJobs(ProcessEngineConfiguration processEngineConfiguration, ManagementService managementService, long maxMillisToWait, long intervalMillis,
       boolean shutdownExecutorWhenFinished) {
 
     AsyncExecutor asyncExecutor = processEngineConfiguration.getAsyncExecutor();
     asyncExecutor.start();
     processEngineConfiguration.setAsyncExecutorActivate(true);
-    
+
     try {
       Timer timer = new Timer();
       InteruptTask task = new InteruptTask(Thread.currentThread());
@@ -191,7 +190,7 @@ public class JobTestHelper {
   public static boolean areJobsAvailable(ManagementService managementService) {
     return !managementService.createJobQuery().list().isEmpty();
   }
-  
+
   public static boolean areJobsOrExecutableTimersAvailable(ManagementService managementService) {
     boolean emptyJobs = managementService.createJobQuery().list().isEmpty();
     if (emptyJobs) {

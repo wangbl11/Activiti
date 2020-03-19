@@ -1,7 +1,6 @@
 package org.activiti.engine.impl.cmd;
 
 import java.io.Serializable;
-
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.ActivitiObjectNotFoundException;
 import org.activiti.engine.delegate.event.ActivitiEventType;
@@ -31,7 +30,7 @@ public class DeleteDeadLetterJobCmd implements Command<Object>, Serializable {
 
   public Object execute(CommandContext commandContext) {
     DeadLetterJobEntity jobToDelete = getJobToDelete(commandContext);
-    
+
     sendCancelEvent(jobToDelete);
 
     commandContext.getDeadLetterJobEntityManager().delete(jobToDelete);

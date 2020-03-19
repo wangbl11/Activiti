@@ -16,16 +16,9 @@ package org.activiti.engine.impl.calendar;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
-
+import java.util.*;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
-
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.impl.util.TimeZoneUtil;

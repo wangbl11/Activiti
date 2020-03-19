@@ -17,14 +17,12 @@
 package org.activiti.validation.validator.impl;
 
 import java.util.ArrayList;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.ServiceTask;
 import org.activiti.validation.ValidationError;
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class ServiceTaskValidatorTest {
 

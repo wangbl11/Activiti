@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,6 +12,7 @@
  */
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.List;
 import org.activiti.bpmn.model.BoundaryEvent;
 import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.engine.delegate.DelegateExecution;
@@ -23,8 +24,6 @@ import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntity;
 import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntityManager;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.MessageEventSubscriptionEntity;
-
-import java.util.List;
 
 /**
 
@@ -47,13 +46,13 @@ public class BoundaryMessageEventActivityBehavior extends BoundaryEventActivityB
   public void execute(DelegateExecution execution) {
     CommandContext commandContext = Context.getCommandContext();
     ExecutionEntity executionEntity = (ExecutionEntity) execution;
-    
-    MessageEventSubscriptionEntity messageEvent = messageExecutionContext.createMessageEventSubscription(commandContext, 
+
+    MessageEventSubscriptionEntity messageEvent = messageExecutionContext.createMessageEventSubscription(commandContext,
                                                                                                          executionEntity);
     if (commandContext.getProcessEngineConfiguration().getEventDispatcher().isEnabled()) {
-        
+
         commandContext.getProcessEngineConfiguration().getEventDispatcher()
-                .dispatchEvent(ActivitiEventBuilder.createMessageWaitingEvent(executionEntity, 
+                .dispatchEvent(ActivitiEventBuilder.createMessageWaitingEvent(executionEntity,
                                                                               messageEvent.getEventName(),
                                                                               messageEvent.getConfiguration()));
     }
@@ -87,5 +86,5 @@ public class BoundaryMessageEventActivityBehavior extends BoundaryEventActivityB
   public MessageExecutionContext getMessageExecutionContext() {
     return messageExecutionContext;
   }
-  
+
 }

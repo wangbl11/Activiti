@@ -14,7 +14,6 @@
 package org.activiti.spring.test.taskListener;
 
 import java.util.List;
-
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.test.Deployment;

@@ -1,7 +1,6 @@
 package org.activiti.standalone.cfg;
 
 import java.util.List;
-
 import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;

@@ -14,9 +14,8 @@
 
 package org.activiti.engine.impl.persistence.entity;
 
-import org.activiti.engine.api.internal.Internal;
-
 import java.util.Date;
+import org.activiti.engine.api.internal.Internal;
 
 /**
 
@@ -49,5 +48,5 @@ public interface HistoricScopeInstanceEntity extends Entity {
   String getDeleteReason();
 
   void setDeleteReason(String deleteReason);
-  
+
 }

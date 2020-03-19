@@ -17,7 +17,6 @@
 package org.activiti.test.operations;
 
 import java.util.List;
-
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.payloads.SignalPayload;
 import org.activiti.api.process.model.payloads.StartProcessPayload;

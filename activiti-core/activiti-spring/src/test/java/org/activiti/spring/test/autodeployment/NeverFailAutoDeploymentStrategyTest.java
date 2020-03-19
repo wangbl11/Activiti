@@ -1,7 +1,6 @@
 package org.activiti.spring.test.autodeployment;
 
 import java.util.List;
-
 import org.activiti.spring.autodeployment.NeverFailAutoDeploymentStrategy;
 import org.activiti.spring.impl.test.SpringActivitiTestCase;
 import org.junit.Test;

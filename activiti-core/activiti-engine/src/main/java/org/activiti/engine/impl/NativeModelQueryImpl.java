@@ -1,12 +1,11 @@
 package org.activiti.engine.impl;
 
-import org.activiti.engine.impl.interceptor.CommandContext;
-import org.activiti.engine.impl.interceptor.CommandExecutor;
-import org.activiti.engine.repository.NativeModelQuery;
-import org.activiti.engine.repository.Model;
-
 import java.util.List;
 import java.util.Map;
+import org.activiti.engine.impl.interceptor.CommandContext;
+import org.activiti.engine.impl.interceptor.CommandExecutor;
+import org.activiti.engine.repository.Model;
+import org.activiti.engine.repository.NativeModelQuery;
 
 public class NativeModelQueryImpl extends AbstractNativeQuery<NativeModelQuery, Model> implements NativeModelQuery {
 

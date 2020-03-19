@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.event.impl;
 
 import java.util.Optional;
-
 import org.activiti.api.process.model.events.BPMNMessageSentEvent;
 import org.activiti.api.runtime.event.impl.BPMNMessageSentEventImpl;
 import org.activiti.engine.delegate.event.ActivitiMessageEvent;

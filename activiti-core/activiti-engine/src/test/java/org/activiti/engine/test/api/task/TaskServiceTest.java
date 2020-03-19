@@ -14,18 +14,8 @@
 package org.activiti.engine.test.api.task;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.activiti.engine.ActivitiException;
-import org.activiti.engine.ActivitiIllegalArgumentException;
-import org.activiti.engine.ActivitiObjectNotFoundException;
-import org.activiti.engine.ActivitiOptimisticLockingException;
-import org.activiti.engine.ActivitiTaskAlreadyClaimedException;
+import java.util.*;
+import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricDetail;
 import org.activiti.engine.history.HistoricTaskInstance;
@@ -38,16 +28,10 @@ import org.activiti.engine.impl.persistence.entity.HistoricDetailVariableInstanc
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
 import org.activiti.engine.impl.util.CollectionUtil;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Attachment;
-import org.activiti.engine.task.Comment;
-import org.activiti.engine.task.DelegationState;
-import org.activiti.engine.task.Event;
-import org.activiti.engine.task.IdentityLink;
-import org.activiti.engine.task.IdentityLinkType;
-import org.activiti.engine.task.Task;
+import org.activiti.engine.task.*;
 import org.activiti.engine.test.Deployment;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
 public class TaskServiceTest extends PluggableActivitiTestCase {
 

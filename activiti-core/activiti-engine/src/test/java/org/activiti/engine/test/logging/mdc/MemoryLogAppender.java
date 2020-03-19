@@ -1,8 +1,7 @@
 package org.activiti.engine.test.logging.mdc;
 
-import java.io.ByteArrayOutputStream;
-
 import ch.qos.logback.core.OutputStreamAppender;
+import java.io.ByteArrayOutputStream;
 
 /**
  * @author Saeid Mirzaei

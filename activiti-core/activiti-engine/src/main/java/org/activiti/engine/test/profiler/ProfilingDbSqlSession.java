@@ -3,7 +3,6 @@ package org.activiti.engine.test.profiler;
 import java.sql.Connection;
 import java.util.Collection;
 import java.util.List;
-
 import org.activiti.engine.impl.db.BulkDeleteOperation;
 import org.activiti.engine.impl.db.DbSqlSession;
 import org.activiti.engine.impl.db.DbSqlSessionFactory;

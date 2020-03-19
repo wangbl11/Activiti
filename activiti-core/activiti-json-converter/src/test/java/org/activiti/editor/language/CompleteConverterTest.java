@@ -1,17 +1,8 @@
 package org.activiti.editor.language;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.IntermediateCatchEvent;
-import org.activiti.bpmn.model.ReceiveTask;
-import org.activiti.bpmn.model.SignalEventDefinition;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.UserTask;
-import org.junit.Test;
+import org.activiti.bpmn.model.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class CompleteConverterTest extends AbstractConverterTest {
 

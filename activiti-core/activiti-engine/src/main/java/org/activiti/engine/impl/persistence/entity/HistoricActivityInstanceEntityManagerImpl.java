@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.impl.persistence.entity;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.impl.HistoricActivityInstanceQueryImpl;
 import org.activiti.engine.impl.Page;
@@ -29,25 +28,25 @@ import org.activiti.engine.impl.persistence.entity.data.HistoricActivityInstance
 
  */
 public class HistoricActivityInstanceEntityManagerImpl extends AbstractEntityManager<HistoricActivityInstanceEntity> implements HistoricActivityInstanceEntityManager {
-  
+
   protected HistoricActivityInstanceDataManager historicActivityInstanceDataManager;
-  
-  
+
+
   public HistoricActivityInstanceEntityManagerImpl(ProcessEngineConfigurationImpl processEngineConfiguration, HistoricActivityInstanceDataManager historicActivityInstanceDataManager) {
     super(processEngineConfiguration);
     this.historicActivityInstanceDataManager = historicActivityInstanceDataManager;
   }
-  
+
   @Override
   protected DataManager<HistoricActivityInstanceEntity> getDataManager() {
     return historicActivityInstanceDataManager;
   }
-  
+
   @Override
   public List<HistoricActivityInstanceEntity> findUnfinishedHistoricActivityInstancesByExecutionAndActivityId(String executionId, String activityId) {
     return historicActivityInstanceDataManager.findUnfinishedHistoricActivityInstancesByExecutionAndActivityId(executionId, activityId);
   }
-  
+
   @Override
   public List<HistoricActivityInstanceEntity> findUnfinishedHistoricActivityInstancesByProcessInstanceId(String processInstanceId) {
     return historicActivityInstanceDataManager.findUnfinishedHistoricActivityInstancesByProcessInstanceId(processInstanceId);
@@ -87,5 +86,5 @@ public class HistoricActivityInstanceEntityManagerImpl extends AbstractEntityMan
   public void setHistoricActivityInstanceDataManager(HistoricActivityInstanceDataManager historicActivityInstanceDataManager) {
     this.historicActivityInstanceDataManager = historicActivityInstanceDataManager;
   }
-  
+
 }

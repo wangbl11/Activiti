@@ -2,7 +2,6 @@ package org.activiti.engine.impl.event.logger.handler;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
 

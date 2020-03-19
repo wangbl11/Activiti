@@ -1,14 +1,13 @@
 package org.activiti.engine.impl.persistence.entity;
 
 import java.io.Serializable;
-
 import org.activiti.engine.impl.context.Context;
 
 /**
  * <p>
  * Encapsulates the logic for transparently working with {@link ByteArrayEntity} .
  * </p>
- * 
+ *
 
  */
 public class ByteArrayRef implements Serializable {

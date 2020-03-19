@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.event.impl;
 
 import java.util.Optional;
-
 import org.activiti.api.runtime.model.impl.StartMessageSubscriptionImpl;
 import org.activiti.engine.impl.persistence.entity.MessageEventSubscriptionEntity;
 
@@ -36,5 +35,5 @@ public class StartMessageSubscriptionConverter {
                                                                        .build())
                        .orElseThrow(() -> new IllegalArgumentException("messageEventSubscriptionEntity must not be null"));
     }
-    
+
 }

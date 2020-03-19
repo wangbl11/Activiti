@@ -13,6 +13,9 @@
 
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.activiti.bpmn.model.Signal;
 import org.activiti.bpmn.model.SignalEventDefinition;
 import org.activiti.engine.delegate.DelegateExecution;
@@ -23,10 +26,6 @@ import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntityManage
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.SignalEventSubscriptionEntity;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public class IntermediateThrowSignalEventActivityBehavior extends AbstractBpmnActivityBehavior {
 
@@ -81,7 +80,7 @@ public class IntermediateThrowSignalEventActivityBehavior extends AbstractBpmnAc
             Map<String, Object> signalVariables = Optional.ofNullable(execution.getVariables())
                                                           .filter(it -> !it.isEmpty())
                                                           .orElse(null);
-            
+
             eventSubscriptionEntityManager.eventReceived(signalEventSubscriptionEntity,
                                                          signalVariables,
                                                          signalEventDefinition.isAsync());

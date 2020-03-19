@@ -16,12 +16,9 @@
 
 package org.activiti.spring.boot.tasks;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.api.model.shared.model.VariableInstance;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.runtime.shared.query.Pageable;
@@ -29,6 +26,7 @@ import org.activiti.api.task.model.Task;
 import org.activiti.api.task.model.Task.TaskStatus;
 import org.activiti.api.task.model.builders.TaskPayloadBuilder;
 import org.activiti.api.task.runtime.TaskRuntime;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestComponent;
 

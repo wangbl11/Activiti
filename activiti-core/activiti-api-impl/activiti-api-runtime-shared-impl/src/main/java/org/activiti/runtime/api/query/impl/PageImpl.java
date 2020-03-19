@@ -16,9 +16,8 @@
 
 package org.activiti.runtime.api.query.impl;
 
-import org.activiti.api.runtime.shared.query.Page;
-
 import java.util.List;
+import org.activiti.api.runtime.shared.query.Page;
 
 public class PageImpl<T> implements Page<T> {
 

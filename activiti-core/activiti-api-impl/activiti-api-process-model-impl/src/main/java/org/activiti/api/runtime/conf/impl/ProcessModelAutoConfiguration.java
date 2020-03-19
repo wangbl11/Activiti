@@ -16,53 +16,6 @@
 
 package org.activiti.api.runtime.conf.impl;
 
-import org.activiti.api.process.model.BPMNActivity;
-import org.activiti.api.process.model.BPMNError;
-import org.activiti.api.process.model.BPMNMessage;
-import org.activiti.api.process.model.BPMNSequenceFlow;
-import org.activiti.api.process.model.BPMNSignal;
-import org.activiti.api.process.model.BPMNTimer;
-import org.activiti.api.process.model.IntegrationContext;
-import org.activiti.api.process.model.MessageSubscription;
-import org.activiti.api.process.model.ProcessDefinition;
-import org.activiti.api.process.model.ProcessInstance;
-import org.activiti.api.process.model.StartMessageDeploymentDefinition;
-import org.activiti.api.process.model.StartMessageSubscription;
-import org.activiti.api.process.model.events.StartMessageDeployedEvent;
-import org.activiti.api.process.model.payloads.DeleteProcessPayload;
-import org.activiti.api.process.model.payloads.GetProcessDefinitionsPayload;
-import org.activiti.api.process.model.payloads.GetProcessInstancesPayload;
-import org.activiti.api.process.model.payloads.GetVariablesPayload;
-import org.activiti.api.process.model.payloads.MessageEventPayload;
-import org.activiti.api.process.model.payloads.ReceiveMessagePayload;
-import org.activiti.api.process.model.payloads.RemoveProcessVariablesPayload;
-import org.activiti.api.process.model.payloads.ResumeProcessPayload;
-import org.activiti.api.process.model.payloads.SetProcessVariablesPayload;
-import org.activiti.api.process.model.payloads.SignalPayload;
-import org.activiti.api.process.model.payloads.StartMessagePayload;
-import org.activiti.api.process.model.payloads.StartProcessPayload;
-import org.activiti.api.process.model.payloads.SuspendProcessPayload;
-import org.activiti.api.process.model.payloads.TimerPayload;
-import org.activiti.api.process.model.payloads.UpdateProcessPayload;
-import org.activiti.api.process.model.results.ProcessInstanceResult;
-import org.activiti.api.runtime.event.impl.StartMessageDeployedEventImpl;
-import org.activiti.api.runtime.model.impl.BPMNActivityImpl;
-import org.activiti.api.runtime.model.impl.BPMNErrorImpl;
-import org.activiti.api.runtime.model.impl.BPMNMessageImpl;
-import org.activiti.api.runtime.model.impl.BPMNSequenceFlowImpl;
-import org.activiti.api.runtime.model.impl.BPMNSignalImpl;
-import org.activiti.api.runtime.model.impl.BPMNTimerImpl;
-import org.activiti.api.runtime.model.impl.IntegrationContextImpl;
-import org.activiti.api.runtime.model.impl.MessageSubscriptionImpl;
-import org.activiti.api.runtime.model.impl.ProcessDefinitionImpl;
-import org.activiti.api.runtime.model.impl.ProcessInstanceImpl;
-import org.activiti.api.runtime.model.impl.StartMessageDeploymentDefinitionImpl;
-import org.activiti.api.runtime.model.impl.StartMessageSubscriptionImpl;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.DeserializationConfig;
@@ -71,6 +24,16 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.activiti.api.process.model.*;
+import org.activiti.api.process.model.events.StartMessageDeployedEvent;
+import org.activiti.api.process.model.payloads.*;
+import org.activiti.api.process.model.results.ProcessInstanceResult;
+import org.activiti.api.runtime.event.impl.StartMessageDeployedEventImpl;
+import org.activiti.api.runtime.model.impl.*;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @AutoConfigureBefore({JacksonAutoConfiguration.class})
 @Configuration
@@ -118,7 +81,7 @@ public class ProcessModelAutoConfiguration {
                             StartMessageDeployedEventImpl.class);
         resolver.addMapping(StartMessageDeploymentDefinition.class,
                             StartMessageDeploymentDefinitionImpl.class);
-        
+
         module.registerSubtypes(new NamedType(ProcessInstanceResult.class,
                                               ProcessInstanceResult.class.getSimpleName()));
 

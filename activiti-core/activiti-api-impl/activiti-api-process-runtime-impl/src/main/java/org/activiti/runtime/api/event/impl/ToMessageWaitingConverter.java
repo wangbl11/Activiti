@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.event.impl;
 
 import java.util.Optional;
-
 import org.activiti.api.process.model.events.BPMNMessageWaitingEvent;
 import org.activiti.api.runtime.event.impl.BPMNMessageWaitingEventImpl;
 import org.activiti.engine.delegate.event.ActivitiMessageEvent;

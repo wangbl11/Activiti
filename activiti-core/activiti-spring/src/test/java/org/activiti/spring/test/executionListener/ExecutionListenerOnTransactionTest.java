@@ -15,7 +15,6 @@ package org.activiti.spring.test.executionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.runtime.ProcessInstance;

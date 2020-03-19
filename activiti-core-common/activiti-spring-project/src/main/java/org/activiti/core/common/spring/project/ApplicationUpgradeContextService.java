@@ -1,11 +1,10 @@
 package org.activiti.core.common.spring.project;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.activiti.core.common.project.model.ProjectManifest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;

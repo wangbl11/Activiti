@@ -2,7 +2,6 @@ package org.activiti.engine.impl.event.logger.handler;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.delegate.event.ActivitiActivityEvent;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.EventLogEntryEntity;
@@ -23,7 +22,7 @@ public class ActivityCompensatedEventHandler extends AbstractDatabaseEventLogger
     putInMapIfNotNull(data, Fields.PROCESS_INSTANCE_ID, activityEvent.getProcessInstanceId());
     putInMapIfNotNull(data, Fields.EXECUTION_ID, activityEvent.getExecutionId());
     putInMapIfNotNull(data, Fields.ACTIVITY_TYPE, activityEvent.getActivityType());
- 
+
     return createEventLogEntry(activityEvent.getProcessDefinitionId(), activityEvent.getProcessInstanceId(), activityEvent.getExecutionId(), null, data);
   }
 

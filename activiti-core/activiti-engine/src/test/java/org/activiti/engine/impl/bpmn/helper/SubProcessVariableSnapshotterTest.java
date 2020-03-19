@@ -2,14 +2,9 @@ package org.activiti.engine.impl.bpmn.helper;
 
 import java.util.Collections;
 import java.util.Map;
-
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
 

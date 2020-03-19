@@ -1,5 +1,6 @@
 package org.activiti.spring.test.components.scope;
 
+import java.io.Serializable;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,11 +8,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 
-import java.io.Serializable;
-
 /**
  * dumb object to demonstrate holding scoped state for the duration of a business process
- * 
+ *
 
  */
 public class StatefulObject implements Serializable, InitializingBean {

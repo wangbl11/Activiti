@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.test.ResourceActivitiTestCase;
 import org.activiti.engine.runtime.ProcessInstance;

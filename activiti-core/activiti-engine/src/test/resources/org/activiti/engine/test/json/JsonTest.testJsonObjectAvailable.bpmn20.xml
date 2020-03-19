@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions
   xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-  xmlns:activiti="http://activiti.org/bpmn"
   targetNamespace="Examples">
 
   <process id="testJsonAvailableProcess" name="Test JSON available process">
-  
+
     <startEvent id="theStart" />
     <sequenceFlow id="flow1" sourceRef="theStart" targetRef="userTask" />
     <userTask id="userTask" />
@@ -29,7 +28,7 @@ java.lang.System.out.println('  var2:'+jsonObj.get('var2'));
     <userTask id="userTaskSuccess" />
     <sequenceFlow id="flow4" sourceRef="userTaskSuccess" targetRef="theEndSuccess" />
     <endEvent id="theEndSuccess" />
-    
+
   </process>
 
 </definitions>

@@ -17,17 +17,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
-
 import org.activiti.engine.impl.cmd.CancelJobsCmd;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
 import org.activiti.engine.impl.util.IoUtil;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.runtime.Execution;
-import org.activiti.engine.runtime.Job;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.runtime.ProcessInstanceQuery;
-import org.activiti.engine.runtime.TimerJobQuery;
+import org.activiti.engine.runtime.*;
 import org.activiti.engine.test.Deployment;
 
 public class StartTimerEventTest extends PluggableActivitiTestCase {

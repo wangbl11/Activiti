@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.agenda;
 
 import java.util.LinkedList;
-
 import org.activiti.engine.ActivitiEngineAgenda;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
@@ -31,7 +30,7 @@ public class DefaultActivitiEngineAgenda implements ActivitiEngineAgenda {
 
     protected LinkedList<Runnable> operations = new LinkedList<Runnable>();
     protected CommandContext commandContext;
-    
+
     public DefaultActivitiEngineAgenda(CommandContext commandContext) {
       this.commandContext = commandContext;
     }

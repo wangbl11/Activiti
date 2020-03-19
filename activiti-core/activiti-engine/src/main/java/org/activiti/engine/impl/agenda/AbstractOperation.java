@@ -14,12 +14,12 @@ package org.activiti.engine.impl.agenda;
 
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.HasExecutionListeners;
+import org.activiti.engine.Agenda;
 import org.activiti.engine.delegate.ExecutionListener;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
-import org.activiti.engine.Agenda;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 
 /**

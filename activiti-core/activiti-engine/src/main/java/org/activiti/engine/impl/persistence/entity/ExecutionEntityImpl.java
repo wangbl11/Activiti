@@ -13,13 +13,7 @@
 
 package org.activiti.engine.impl.persistence.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.activiti.bpmn.model.ActivitiListener;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.engine.ActivitiException;

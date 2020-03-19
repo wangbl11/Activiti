@@ -2,7 +2,6 @@ package org.activiti.engine.test.jobexecutor;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;

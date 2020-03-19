@@ -3,7 +3,6 @@ package org.activiti.engine.test.db;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.engine.impl.Page;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
@@ -16,7 +15,7 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.test.Deployment;
 
 /**
- * 
+ *
 
  */
 public class ProcessInstanceSuspensionTest extends PluggableActivitiTestCase {
@@ -50,7 +49,7 @@ public class ProcessInstanceSuspensionTest extends PluggableActivitiTestCase {
 
     ProcessDefinition pd = repositoryService.createProcessDefinitionQuery().singleResult();
     runtimeService.startProcessInstanceByKey(pd.getKey());
-    
+
     // now there is one job:
     Job job = managementService.createTimerJobQuery().singleResult();
     assertNotNull(job);
@@ -68,13 +67,13 @@ public class ProcessInstanceSuspensionTest extends PluggableActivitiTestCase {
     acquiredJobs = executeAcquireJobsCommand();
     assertEquals(0, acquiredJobs.size());
   }
-  
+
   @Deployment(resources = { "org/activiti/engine/test/db/oneJobProcess.bpmn20.xml" })
   public void testJobsVisibleToAcquisitionIfDefinitionSuspendedWithoutProcessInstances() {
 
     ProcessDefinition pd = repositoryService.createProcessDefinitionQuery().singleResult();
     runtimeService.startProcessInstanceByKey(pd.getKey());
-    
+
     // now there is one job:
     Job job = managementService.createTimerJobQuery().singleResult();
     assertNotNull(job);
@@ -113,7 +112,7 @@ public class ProcessInstanceSuspensionTest extends PluggableActivitiTestCase {
       public List<TimerJobEntity> execute(CommandContext commandContext) {
         return processEngineConfiguration.getTimerJobEntityManager().findTimerJobsToExecute(new Page(0, 1));
       }
-      
+
     });
     assertEquals(1, jobs.size());
 
@@ -128,7 +127,7 @@ public class ProcessInstanceSuspensionTest extends PluggableActivitiTestCase {
         return processEngineConfiguration.getTimerJobEntityManager().findTimerJobsToExecute(new Page(0, 1));
       }
     });
-    
+
     assertEquals(0, jobs.size());
   }
 
@@ -148,7 +147,7 @@ public class ProcessInstanceSuspensionTest extends PluggableActivitiTestCase {
       public List<TimerJobEntity> execute(CommandContext commandContext) {
         return commandContext.getTimerJobEntityManager().findTimerJobsToExecute(new Page(0, 1));
       }
-      
+
     });
   }
 

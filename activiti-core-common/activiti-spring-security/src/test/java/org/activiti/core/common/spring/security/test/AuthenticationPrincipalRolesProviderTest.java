@@ -16,26 +16,24 @@
 
 package org.activiti.core.common.spring.security.test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import java.util.List;
 import org.activiti.core.common.spring.security.AuthenticationPrincipalRolesProvider;
 import org.activiti.core.common.spring.security.SimpleGrantedAuthoritiesResolver;
 import org.activiti.core.common.spring.security.SimpleGrantedAuthoritiesRolesMapper;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.util.List;
-
 
 public class AuthenticationPrincipalRolesProviderTest {
 
     private AuthenticationPrincipalRolesProvider subject;
-    
-    @Before
+
+    @BeforeEach
     public void setUp() {
         subject = new AuthenticationPrincipalRolesProvider(new SimpleGrantedAuthoritiesResolver(),
                                                            new SimpleGrantedAuthoritiesRolesMapper());
@@ -44,19 +42,19 @@ public class AuthenticationPrincipalRolesProviderTest {
     @Test
     public void testGetRoles() {
         // given
-        Authentication authentication = new UsernamePasswordAuthenticationToken("username", 
-                                                                                "password", 
+        Authentication authentication = new UsernamePasswordAuthenticationToken("username",
+                                                                                "password",
                                                                                 AuthorityUtils.createAuthorityList("ROLE_user",
                                                                                                                    "GROUP_users"));
-        
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
+
         // when
         List<String> result = subject.getRoles(authentication);
-        
+
         // then
         assertThat(result).isNotEmpty()
-                          .containsExactly("user");              
+                          .containsExactly("user");
     }
 
 }

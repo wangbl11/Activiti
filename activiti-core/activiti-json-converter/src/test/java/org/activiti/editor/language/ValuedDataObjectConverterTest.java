@@ -1,26 +1,12 @@
 package org.activiti.editor.language;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import org.activiti.bpmn.model.BooleanDataObject;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.DateDataObject;
-import org.activiti.bpmn.model.DoubleDataObject;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.IntegerDataObject;
-import org.activiti.bpmn.model.LongDataObject;
-import org.activiti.bpmn.model.StartEvent;
-import org.activiti.bpmn.model.StringDataObject;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.ValuedDataObject;
-import org.junit.Test;
+import org.activiti.bpmn.model.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class ValuedDataObjectConverterTest extends AbstractConverterTest {
 

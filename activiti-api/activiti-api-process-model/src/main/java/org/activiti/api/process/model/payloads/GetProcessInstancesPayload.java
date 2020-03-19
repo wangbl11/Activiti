@@ -3,7 +3,6 @@ package org.activiti.api.process.model.payloads;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import org.activiti.api.model.shared.Payload;
 
 public class GetProcessInstancesPayload implements Payload {
@@ -55,14 +54,14 @@ public class GetProcessInstancesPayload implements Payload {
     public void setActiveOnly(boolean activeOnly) {
         this.activeOnly = activeOnly;
     }
-    
+
     public String getParentProcessInstanceId() {
         return parentProcessInstanceId;
     }
-    
+
     public void setParentProcessInstanceId(String parentProcessInstanceId) {
         this.parentProcessInstanceId=parentProcessInstanceId;
     }
 
-    
+
 }

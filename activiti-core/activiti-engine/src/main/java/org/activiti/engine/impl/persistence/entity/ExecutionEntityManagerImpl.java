@@ -13,15 +13,7 @@
 
 package org.activiti.engine.impl.persistence.entity;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.ActivitiObjectNotFoundException;

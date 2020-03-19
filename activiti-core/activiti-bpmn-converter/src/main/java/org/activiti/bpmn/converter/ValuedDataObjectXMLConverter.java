@@ -3,22 +3,10 @@ package org.activiti.bpmn.converter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
-
 import org.activiti.bpmn.converter.util.BpmnXMLUtil;
-import org.activiti.bpmn.model.BaseElement;
-import org.activiti.bpmn.model.BooleanDataObject;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.DateDataObject;
-import org.activiti.bpmn.model.DoubleDataObject;
-import org.activiti.bpmn.model.ExtensionElement;
-import org.activiti.bpmn.model.IntegerDataObject;
-import org.activiti.bpmn.model.ItemDefinition;
-import org.activiti.bpmn.model.LongDataObject;
-import org.activiti.bpmn.model.StringDataObject;
-import org.activiti.bpmn.model.ValuedDataObject;
+import org.activiti.bpmn.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 /**

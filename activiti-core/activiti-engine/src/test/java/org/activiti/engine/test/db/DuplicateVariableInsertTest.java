@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
-
 import org.activiti.engine.ActivitiOptimisticLockingException;
 import org.activiti.engine.impl.cmd.SetExecutionVariablesCmd;
 import org.activiti.engine.impl.cmd.SetTaskVariablesCmd;
@@ -138,9 +137,9 @@ public class DuplicateVariableInsertTest extends PluggableActivitiTestCase {
 
   /**
    * Command wrapping a SetExecutionVariablesCmd, waiting in to start and end on the barriers passed in.
-   * 
+   *
 
-   * 
+   *
    */
   private class SetVariableWithBarriersCommand implements Command<Void> {
 
@@ -179,9 +178,9 @@ public class DuplicateVariableInsertTest extends PluggableActivitiTestCase {
 
   /**
    * Command wrapping a SetTaskVariablesCmd, waiting in to start and end on the barriers passed in.
-   * 
+   *
 
-   * 
+   *
    */
   private class SetTaskVariableWithBarriersCommand implements Command<Void> {
 

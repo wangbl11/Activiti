@@ -1,7 +1,6 @@
 package org.activiti.api.runtime.model.impl;
 
 import java.util.Objects;
-
 import org.activiti.api.process.model.BPMNActivity;
 
 public class BPMNActivityImpl extends BPMNElementImpl implements BPMNActivity {

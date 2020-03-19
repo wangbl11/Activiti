@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.util;
 
 import java.util.List;
-
 import org.activiti.engine.cfg.security.ExecutorContext;
 
 /**

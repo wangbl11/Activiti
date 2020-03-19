@@ -12,16 +12,8 @@
  */
 package org.activiti.engine.impl.bpmn.behavior;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.*;
 import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;

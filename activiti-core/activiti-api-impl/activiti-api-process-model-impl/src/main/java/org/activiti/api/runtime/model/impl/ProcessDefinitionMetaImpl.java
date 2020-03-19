@@ -17,7 +17,6 @@
 package org.activiti.api.runtime.model.impl;
 
 import java.util.List;
-
 import org.activiti.api.process.model.ProcessDefinitionMeta;
 
 public class ProcessDefinitionMetaImpl implements ProcessDefinitionMeta {

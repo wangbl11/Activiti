@@ -18,7 +18,6 @@ package org.activiti.engine.impl;
 
 import java.util.List;
 import java.util.Set;
-
 import org.activiti.api.runtime.shared.identity.UserGroupManager;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;

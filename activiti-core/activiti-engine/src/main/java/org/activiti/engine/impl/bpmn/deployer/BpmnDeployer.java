@@ -12,21 +12,15 @@
  */
 package org.activiti.engine.impl.bpmn.deployer;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.bpmn.constants.BpmnXMLConstants;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.ExtensionElement;
-import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.UserTask;
-import org.activiti.bpmn.model.ValuedDataObject;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.DynamicBpmnConstants;
 import org.activiti.engine.DynamicBpmnService;
 import org.activiti.engine.delegate.event.ActivitiEventType;

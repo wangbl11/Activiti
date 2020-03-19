@@ -1,21 +1,10 @@
 package org.activiti.bpmn.converter.util;
 
 import java.text.StringCharacterIterator;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import javax.xml.stream.Location;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamWriter;
-
+import java.util.*;
+import javax.xml.stream.*;
 import org.activiti.bpmn.constants.BpmnXMLConstants;
 import org.activiti.bpmn.converter.child.*;
-import org.activiti.bpmn.converter.child.MessageEventDefinitionParser;
 import org.activiti.bpmn.converter.child.multi.instance.MultiInstanceParser;
 import org.activiti.bpmn.model.*;
 import org.apache.commons.lang3.StringUtils;

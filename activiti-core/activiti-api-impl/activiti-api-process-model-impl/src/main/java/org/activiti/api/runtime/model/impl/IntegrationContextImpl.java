@@ -16,13 +16,7 @@
 
 package org.activiti.api.runtime.model.impl;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
-
+import java.util.*;
 import org.activiti.api.process.model.IntegrationContext;
 
 public class IntegrationContextImpl implements IntegrationContext {

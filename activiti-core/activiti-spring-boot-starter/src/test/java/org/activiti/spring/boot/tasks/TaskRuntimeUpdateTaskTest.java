@@ -1,11 +1,6 @@
 package org.activiti.spring.boot.tasks;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.assertj.core.api.Assertions.tuple;
-
 import java.util.Date;
-
 import org.activiti.api.runtime.shared.query.Page;
 import org.activiti.api.runtime.shared.query.Pageable;
 import org.activiti.api.task.model.Task;
@@ -16,20 +11,18 @@ import org.activiti.api.task.runtime.TaskRuntime;
 import org.activiti.spring.boot.RuntimeTestConfiguration;
 import org.activiti.spring.boot.security.util.SecurityUtil;
 import org.activiti.spring.boot.test.util.TaskCleanUpUtil;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class TaskRuntimeUpdateTaskTest {
 
     @Autowired
     private TaskRuntime taskRuntime;
-    
+
     @Autowired
     private TaskAdminRuntime taskAdminRuntime;
 
@@ -39,7 +32,7 @@ public class TaskRuntimeUpdateTaskTest {
     @Autowired
     private TaskCleanUpUtil taskCleanUpUtil;
 
-    @After
+    @AfterEach
     public void taskCleanUp(){
         taskCleanUpUtil.cleanUpWithAdmin();
     }
@@ -138,7 +131,7 @@ public class TaskRuntimeUpdateTaskTest {
                 .contains(tuple(Task.TaskStatus.ASSIGNED,
                                 standaloneTask.getId()));
     }
-    
+
     @Test
     public void createClaimAndAdminUpdateStandaloneTask() {
 
@@ -176,7 +169,7 @@ public class TaskRuntimeUpdateTaskTest {
         final Task updatedTask = taskAdminRuntime.update(updateTaskPayload);
         tasks = taskAdminRuntime.tasks(Pageable.of(0,
                                               50));
-        
+
         assertThat(RuntimeTestConfiguration.updatedTasks).contains(updatedTask.getId());
         assertThat(tasks.getContent())
                 .extracting("id",

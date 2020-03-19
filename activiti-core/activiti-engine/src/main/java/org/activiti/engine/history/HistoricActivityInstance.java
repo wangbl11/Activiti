@@ -14,9 +14,8 @@
 
 package org.activiti.engine.history;
 
-import org.activiti.engine.api.internal.Internal;
-
 import java.util.Date;
+import org.activiti.engine.api.internal.Internal;
 
 /**
  * Represents one execution of an activity and it's stored permanent for statistics, audit and other business intelligence purposes.
@@ -60,10 +59,10 @@ public interface HistoricActivityInstance extends HistoricData {
 
   /** Time when the activity instance ended */
   Date getEndTime();
-  
+
   /** Difference between {@link #getEndTime()} and {@link #getStartTime()}. */
   Long getDurationInMillis();
-  
+
   /** Returns the delete reason for this activity, if any was set (if completed normally, no delete reason is set) */
   String getDeleteReason();
 

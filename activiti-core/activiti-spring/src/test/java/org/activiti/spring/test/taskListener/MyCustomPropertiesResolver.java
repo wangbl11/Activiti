@@ -12,11 +12,10 @@
  */
 package org.activiti.spring.test.taskListener;
 
-import org.activiti.engine.delegate.CustomPropertiesResolver;
-import org.activiti.engine.delegate.DelegateExecution;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.activiti.engine.delegate.CustomPropertiesResolver;
+import org.activiti.engine.delegate.DelegateExecution;
 
 /**
 

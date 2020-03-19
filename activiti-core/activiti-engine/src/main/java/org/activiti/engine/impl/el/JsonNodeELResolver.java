@@ -13,21 +13,14 @@
  */
 package org.activiti.engine.impl.el;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.beans.FeatureDescriptor;
 import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.el.CompositeELResolver;
-import javax.el.ELContext;
-import javax.el.ELException;
-import javax.el.ELResolver;
-import javax.el.PropertyNotWritableException;
-
+import javax.el.*;
 import org.activiti.engine.impl.context.Context;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * Defines property resolution behavior on JsonNodes.
@@ -60,7 +53,7 @@ public class JsonNodeELResolver extends ELResolver {
 	 * Assuming the base is not null, this method will always return
 	 * Object.class. This is because any object is accepted as a key and is
 	 * coerced into a string.
-	 * 
+	 *
 	 * @param context
 	 *            The context of this evaluation.
 	 * @param base
@@ -87,7 +80,7 @@ public class JsonNodeELResolver extends ELResolver {
 	 * PropertyDescriptor.getPropertyType().</li>
 	 * <li>{@link ELResolver#RESOLVABLE_AT_DESIGN_TIME} - true.</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param context
 	 *            The context of this evaluation.
 	 * @param base
@@ -140,7 +133,7 @@ public class JsonNodeELResolver extends ELResolver {
 	 * caller should ignore the return value. Assuming the base is a Map, this
 	 * method will always return Object.class. This is because Maps accept any
 	 * object as the value for a given key.
-	 * 
+	 *
 	 * @param context
 	 *            The context of this evaluation.
 	 * @param base
@@ -181,7 +174,7 @@ public class JsonNodeELResolver extends ELResolver {
 	 * java.util.Map.get(Object), just because null is returned doesn't mean
 	 * there is no mapping for the key; it's also possible that the Map
 	 * explicitly maps the key to null.
-	 * 
+	 *
 	 * @param context
 	 *            The context of this evaluation.
 	 * @param base
@@ -252,7 +245,7 @@ public class JsonNodeELResolver extends ELResolver {
 	 * However, an implementation can create a prototype unmodifiable Map and
 	 * query its runtime type to see if it matches the runtime type of the base
 	 * object as a workaround.
-	 * 
+	 *
 	 * @param context
 	 *            The context of this evaluation.
 	 * @param base
@@ -296,7 +289,7 @@ public class JsonNodeELResolver extends ELResolver {
 	 * method to detect this. However, an implementation can create a prototype
 	 * unmodifiable Map and query its runtime type to see if it matches the
 	 * runtime type of the base object as a workaround.
-	 * 
+	 *
 	 * @param context
 	 *            The context of this evaluation.
 	 * @param base
@@ -358,7 +351,7 @@ public class JsonNodeELResolver extends ELResolver {
 
 	/**
 	 * Test whether the given base should be resolved by this ELResolver.
-	 * 
+	 *
 	 * @param base
 	 *            The bean to analyze.
 	 * @param property

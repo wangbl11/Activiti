@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,13 +12,7 @@
  */
 package org.activiti.engine.debug;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
@@ -27,9 +21,9 @@ import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 
  */
 public class ExecutionTreeUtil {
-  
+
   public static ExecutionTree buildExecutionTree(DelegateExecution executionEntity) {
-    
+
     // Find highest parent
     ExecutionEntity parentExecution = (ExecutionEntity) executionEntity;
     while (parentExecution.getParentId() != null || parentExecution.getSuperExecutionId() != null) {
@@ -39,20 +33,20 @@ public class ExecutionTreeUtil {
         parentExecution = parentExecution.getSuperExecution();
       }
     }
-    
+
     // Collect all child executions now we have the parent
     List<ExecutionEntity> allExecutions = new ArrayList<ExecutionEntity>();
     allExecutions.add(parentExecution);
     collectChildExecutions(parentExecution, allExecutions);
     return buildExecutionTree(allExecutions);
   }
-  
+
   protected static void collectChildExecutions(ExecutionEntity rootExecutionEntity, List<ExecutionEntity> allExecutions) {
     for (ExecutionEntity childExecutionEntity : rootExecutionEntity.getExecutions()) {
       allExecutions.add(childExecutionEntity);
       collectChildExecutions(childExecutionEntity, allExecutions);
     }
-    
+
     if (rootExecutionEntity.getSubProcessInstance() != null) {
       allExecutions.add(rootExecutionEntity.getSubProcessInstance());
       collectChildExecutions(rootExecutionEntity.getSubProcessInstance(), allExecutions);
@@ -66,12 +60,12 @@ public class ExecutionTreeUtil {
     Map<String, List<ExecutionEntity>> parentMapping = new HashMap<String, List<ExecutionEntity>>();
     for (ExecutionEntity executionEntity : executions) {
       String parentId = executionEntity.getParentId();
-      
+
       // Support for call activity
       if (parentId == null) {
         parentId = executionEntity.getSuperExecutionId();
       }
-      
+
       if (parentId != null) {
         if (!parentMapping.containsKey(parentId)) {
           parentMapping.put(parentId, new ArrayList<ExecutionEntity>());
@@ -81,11 +75,11 @@ public class ExecutionTreeUtil {
         executionTree.setRoot(new ExecutionTreeNode(executionEntity));
       }
     }
-    
+
     fillExecutionTree(executionTree, parentMapping);
     return executionTree;
   }
-  
+
   public static ExecutionTree buildExecutionTreeForProcessInstance(Collection<ExecutionEntity> executions) {
     ExecutionTree executionTree = new ExecutionTree();
     if (executions.size() == 0) {
@@ -96,7 +90,7 @@ public class ExecutionTreeUtil {
     Map<String, List<ExecutionEntity>> parentMapping = new HashMap<String, List<ExecutionEntity>>();
     for (ExecutionEntity executionEntity : executions) {
       String parentId = executionEntity.getParentId();
-      
+
       if (parentId != null) {
         if (!parentMapping.containsKey(parentId)) {
           parentMapping.put(parentId, new ArrayList<ExecutionEntity>());
@@ -106,7 +100,7 @@ public class ExecutionTreeUtil {
         executionTree.setRoot(new ExecutionTreeNode(executionEntity));
       }
     }
-    
+
     fillExecutionTree(executionTree, parentMapping);
     return executionTree;
   }

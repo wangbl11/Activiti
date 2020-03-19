@@ -18,7 +18,6 @@ package org.activiti.api.process.model.builders;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-
 import org.activiti.api.process.model.payloads.StartMessagePayload;
 
 public class StartMessagePayloadBuilder {

@@ -1,19 +1,10 @@
 package org.activiti.editor.language.xml;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
 import org.activiti.bpmn.BpmnAutoLayout;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.StartEvent;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.UserTask;
-import org.activiti.bpmn.model.ValuedDataObject;
-import org.junit.Test;
+import org.activiti.bpmn.model.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class SubProcessConverterAutoLayoutTest extends AbstractConverterTest {
 

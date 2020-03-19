@@ -2,7 +2,6 @@ package org.activiti.engine.test.api.repository;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.ExtensionElement;

@@ -1,11 +1,14 @@
 package org.activiti.engine.test.api.event;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.event.EventLogEntry;
 import org.activiti.engine.impl.event.logger.EventLogger;
@@ -16,11 +19,6 @@ import org.activiti.engine.impl.util.CollectionUtil;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.test.Deployment;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
 
@@ -60,7 +58,7 @@ public class DatabaseEventLoggerTest extends PluggableActivitiTestCase {
         .deploy().getId();
 
     // Run process to gather data
-    ProcessInstance processInstance = runtimeService.startProcessInstanceByKeyAndTenantId("DatabaseEventLoggerProcess", 
+    ProcessInstance processInstance = runtimeService.startProcessInstanceByKeyAndTenantId("DatabaseEventLoggerProcess",
         CollectionUtil.singletonMap("testVar", "helloWorld"), testTenant);
 
     // Verify event log entries
@@ -376,7 +374,7 @@ public class DatabaseEventLoggerTest extends PluggableActivitiTestCase {
 
         assertEquals(testTenant, data.get(Fields.TENANT_ID));
       }
-      
+
       if (i == 14 || i == 15) {
         assertNotNull(entry.getType());
         assertEquals("VARIABLE_DELETED", entry.getType());
@@ -437,7 +435,7 @@ public class DatabaseEventLoggerTest extends PluggableActivitiTestCase {
     }
 
     assertEquals(15, eventLogEntries.size());
-    
+
     for (int i = 0; i < eventLogEntries.size(); i++) {
 
       EventLogEntry entry = eventLogEntries.get(i);
@@ -521,9 +519,9 @@ public class DatabaseEventLoggerTest extends PluggableActivitiTestCase {
     task.setAssignee("kermit");
     task.setTenantId("myTenant");
     taskService.saveTask(task);
-    
+
     taskService.setAssignee(task.getId(), "gonzo");
-    
+
     task = taskService.createTaskQuery().taskId(task.getId()).singleResult();
     task.setAssignee("kermit");
     taskService.saveTask(task);

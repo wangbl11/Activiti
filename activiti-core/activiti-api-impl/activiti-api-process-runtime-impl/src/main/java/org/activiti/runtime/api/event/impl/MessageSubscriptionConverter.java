@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.event.impl;
 
 import java.util.Optional;
-
 import org.activiti.api.runtime.model.impl.MessageSubscriptionImpl;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.persistence.entity.MessageEventSubscriptionEntity;
@@ -25,7 +24,7 @@ import org.activiti.engine.impl.persistence.entity.MessageEventSubscriptionEntit
 public class MessageSubscriptionConverter {
 
     public MessageSubscriptionImpl convertToMessageSubscription(MessageEventSubscriptionEntity messageEventSubscriptionEntity) {
-        
+
         return Optional.of(messageEventSubscriptionEntity)
                        .map(entity -> MessageSubscriptionImpl.builder()
                                                              .withId(entity.getId())
@@ -42,5 +41,5 @@ public class MessageSubscriptionConverter {
                                                              .build())
                        .orElseThrow( () -> new IllegalArgumentException("messageEventSubscriptionEntity must not be null"));
     }
-    
+
 }

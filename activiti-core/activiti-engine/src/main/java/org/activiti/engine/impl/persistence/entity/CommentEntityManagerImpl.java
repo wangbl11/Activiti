@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@
 package org.activiti.engine.impl.persistence.entity;
 
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.delegate.event.ActivitiEventType;
@@ -32,9 +31,9 @@ import org.activiti.engine.task.Event;
 @Internal
 @Deprecated
 public class CommentEntityManagerImpl extends AbstractEntityManager<CommentEntity> implements CommentEntityManager {
-  
+
   protected CommentDataManager commentDataManager;
-  
+
   public CommentEntityManagerImpl(ProcessEngineConfigurationImpl processEngineConfiguration, CommentDataManager commentDataManager) {
     super(processEngineConfiguration);
     this.commentDataManager = commentDataManager;
@@ -44,11 +43,11 @@ public class CommentEntityManagerImpl extends AbstractEntityManager<CommentEntit
   protected DataManager<CommentEntity> getDataManager() {
     return commentDataManager;
   }
-  
+
   @Override
   public void insert(CommentEntity commentEntity) {
     checkHistoryEnabled();
-    
+
     insert(commentEntity, false);
 
     Comment comment = (Comment) commentEntity;
@@ -133,11 +132,11 @@ public class CommentEntityManagerImpl extends AbstractEntityManager<CommentEntit
   public Event findEvent(String commentId) {
     return commentDataManager.findEvent(commentId);
   }
-  
+
   @Override
   public void delete(CommentEntity commentEntity) {
     checkHistoryEnabled();
-    
+
     delete(commentEntity, false);
 
     Comment comment = (Comment) commentEntity;
@@ -170,5 +169,5 @@ public class CommentEntityManagerImpl extends AbstractEntityManager<CommentEntit
   public void setCommentDataManager(CommentDataManager commentDataManager) {
     this.commentDataManager = commentDataManager;
   }
-  
+
 }

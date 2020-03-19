@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions id="definitions"
-	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-	xmlns:activiti="http://activiti.org/bpmn" 
-	targetNamespace="Examples">
-	
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="Examples">
+
 	<process id="testThrowErrorInScriptTaskInsideCallActivitiCatchInTopLevelProcess">
 
 		<startEvent id="theStart" />
@@ -15,9 +14,9 @@
       <callActivity id="callSubProcess" calledElement="catchErrorThrownByJavaDelegateOnCallActivity-child" />
     </subProcess>
     <sequenceFlow id="flow3" sourceRef="subprocess" targetRef="theEnd" />
-		
+
 		<endEvent id="theEnd" />
-    
+
 
     <subProcess id="eventSubProcess" triggeredByEvent="true">
       <startEvent id="catchError">

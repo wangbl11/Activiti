@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20151230133244101" modeler:modelId="4002" modeler:modelVersion="1" modeler:modelLastUpdated="1451478663021">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler"
+             modeler:version="1.0en" modeler:exportDateTime="20151230133244101" modeler:modelId="4002"
+             modeler:modelVersion="1" modeler:modelLastUpdated="1451478663021">
   <process id="calledProcess" name="terminateMi2" isExecutable="true">
     <sequenceFlow id="sid-59F16DE7-45C5-46FE-BDCA-05B83C2DD922" sourceRef="sid-B7139DEC-F0CB-4AB4-A4B0-C7A541A9B26B" targetRef="sid-CF33823F-7523-4995-BFBE-8D529CB22AA4"/>
     <sequenceFlow id="sid-FCA37C32-50A3-46BE-AD39-5DF16393B60D" sourceRef="sid-CF33823F-7523-4995-BFBE-8D529CB22AA4" targetRef="sid-27490E05-A7D3-4A34-9AC0-007ACFF898FA"/>

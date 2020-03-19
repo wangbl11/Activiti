@@ -13,7 +13,6 @@
 package org.activiti.spring.test.taskassignment;
 
 import java.util.List;
-
 import org.activiti.engine.impl.util.CollectionUtil;
 import org.activiti.engine.test.Deployment;
 import org.activiti.spring.impl.test.SpringActivitiTestCase;

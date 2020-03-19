@@ -15,7 +15,6 @@ package org.activiti.engine.test.bpmn.event.error;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.BpmnError;
 import org.activiti.engine.history.HistoricProcessInstance;
@@ -25,7 +24,6 @@ import org.activiti.engine.impl.util.CollectionUtil;
 import org.activiti.engine.impl.util.JvmUtil;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.test.Deployment;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.catchThrowable;
 

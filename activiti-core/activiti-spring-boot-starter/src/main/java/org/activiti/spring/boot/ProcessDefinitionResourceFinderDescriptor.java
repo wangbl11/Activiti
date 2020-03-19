@@ -17,14 +17,13 @@
 package org.activiti.spring.boot;
 
 import java.util.List;
-
 import org.activiti.spring.resources.ResourceFinderDescriptor;
 import org.springframework.core.io.Resource;
 
 public class ProcessDefinitionResourceFinderDescriptor implements ResourceFinderDescriptor {
-    
+
     private ActivitiProperties activitiProperties;
-    
+
     public ProcessDefinitionResourceFinderDescriptor(ActivitiProperties activitiProperties) {
        this.activitiProperties = activitiProperties;
     }
@@ -53,11 +52,11 @@ public class ProcessDefinitionResourceFinderDescriptor implements ResourceFinder
     public String getMsgForResourcesFound(List<String> foundProcessResources) {
         return "The following process definition files will be deployed: " + foundProcessResources;
     }
-    
+
     @Override
     public void validate(List<Resource> resources) {
-        
+
     }
-  
-   
+
+
 }

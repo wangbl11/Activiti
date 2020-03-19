@@ -14,7 +14,6 @@
 package org.activiti.engine.impl.el;
 
 import java.util.Map;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.delegate.VariableScope;

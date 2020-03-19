@@ -16,19 +16,17 @@
 
 package org.activiti.runtime.api.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-
 import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.api.task.model.builders.TaskPayloadBuilder;
 import org.activiti.api.task.model.payloads.CreateTaskVariablePayload;
 import org.activiti.api.task.model.payloads.UpdateTaskVariablePayload;
 import org.activiti.common.util.DateFormatterProvider;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import org.junit.jupiter.api.Test;
 
 public class TaskVariablesPayloadValidatorTest {
 
@@ -183,7 +181,7 @@ public class TaskVariablesPayloadValidatorTest {
         //then
         assertThat(handledDatePayload.getValue()).isEqualTo(true);
     }
-    
+
     @Test
     public void should_returnErrorList_when_setVariableWithWrongCharactersInName() throws Exception {
 
@@ -196,11 +194,11 @@ public class TaskVariablesPayloadValidatorTest {
 
         Throwable throwable = catchThrowable(() -> taskVariablesPayloadValidator.handleCreateTaskVariablePayload(payload));
 
-        assertThat(throwable).isInstanceOf(IllegalStateException.class); 
-        
+        assertThat(throwable).isInstanceOf(IllegalStateException.class);
+
         assertThat(throwable.getMessage())
             .contains(expectedTypeErrorMessage);
-        
+
     }
 
 }

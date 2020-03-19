@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,14 +12,7 @@
  */
 package org.activiti.engine.impl.bpmn.parser.handler;
 
-import org.activiti.bpmn.model.BaseElement;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.ErrorEventDefinition;
-import org.activiti.bpmn.model.EventDefinition;
-import org.activiti.bpmn.model.EventSubProcess;
-import org.activiti.bpmn.model.Message;
-import org.activiti.bpmn.model.MessageEventDefinition;
-import org.activiti.bpmn.model.StartEvent;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.impl.bpmn.parser.BpmnParse;
 import org.activiti.engine.impl.util.CollectionUtil;
 
@@ -49,17 +42,17 @@ public class StartEventParseHandler extends AbstractActivityBpmnParseHandler<Sta
             messageDefinition.setExtensionElements(message.getExtensionElements());
           }
           element.setBehavior(bpmnParse.getActivityBehaviorFactory().createEventSubProcessMessageStartEventActivityBehavior(element, messageDefinition));
-        
+
         } else if (eventDefinition instanceof ErrorEventDefinition) {
           element.setBehavior(bpmnParse.getActivityBehaviorFactory().createEventSubProcessErrorStartEventActivityBehavior(element));
         }
       }
-      
+
     } else if (CollectionUtil.isEmpty(element.getEventDefinitions())) {
       element.setBehavior(bpmnParse.getActivityBehaviorFactory().createNoneStartEventActivityBehavior(element));
     }
-    
-    if (element.getSubProcess() == null && (CollectionUtil.isEmpty(element.getEventDefinitions()) || 
+
+    if (element.getSubProcess() == null && (CollectionUtil.isEmpty(element.getEventDefinitions()) ||
         bpmnParse.getCurrentProcess().getInitialFlowElement() == null)) {
 
       bpmnParse.getCurrentProcess().setInitialFlowElement(element);

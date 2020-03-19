@@ -13,7 +13,6 @@
 package org.activiti.engine.test.bpmn.exclusive;
 
 import java.util.Date;
-
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.runtime.TimerJobQuery;

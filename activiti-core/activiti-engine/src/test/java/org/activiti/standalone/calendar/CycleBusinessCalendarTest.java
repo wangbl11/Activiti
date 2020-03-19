@@ -15,7 +15,6 @@ package org.activiti.standalone.calendar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.activiti.engine.impl.calendar.CycleBusinessCalendar;
 import org.activiti.engine.impl.test.AbstractTestCase;
 import org.activiti.engine.impl.util.DefaultClockImpl;

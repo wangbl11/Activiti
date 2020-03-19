@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.impl.persistence.entity;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.impl.db.BulkDeleteable;
 import org.activiti.engine.impl.variable.ValueFields;
 import org.activiti.engine.impl.variable.VariableType;
@@ -49,9 +48,9 @@ public class VariableInstanceEntityImpl extends AbstractEntity implements Variab
   protected boolean deleted;
 
   public VariableInstanceEntityImpl() {
-    
+
   }
-  
+
   public Object getPersistentState() {
     Map<String, Object> persistentState = new HashMap<String, Object>();
     if (longValue != null) {
@@ -74,7 +73,7 @@ public class VariableInstanceEntityImpl extends AbstractEntity implements Variab
     }
     return persistentState;
   }
-  
+
   public void setExecution(ExecutionEntity execution) {
     this.executionId = execution.getId();
     this.processInstanceId = execution.getProcessInstanceId();
@@ -110,7 +109,7 @@ public class VariableInstanceEntityImpl extends AbstractEntity implements Variab
   public ByteArrayRef getByteArrayRef() {
     return byteArrayRef;
   }
-  
+
   protected void ensureByteArrayRefInitialized() {
     if (byteArrayRef == null) {
       byteArrayRef = new ByteArrayRef();

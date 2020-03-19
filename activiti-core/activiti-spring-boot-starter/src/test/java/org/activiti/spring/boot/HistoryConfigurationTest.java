@@ -1,8 +1,5 @@
 package org.activiti.spring.boot;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.spy;
-
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.builders.ProcessPayloadBuilder;
 import org.activiti.api.process.runtime.ProcessRuntime;
@@ -20,17 +17,16 @@ import org.activiti.runtime.api.model.impl.APIProcessInstanceConverter;
 import org.activiti.runtime.api.model.impl.APIVariableInstanceConverter;
 import org.activiti.spring.boot.security.util.SecurityUtil;
 import org.activiti.spring.boot.test.util.ProcessCleanUpUtil;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @TestPropertySource("classpath:application-history.properties")
 public class HistoryConfigurationTest {
@@ -48,7 +44,7 @@ public class HistoryConfigurationTest {
 
     @Autowired
     private HistoryService historyService;
-    
+
     @Autowired
     private APIProcessDefinitionConverter processDefinitionConverter;
 
@@ -66,10 +62,10 @@ public class HistoryConfigurationTest {
 
     @Autowired
     private ProcessRuntimeConfiguration configuration;
-    
+
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
-    
+
     @Autowired
     ProcessVariablesPayloadValidator processVariablesValidator;
 
@@ -80,15 +76,15 @@ public class HistoryConfigurationTest {
     private APIDeploymentConverter deploymentConverter;
 
 
-    @After
+    @AfterEach
     public void cleanUp(){
         processCleanUpUtil.cleanUpWithAdmin();
     }
 
-    @Before
+    @BeforeEach
     public void init() {
         ApplicationEventPublisher eventPublisher = spy(applicationEventPublisher);
-        
+
         spy(new ProcessRuntimeImpl(repositoryService,
                      processDefinitionConverter,
                      runtimeService,

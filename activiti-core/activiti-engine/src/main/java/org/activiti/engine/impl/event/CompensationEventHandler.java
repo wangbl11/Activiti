@@ -13,6 +13,7 @@
 
 package org.activiti.engine.impl.event;
 
+import java.util.List;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.SubProcess;
@@ -26,8 +27,6 @@ import org.activiti.engine.impl.persistence.entity.CompensateEventSubscriptionEn
 import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntity;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
-
-import java.util.List;
 
 /**
 

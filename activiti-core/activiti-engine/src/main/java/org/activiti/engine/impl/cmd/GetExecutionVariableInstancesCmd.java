@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.ActivitiObjectNotFoundException;
 import org.activiti.engine.impl.interceptor.Command;

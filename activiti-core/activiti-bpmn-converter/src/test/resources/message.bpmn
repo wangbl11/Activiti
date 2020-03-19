@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions id="definitions"
-  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-  xmlns:activiti="http://activiti.org/bpmn"
-  targetNamespace="Examples"
-  xmlns:tns="Examples"
-  xmlns:tns2="http://foo.bar.com/Examples"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="Examples"
+             xmlns:tns="Examples"
+             xmlns:tns2="http://foo.bar.com/Examples"
+>
 
   <message id="writeReport" name="newWriteReport" itemRef="tns:writeReportItem"/>
   <message id="writeReport2" name="newWriteReport2" itemRef="tns2:writeReportItem2"/>

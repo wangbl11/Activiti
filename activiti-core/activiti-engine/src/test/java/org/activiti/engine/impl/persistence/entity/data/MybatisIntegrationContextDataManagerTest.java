@@ -20,15 +20,14 @@ import org.activiti.engine.impl.db.DbSqlSession;
 import org.activiti.engine.impl.persistence.entity.data.integration.MybatisIntegrationContextDataManager;
 import org.activiti.engine.impl.persistence.entity.integration.IntegrationContextEntity;
 import org.activiti.engine.impl.persistence.entity.integration.IntegrationContextEntityImpl;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.MockitoAnnotations.initMocks;
+import org.mockito.Spy;
 
 public class MybatisIntegrationContextDataManagerTest {
 

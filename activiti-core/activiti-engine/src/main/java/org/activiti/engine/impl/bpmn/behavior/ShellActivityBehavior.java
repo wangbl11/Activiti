@@ -2,7 +2,6 @@ package org.activiti.engine.impl.bpmn.behavior;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.cfg.security.CommandExecutorContext;
 import org.activiti.engine.cfg.security.CommandExecutorFactory;

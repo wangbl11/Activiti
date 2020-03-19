@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,12 +13,7 @@
 
 package org.activiti.engine.test.bpmn.event.signal;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.EventSubscriptionQueryImpl;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -48,19 +43,19 @@ public class SignalEventTest extends PluggableActivitiTestCase {
     assertEquals(0, createEventSubscriptionQuery().count());
     assertEquals(0, runtimeService.createProcessInstanceQuery().count());
   }
-  
+
   @Deployment(resources = { "org/activiti/engine/test/bpmn/event/signal/SignalEventTests.catchAlertSignalExpression.bpmn20.xml",
       "org/activiti/engine/test/bpmn/event/signal/SignalEventTests.throwAlertSignalExpression.bpmn20.xml" })
   public void testSignalCatchIntermediateExpression() {
     Map<String, Object> variableMap = new HashMap<String, Object>();
     variableMap.put("mySignalName", "testSignal");
     runtimeService.startProcessInstanceByKey("catchSignal", variableMap);
-    
+
     assertEquals(1, createEventSubscriptionQuery().count());
     assertEquals(1, runtimeService.createProcessInstanceQuery().count());
-    
+
     runtimeService.startProcessInstanceByKey("throwSignal", variableMap);
-    
+
     assertEquals(0, createEventSubscriptionQuery().count());
     assertEquals(0, runtimeService.createProcessInstanceQuery().count());
   }
@@ -537,28 +532,28 @@ public class SignalEventTest extends PluggableActivitiTestCase {
     }
 
   }
-  
+
   public void testSignalStartEventSuspendedProcessDefinition() {
-       
+
        // Deploy test processes
        repositoryService.createDeployment()
          .addClasspathResource("org/activiti/engine/test/bpmn/event/signal/SignalEventTest.testSignalStartEvent.bpmn20.xml")
          .deploy();
-       
+
        repositoryService.suspendProcessDefinitionByKey("processWithSignalStart1");
-       
+
        try {
          runtimeService.signalEventReceived("The Signal");
          fail("ActivitiException expected. Process definition is suspended");
        } catch (ActivitiException ae) {
          // ignore
        }
-       
+
        // Cleanup
        for (org.activiti.engine.repository.Deployment deployment : repositoryService.createDeploymentQuery().list()) {
          repositoryService.deleteDeployment(deployment.getId(), true);
        }
-       
+
       }
 
   @Deployment
@@ -616,13 +611,13 @@ public class SignalEventTest extends PluggableActivitiTestCase {
     assertNotNull(task);
     assertEquals("Wait2", task.getName());
   }
-  
+
   /**
    * From https://forums.activiti.org/content/boundary-signal-causes-already-taking-transition
    */
   @Deployment
   public void testSignalThrowAndCatchInSameTransaction() {
-    
+
     String fileExistsVar = "fileexists";
 
     // remove mock file
@@ -669,28 +664,28 @@ public class SignalEventTest extends PluggableActivitiTestCase {
     List<Task> usingTask = taskService.createTaskQuery().taskName("Use the file").list();
     assertEquals(1, usingTask.size());
   }
-  
+
   @Deployment
   public void testMultipleSignalStartEvents() {
     runtimeService.signalEventReceived("signal1");
     validateTaskCounts(1, 0, 0);
-    
+
     runtimeService.signalEventReceived("signal2");
     validateTaskCounts(1, 1, 0);
-    
+
     runtimeService.signalEventReceived("signal3");
     validateTaskCounts(1, 1, 1);
-    
+
     runtimeService.signalEventReceived("signal1");
     validateTaskCounts(2, 1, 1);
-    
+
     runtimeService.signalEventReceived("signal1");
     validateTaskCounts(3, 1, 1);
-    
+
     runtimeService.signalEventReceived("signal3");
     validateTaskCounts(3, 1, 2);
   }
-  
+
   private void validateTaskCounts(long taskACount, long taskBCount, long taskCCount) {
     assertEquals(taskACount, taskService.createTaskQuery().taskName("Task A").count());
     assertEquals(taskBCount, taskService.createTaskQuery().taskName("Task B").count());

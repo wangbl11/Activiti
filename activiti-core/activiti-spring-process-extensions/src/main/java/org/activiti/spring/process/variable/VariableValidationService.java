@@ -3,7 +3,6 @@ package org.activiti.spring.process.variable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.spring.process.model.VariableDefinition;
 import org.activiti.spring.process.variable.types.VariableType;

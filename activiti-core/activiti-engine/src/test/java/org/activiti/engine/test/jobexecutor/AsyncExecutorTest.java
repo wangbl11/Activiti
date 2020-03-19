@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.test.jobexecutor;
 import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.impl.asyncexecutor.AsyncExecutor;
@@ -33,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Tests specifically for the {@link AsyncExecutor}.
- * 
+ *
 
  */
 public class AsyncExecutorTest {
@@ -223,7 +222,7 @@ public class AsyncExecutorTest {
       processEngine = createProcessEngine(true);
       processEngine.getProcessEngineConfiguration().getClock().reset();
       deploy(processEngine, "AsyncExecutorTest.testAsyncFailingScript.bpmn20.xml");
-      
+
       // There is a back off mechanism for the retry, so need a bit of
       // time. But to be sure, we make the wait time small
       processEngine.getProcessEngineConfiguration().setAsyncFailedJobWaitTime(1);

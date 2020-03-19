@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,11 +15,7 @@ package org.activiti.engine.impl.bpmn.parser.factory;
 import org.activiti.bpmn.model.ActivitiListener;
 import org.activiti.bpmn.model.EventListener;
 import org.activiti.engine.api.internal.Internal;
-import org.activiti.engine.delegate.ExecutionListener;
-import org.activiti.engine.delegate.CustomPropertiesResolver;
-import org.activiti.engine.delegate.TaskListener;
-import org.activiti.engine.delegate.TransactionDependentExecutionListener;
-import org.activiti.engine.delegate.TransactionDependentTaskListener;
+import org.activiti.engine.delegate.*;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.engine.impl.bpmn.parser.BpmnParse;
 import org.activiti.engine.impl.bpmn.parser.BpmnParser;
@@ -27,11 +23,11 @@ import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 
 /**
  * Factory class used by the {@link BpmnParser} and {@link BpmnParse} to instantiate the behaviour classes for {@link TaskListener} and {@link ExecutionListener} usages.
- * 
+ *
  * You can provide your own implementation of this class. This way, you can give different execution semantics to the standard construct.
- * 
+ *
  * The easiest and advisable way to implement your own {@link ListenerFactory} is to extend the {@link DefaultListenerFactory}.
- * 
+ *
  * An instance of this interface can be injected in the {@link ProcessEngineConfigurationImpl} and its subclasses.
  *
  */

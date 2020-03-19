@@ -14,7 +14,6 @@ package org.activiti.engine.test.impl.logger;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.slf4j.Logger;
 
 /**

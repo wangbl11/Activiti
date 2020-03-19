@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@
 package org.activiti.engine.test.history;
 
 import java.util.List;
-
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricActivityInstanceQuery;
@@ -75,7 +74,7 @@ public class HistoricActivityInstanceTest extends PluggableActivitiTestCase {
     assertEquals(processInstance.getId(), historicActivityInstance.getProcessInstanceId());
     assertNotNull(historicActivityInstance.getStartTime());
   }
-  
+
   @Deployment
   public void testHistoricActivityInstanceUnfinished() {
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
@@ -85,10 +84,10 @@ public class HistoricActivityInstanceTest extends PluggableActivitiTestCase {
 
     long finishedActivityInstanceCount = historicActivityInstanceQuery.finished().count();
     assertEquals("The Start event is completed", 1, finishedActivityInstanceCount);
-     
+
     long unfinishedActivityInstanceCount = historicActivityInstanceQuery.unfinished().count();
     assertEquals("One active (unfinished) User Task", 1, unfinishedActivityInstanceCount);
-   
+
   }
 
   @Deployment
@@ -342,14 +341,14 @@ public class HistoricActivityInstanceTest extends PluggableActivitiTestCase {
     assertNotNull(historicActivityInstance.get(0).getEndTime());
     assertNotNull(historicActivityInstance.get(1).getEndTime());
   }
-  
+
   @Deployment
   public void testLoop() {
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("historic-activity-loops", CollectionUtil.singletonMap("input", 0));
-    
+
     // completing 10 user tasks
     // 15 service tasks should have passed
-    
+
     for (int i=0; i<10; i++) {
       Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
       Number inputNumber = (Number) taskService.getVariable(task.getId(), "input");
@@ -358,7 +357,7 @@ public class HistoricActivityInstanceTest extends PluggableActivitiTestCase {
       taskService.complete(task.getId(), CollectionUtil.singletonMap("input", input + 1));
       task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
     }
-    
+
     // Verify history
     List<HistoricActivityInstance> taskActivityInstances = historyService.createHistoricActivityInstanceQuery().activityType("userTask").list();
     assertEquals(10, taskActivityInstances.size());
@@ -366,7 +365,7 @@ public class HistoricActivityInstanceTest extends PluggableActivitiTestCase {
       assertNotNull(historicActivityInstance.getStartTime());
       assertNotNull(historicActivityInstance.getEndTime());
     }
-    
+
     List<HistoricActivityInstance> serviceTaskInstances = historyService.createHistoricActivityInstanceQuery().activityType("serviceTask").list();
     assertEquals(15, serviceTaskInstances.size());
     for (HistoricActivityInstance historicActivityInstance : serviceTaskInstances) {

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ package org.activiti.engine.impl.persistence.entity;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.HistoricTaskInstanceQueryImpl;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
@@ -31,26 +30,26 @@ import org.activiti.engine.impl.persistence.entity.data.HistoricTaskInstanceData
 public class HistoricTaskInstanceEntityManagerImpl extends AbstractEntityManager<HistoricTaskInstanceEntity> implements HistoricTaskInstanceEntityManager {
 
   protected HistoricTaskInstanceDataManager historicTaskInstanceDataManager;
-  
+
   public HistoricTaskInstanceEntityManagerImpl(ProcessEngineConfigurationImpl processEngineConfiguration, HistoricTaskInstanceDataManager historicTaskInstanceDataManager) {
     super(processEngineConfiguration);
     this.historicTaskInstanceDataManager = historicTaskInstanceDataManager;
   }
-  
+
   @Override
   protected DataManager<HistoricTaskInstanceEntity> getDataManager() {
       return historicTaskInstanceDataManager;
   }
-  
+
   @Override
   public HistoricTaskInstanceEntity create(TaskEntity task, ExecutionEntity execution) {
     return historicTaskInstanceDataManager.create(task, execution);
   }
-  
+
   @Override
   public void deleteHistoricTaskInstancesByProcessInstanceId(String processInstanceId) {
     if (getHistoryManager().isHistoryLevelAtLeast(HistoryLevel.AUDIT)) {
-      List<HistoricTaskInstanceEntity> taskInstances = historicTaskInstanceDataManager.findHistoricTaskInstanceByProcessInstanceId(processInstanceId); 
+      List<HistoricTaskInstanceEntity> taskInstances = historicTaskInstanceDataManager.findHistoricTaskInstanceByProcessInstanceId(processInstanceId);
       for (HistoricTaskInstanceEntity historicTaskInstanceEntity : taskInstances) {
         delete(historicTaskInstanceEntity.getId()); // Needs to be by id (since that method is overridden, see below !)
       }
@@ -88,7 +87,7 @@ public class HistoricTaskInstanceEntityManagerImpl extends AbstractEntityManager
     if (getHistoryManager().isHistoryEnabled()) {
       HistoricTaskInstanceEntity historicTaskInstance = findById(id);
       if (historicTaskInstance != null) {
-        
+
         List<HistoricTaskInstanceEntity> subTasks = historicTaskInstanceDataManager.findHistoricTasksByParentTaskId(historicTaskInstance.getId());
         for (HistoricTaskInstance subTask: subTasks) {
           delete(subTask.getId());
@@ -99,7 +98,7 @@ public class HistoricTaskInstanceEntityManagerImpl extends AbstractEntityManager
         getCommentEntityManager().deleteCommentsByTaskId(id);
         getAttachmentEntityManager().deleteAttachmentsByTaskId(id);
         getHistoricIdentityLinkEntityManager().deleteHistoricIdentityLinksByTaskId(id);
-        
+
         delete(historicTaskInstance);
       }
     }
@@ -122,5 +121,5 @@ public class HistoricTaskInstanceEntityManagerImpl extends AbstractEntityManager
   public void setHistoricTaskInstanceDataManager(HistoricTaskInstanceDataManager historicTaskInstanceDataManager) {
     this.historicTaskInstanceDataManager = historicTaskInstanceDataManager;
   }
-  
+
 }

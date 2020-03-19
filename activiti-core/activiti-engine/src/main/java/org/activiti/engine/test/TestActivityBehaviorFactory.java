@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,86 +12,10 @@
  */
 package org.activiti.engine.test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.activiti.bpmn.model.Activity;
-import org.activiti.bpmn.model.BoundaryEvent;
-import org.activiti.bpmn.model.BusinessRuleTask;
-import org.activiti.bpmn.model.CallActivity;
-import org.activiti.bpmn.model.CancelEventDefinition;
-import org.activiti.bpmn.model.CompensateEventDefinition;
-import org.activiti.bpmn.model.EndEvent;
-import org.activiti.bpmn.model.ErrorEventDefinition;
-import org.activiti.bpmn.model.EventGateway;
-import org.activiti.bpmn.model.ExclusiveGateway;
-import org.activiti.bpmn.model.InclusiveGateway;
-import org.activiti.bpmn.model.IntermediateCatchEvent;
-import org.activiti.bpmn.model.ManualTask;
-import org.activiti.bpmn.model.Message;
-import org.activiti.bpmn.model.MessageEventDefinition;
-import org.activiti.bpmn.model.ParallelGateway;
-import org.activiti.bpmn.model.ReceiveTask;
-import org.activiti.bpmn.model.ScriptTask;
-import org.activiti.bpmn.model.SendTask;
-import org.activiti.bpmn.model.ServiceTask;
-import org.activiti.bpmn.model.Signal;
-import org.activiti.bpmn.model.SignalEventDefinition;
-import org.activiti.bpmn.model.StartEvent;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.Task;
-import org.activiti.bpmn.model.ThrowEvent;
-import org.activiti.bpmn.model.TimerEventDefinition;
-import org.activiti.bpmn.model.Transaction;
-import org.activiti.bpmn.model.UserTask;
+import java.util.*;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.delegate.Expression;
-import org.activiti.engine.impl.bpmn.behavior.AbstractBpmnActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.AdhocSubProcessActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.BoundaryCancelEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.BoundaryCompensateEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.BoundaryEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.BoundaryMessageEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.BoundarySignalEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.BoundaryTimerEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.CallActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.CancelEndEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ErrorEndEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.EventBasedGatewayActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.EventSubProcessErrorStartEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.EventSubProcessMessageStartEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ExclusiveGatewayActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.InclusiveGatewayActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateCatchEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateCatchMessageEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateCatchSignalEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateCatchTimerEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateThrowCompensationEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateThrowMessageEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateThrowNoneEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.IntermediateThrowSignalEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.MailActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ManualTaskActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.NoneEndEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.NoneStartEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ParallelGatewayActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ParallelMultiInstanceBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ReceiveTaskActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ScriptTaskActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.SequentialMultiInstanceBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ServiceTaskDelegateExpressionActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ServiceTaskExpressionActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ShellActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.SubProcessActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.TaskActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.TerminateEndEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.ThrowMessageEndEventActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.TransactionActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
-import org.activiti.engine.impl.bpmn.behavior.WebServiceActivityBehavior;
+import org.activiti.engine.impl.bpmn.behavior.*;
 import org.activiti.engine.impl.bpmn.helper.ClassDelegate;
 import org.activiti.engine.impl.bpmn.parser.FieldDeclaration;
 import org.activiti.engine.impl.bpmn.parser.factory.AbstractBehaviorFactory;
@@ -147,7 +71,7 @@ public class TestActivityBehaviorFactory extends AbstractBehaviorFactory impleme
   public ReceiveTaskActivityBehavior createReceiveTaskActivityBehavior(ReceiveTask receiveTask) {
     return wrappedActivityBehaviorFactory.createReceiveTaskActivityBehavior(receiveTask);
   }
-  
+
   @Override
   public UserTaskActivityBehavior createUserTaskActivityBehavior(UserTask userTask) {
     return wrappedActivityBehaviorFactory.createUserTaskActivityBehavior(userTask);
@@ -279,17 +203,17 @@ public class TestActivityBehaviorFactory extends AbstractBehaviorFactory impleme
   public SubProcessActivityBehavior createSubprocessActivityBehavior(SubProcess subProcess) {
     return wrappedActivityBehaviorFactory.createSubprocessActivityBehavior(subProcess);
   }
-  
+
   @Override
   public EventSubProcessErrorStartEventActivityBehavior createEventSubProcessErrorStartEventActivityBehavior(StartEvent startEvent) {
     return wrappedActivityBehaviorFactory.createEventSubProcessErrorStartEventActivityBehavior(startEvent);
   }
-  
+
   @Override
   public EventSubProcessMessageStartEventActivityBehavior createEventSubProcessMessageStartEventActivityBehavior(StartEvent startEvent, MessageEventDefinition messageEventDefinition) {
     return wrappedActivityBehaviorFactory.createEventSubProcessMessageStartEventActivityBehavior(startEvent, messageEventDefinition);
   }
-  
+
   @Override
   public AdhocSubProcessActivityBehavior createAdhocSubprocessActivityBehavior(SubProcess subProcess) {
     return wrappedActivityBehaviorFactory.createAdhocSubprocessActivityBehavior(subProcess);
@@ -388,7 +312,7 @@ public class TestActivityBehaviorFactory extends AbstractBehaviorFactory impleme
   public BoundaryMessageEventActivityBehavior createBoundaryMessageEventActivityBehavior(BoundaryEvent boundaryEvent, MessageEventDefinition messageEventDefinition, boolean interrupting) {
     return wrappedActivityBehaviorFactory.createBoundaryMessageEventActivityBehavior(boundaryEvent, messageEventDefinition, interrupting);
   }
-  
+
   @Override
   public BoundaryCompensateEventActivityBehavior createBoundaryCompensateEventActivityBehavior(BoundaryEvent boundaryEvent, CompensateEventDefinition compensateEventDefinition, boolean interrupting) {
     return wrappedActivityBehaviorFactory.createBoundaryCompensateEventActivityBehavior(boundaryEvent, compensateEventDefinition, interrupting);
@@ -398,19 +322,19 @@ public class TestActivityBehaviorFactory extends AbstractBehaviorFactory impleme
   public IntermediateThrowMessageEventActivityBehavior createThrowMessageEventActivityBehavior(ThrowEvent throwEvent,
                                                                                                MessageEventDefinition messageEventDefinition,
                                                                                                Message message) {
-      return wrappedActivityBehaviorFactory.createThrowMessageEventActivityBehavior(throwEvent, 
-                                                                                    messageEventDefinition, 
+      return wrappedActivityBehaviorFactory.createThrowMessageEventActivityBehavior(throwEvent,
+                                                                                    messageEventDefinition,
                                                                                     message);
   }
   @Override
   public ThrowMessageEndEventActivityBehavior createThrowMessageEndEventActivityBehavior(EndEvent endEvent,
                                                                                          MessageEventDefinition messageEventDefinition,
                                                                                          Message message) {
-      return wrappedActivityBehaviorFactory.createThrowMessageEndEventActivityBehavior(endEvent, 
-                                                                                       messageEventDefinition, 
+      return wrappedActivityBehaviorFactory.createThrowMessageEndEventActivityBehavior(endEvent,
+                                                                                       messageEventDefinition,
                                                                                        message);
   }
-  
+
   // Mock support //////////////////////////////////////////////////////
 
   public void addClassDelegateMock(String originalClassFqn, Class<?> mockClass) {

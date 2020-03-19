@@ -16,21 +16,9 @@
 
 package org.activiti.runtime.api.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.api.runtime.shared.NotFoundException;
 import org.activiti.api.runtime.shared.security.SecurityManager;
 import org.activiti.api.task.model.builders.TaskPayloadBuilder;
@@ -40,10 +28,17 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.activiti.runtime.api.model.impl.APITaskConverter;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class TaskRuntimeHelperTest {
 
     private static final String AUTHENTICATED_USER = "user";
@@ -58,13 +53,12 @@ public class TaskRuntimeHelperTest {
 
     @Mock
     private APITaskConverter taskConverter;
-    
+
     @Mock
     private TaskVariablesPayloadValidator taskVariablesValidator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        initMocks(this);
         taskRuntimeHelper = spy(new TaskRuntimeHelper(taskService,
                 taskConverter,
                 securityManager,

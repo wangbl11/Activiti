@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@
 package org.activiti.engine.impl.cmd;
 
 import java.io.Serializable;
-
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.delegate.event.impl.ActivitiEventBuilder;
 import org.activiti.engine.impl.interceptor.Command;
@@ -36,7 +35,7 @@ public class DeleteAttachmentCmd implements Command<Object>, Serializable {
   }
 
   public Object execute(CommandContext commandContext) {
-    AttachmentEntity attachment = commandContext.getAttachmentEntityManager().findById(attachmentId); 
+    AttachmentEntity attachment = commandContext.getAttachmentEntityManager().findById(attachmentId);
 
     String processInstanceId = attachment.getProcessInstanceId();
     String processDefinitionId = null;
@@ -46,7 +45,7 @@ public class DeleteAttachmentCmd implements Command<Object>, Serializable {
         processDefinitionId = process.getProcessDefinitionId();
       }
     }
-    
+
     commandContext.getAttachmentEntityManager().delete(attachment, false);
 
     if (attachment.getContentId() != null) {

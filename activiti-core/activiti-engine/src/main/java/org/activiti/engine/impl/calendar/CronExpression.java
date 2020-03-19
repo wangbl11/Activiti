@@ -20,17 +20,7 @@ package org.activiti.engine.impl.calendar;
 
 import java.io.Serializable;
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.StringTokenizer;
-import java.util.TimeZone;
-import java.util.TreeSet;
-
+import java.util.*;
 import org.activiti.engine.runtime.ClockReader;
 
 /**
@@ -38,7 +28,7 @@ import org.activiti.engine.runtime.ClockReader;
  * or &quot;At 1:30am every last Friday of the month&quot;.
  * <P>
  * Cron expressions are comprised of 6 required fields and one optional field separated by white space. The fields respectively are described as follows:
- * 
+ *
  * <table cellspacing="8">
  * <tr>
  * <th align="left">Field Name</th>
@@ -137,7 +127,7 @@ import org.activiti.engine.runtime.ClockReader;
  * 5th". A value of "1C" in the day-of-week field means "the first day included by the calendar on or after Sunday".-->
  * <P>
  * The legal characters and the names of months and days of the week are not case sensitive.
- * 
+ *
  * <p>
  * <b>NOTES:</b>
  * <ul>
@@ -147,8 +137,8 @@ import org.activiti.engine.runtime.ClockReader;
  * chooses. An example would be "0 0 14-6 ? * FRI-MON".</li>
  * </ul>
  * </p>
- * 
- * 
+ *
+ *
 
 
 
@@ -217,14 +207,14 @@ public class CronExpression implements Serializable, Cloneable {
 
   /**
    * Constructs a new <CODE>CronExpression</CODE> based on the specified parameter.
-   * 
+   *
    * @param cronExpression
    *          String representation of the cron expression the new object should represent
    * @param clockReader
    *          The reader which will provide the current time
    * @param timeZone
    *          The time zone that will be used for calculations
-   * 
+   *
    * @throws java.text.ParseException
    *           if the string expression cannot be parsed into a valid <CODE>CronExpression</CODE>
    */
@@ -235,7 +225,7 @@ public class CronExpression implements Serializable, Cloneable {
 
   /**
    * Constructs a new <CODE>CronExpression</CODE> based on the specified parameter.
-   * 
+   *
    * @param cronExpression
    *          String representation of the cron expression the new object should represent
    * @throws java.text.ParseException
@@ -269,7 +259,7 @@ public class CronExpression implements Serializable, Cloneable {
 
   /**
    * Returns the string representation of the <CODE>CronExpression</CODE>
-   * 
+   *
    * @return a string representation of the <CODE>CronExpression</CODE>
    */
   public String toString() {
@@ -1306,7 +1296,7 @@ public class CronExpression implements Serializable, Cloneable {
 
   /**
    * Advance the calendar to the particular hour paying particular attention to daylight saving problems.
-   * 
+   *
    * @param cal
    * @param hour
    */

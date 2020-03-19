@@ -18,15 +18,13 @@ package org.activiti.runtime.api.impl;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.bpmn.model.MapExceptionEntry;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.impl.bpmn.behavior.CallActivityBehavior;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.spring.process.ProcessVariablesInitiator;
-
 import static org.activiti.runtime.api.impl.MappingExecutionContext.buildMappingExecutionContext;
+import org.activiti.spring.process.ProcessVariablesInitiator;
 
 public class MappingAwareCallActivityBehavior extends CallActivityBehavior {
 

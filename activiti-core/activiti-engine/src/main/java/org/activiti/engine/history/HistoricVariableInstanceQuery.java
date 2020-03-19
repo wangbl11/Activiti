@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,11 +14,10 @@
 package org.activiti.engine.history;
 
 import java.util.Set;
-
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.query.Query;
 
-/** 
+/**
  * Programmatic querying for {@link HistoricVariableInstance}s.
  *
  */
@@ -30,16 +29,16 @@ public interface HistoricVariableInstanceQuery extends Query<HistoricVariableIns
 
   /** Only select historic process variables with the given process instance. */
   HistoricVariableInstanceQuery processInstanceId(String processInstanceId);
-  
+
   /** Only select historic process variables with the given id. **/
   HistoricVariableInstanceQuery executionId(String executionId);
-  
+
   /** Only select historic process variables whose id is in the given set of ids. */
   HistoricVariableInstanceQuery executionIds(Set<String> executionIds);
 
   /** Only select historic process variables with the given task. */
   HistoricVariableInstanceQuery taskId(String taskId);
-  
+
   /** Only select historic process variables whose id is in the given set of ids. */
   HistoricVariableInstanceQuery taskIds(Set<String> taskIds);
 
@@ -57,17 +56,17 @@ public interface HistoricVariableInstanceQuery extends Query<HistoricVariableIns
 
   /** only select historic process variables with the given name and value */
   HistoricVariableInstanceQuery variableValueEquals(String variableName, Object variableValue);
-  
+
   /**
    * only select historic process variables that don't have the given name and value
    */
   HistoricVariableInstanceQuery variableValueNotEquals(String variableName, Object variableValue);
-  
+
   /**
    * only select historic process variables like the given name and value
    */
   HistoricVariableInstanceQuery variableValueLike(String variableName, String variableValue);
-  
+
   /**
    * only select historic process variables like the given name and value (case insensitive)
    */

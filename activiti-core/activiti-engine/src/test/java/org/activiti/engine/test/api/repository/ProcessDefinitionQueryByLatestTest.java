@@ -3,7 +3,6 @@ package org.activiti.engine.test.api.repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
@@ -11,17 +10,17 @@ import org.activiti.engine.repository.ProcessDefinitionQuery;
 public class ProcessDefinitionQueryByLatestTest extends PluggableActivitiTestCase {
 
 	private static String XML_FILE_PATH = "org/activiti/engine/test/repository/latest/";
-	
+
 	  @Override
 	  protected void setUp() throws Exception {
 	    super.setUp();
 	  }
-	  
+
 	  @Override
 	  protected void tearDown() throws Exception {
 	    super.tearDown();
 	}
-	
+
 	protected List<String> deploy(List<String> xmlFileNameList) throws Exception {
 		List<String> deploymentIdList = new ArrayList<String>();
 		for(String xmlFileName : xmlFileNameList){
@@ -47,7 +46,7 @@ public class ProcessDefinitionQueryByLatestTest extends PluggableActivitiTestCas
 		List<String> xmlFileNameList = Arrays.asList("name_testProcess1_one.bpmn20.xml",
 				"name_testProcess1_two.bpmn20.xml", "name_testProcess2_one.bpmn20.xml");
 		List<String> deploymentIdList = deploy(xmlFileNameList);
-		
+
 		List<String> processDefinitionIdList = new ArrayList<String>();
 		for(String deploymentId : deploymentIdList){
 			String processDefinitionId = repositoryService.createProcessDefinitionQuery().deploymentId(deploymentId).list().get(0).getId();
@@ -91,7 +90,7 @@ public class ProcessDefinitionQueryByLatestTest extends PluggableActivitiTestCas
 		assertEquals(1, processDefinitions.size());
 		assertEquals(1, processDefinitions.get(0).getVersion());
 		assertEquals("testProcess2", processDefinitions.get(0).getKey());
-		
+
 		// Undeploy
 		unDeploy(deploymentIdList);
 	}

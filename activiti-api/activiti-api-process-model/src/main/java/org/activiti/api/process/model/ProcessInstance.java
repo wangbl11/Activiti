@@ -17,7 +17,6 @@
 package org.activiti.api.process.model;
 
 import java.util.Date;
-
 import org.activiti.api.model.shared.model.ApplicationElement;
 
 public interface ProcessInstance extends ApplicationElement {
@@ -47,7 +46,7 @@ public interface ProcessInstance extends ApplicationElement {
     String getProcessDefinitionKey();
 
     String getParentId();
-    
+
     Integer getProcessDefinitionVersion();
 
 }

@@ -12,13 +12,12 @@
  */
 package org.activiti.engine.impl.el;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import java.beans.FeatureDescriptor;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.el.ELContext;
 import javax.el.ELResolver;
-
 import org.activiti.engine.delegate.VariableScope;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.identity.Authentication;
@@ -26,16 +25,14 @@ import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
 import org.activiti.engine.impl.persistence.entity.VariableInstance;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 /**
  * Implementation of an {@link ELResolver} that resolves expressions with the
  * process variables of a given {@link VariableScope} as context. <br>
  * Also exposes the currently logged in username to be used in expressions (if
  * any)
- * 
- * 
- * 
+ *
+ *
+ *
  */
 public class VariableScopeElResolver extends ELResolver {
 

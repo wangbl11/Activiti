@@ -23,12 +23,7 @@ import java.util.Optional;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.spring.process.ProcessExtensionService;
-import org.activiti.spring.process.model.ConstantDefinition;
-import org.activiti.spring.process.model.Extension;
-import org.activiti.spring.process.model.Mapping;
-import org.activiti.spring.process.model.ProcessConstantsMapping;
-import org.activiti.spring.process.model.ProcessVariablesMapping;
-import org.activiti.spring.process.model.VariableDefinition;
+import org.activiti.spring.process.model.*;
 
 public class VariablesMappingProvider {
 

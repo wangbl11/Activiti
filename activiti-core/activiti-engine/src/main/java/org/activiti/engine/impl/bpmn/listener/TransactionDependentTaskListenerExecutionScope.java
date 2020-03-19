@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.bpmn.listener;
 
 import java.util.Map;
-
 import org.activiti.bpmn.model.Task;
 
 /**

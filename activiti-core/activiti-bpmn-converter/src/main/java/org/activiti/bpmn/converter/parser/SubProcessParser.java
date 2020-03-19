@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,16 +13,11 @@
 package org.activiti.bpmn.converter.parser;
 
 import java.util.List;
-
 import javax.xml.stream.XMLStreamReader;
-
 import org.activiti.bpmn.constants.BpmnXMLConstants;
 import org.activiti.bpmn.converter.util.BpmnXMLUtil;
-import org.activiti.bpmn.model.AdhocSubProcess;
-import org.activiti.bpmn.model.EventSubProcess;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.Transaction;
+import org.activiti.bpmn.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -34,27 +29,27 @@ public class SubProcessParser implements BpmnXMLConstants {
     SubProcess subProcess = null;
     if (ELEMENT_TRANSACTION.equalsIgnoreCase(xtr.getLocalName())) {
       subProcess = new Transaction();
-      
+
     } else if (ELEMENT_ADHOC_SUBPROCESS.equalsIgnoreCase(xtr.getLocalName())) {
       AdhocSubProcess adhocSubProcess = new AdhocSubProcess();
       String orderingAttributeValue = xtr.getAttributeValue(null, ATTRIBUTE_ORDERING);
       if (StringUtils.isNotEmpty(orderingAttributeValue)) {
         adhocSubProcess.setOrdering(orderingAttributeValue);
       }
-      
+
       if (ATTRIBUTE_VALUE_FALSE.equalsIgnoreCase(xtr.getAttributeValue(null, ATTRIBUTE_CANCEL_REMAINING_INSTANCES))) {
         adhocSubProcess.setCancelRemainingInstances(false);
       }
-      
+
       subProcess = adhocSubProcess;
-      
+
     } else if (ATTRIBUTE_VALUE_TRUE.equalsIgnoreCase(xtr.getAttributeValue(null, ATTRIBUTE_TRIGGERED_BY))) {
       subProcess = new EventSubProcess();
-      
+
     } else {
       subProcess = new SubProcess();
     }
-    
+
     BpmnXMLUtil.addXMLLocation(subProcess, xtr);
     activeSubProcessList.add(subProcess);
 

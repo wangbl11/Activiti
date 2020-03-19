@@ -1,7 +1,6 @@
 package org.activiti.engine.test.api.runtime;
 
 import java.util.List;
-
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -34,7 +33,7 @@ public class ProcessInstanceQueryAndWithExceptionTest extends PluggableActivitiT
 
   public void testQueryWithException() throws InterruptedException{
     ProcessInstance processNoException = runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY_NO_EXCEPTION);
-    
+
     ProcessInstanceQuery queryNoException = runtimeService.createProcessInstanceQuery();
     assertEquals(1, queryNoException.count());
     assertEquals(1, queryNoException.list().size());
@@ -43,7 +42,7 @@ public class ProcessInstanceQueryAndWithExceptionTest extends PluggableActivitiT
     ProcessInstanceQuery queryWithException = runtimeService.createProcessInstanceQuery();
     assertEquals(0, queryWithException.withJobException().count());
     assertEquals(0, queryWithException.withJobException().list().size());
-    
+
     ProcessInstance processWithException1 = startProcessInstanceWithFailingJob(PROCESS_DEFINITION_KEY_WITH_EXCEPTION_1);
     TimerJobQuery jobQuery1 = managementService.createTimerJobQuery().processInstanceId(processWithException1.getId());
     assertEquals(1, jobQuery1.withException().count());
@@ -65,7 +64,7 @@ public class ProcessInstanceQueryAndWithExceptionTest extends PluggableActivitiT
 
   private ProcessInstance startProcessInstanceWithFailingJob(String processInstanceByKey) {
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processInstanceByKey);
-    
+
     List<Job> jobList = managementService.createJobQuery()
       .processInstanceId(processInstance.getId())
       .list();

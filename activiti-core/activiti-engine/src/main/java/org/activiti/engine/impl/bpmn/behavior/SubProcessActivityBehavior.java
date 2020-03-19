@@ -13,6 +13,9 @@
 
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.StartEvent;
 import org.activiti.bpmn.model.SubProcess;
@@ -22,10 +25,6 @@ import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.util.CollectionUtil;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Implementation of the BPMN 2.0 subprocess (formally known as 'embedded' subprocess): a subprocess defined within another process definition.

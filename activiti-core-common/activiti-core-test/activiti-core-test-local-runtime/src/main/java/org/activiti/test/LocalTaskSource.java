@@ -17,7 +17,6 @@
 package org.activiti.test;
 
 import java.util.List;
-
 import org.activiti.api.runtime.shared.query.Page;
 import org.activiti.api.runtime.shared.query.Pageable;
 import org.activiti.api.task.model.Task;

@@ -1,13 +1,8 @@
 package org.activiti.engine.impl.variable;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.impl.context.Context;
@@ -15,7 +10,7 @@ import org.activiti.engine.impl.context.Context;
 /**
  * Variable type capable of storing a list of reference to JPA-entities. Only JPA-Entities which are configured by annotations are supported. Use of compound primary keys is not supported. <br>
  * The variable value should be of type {@link List} and can only contain objects of the same type.
- * 
+ *
 
  */
 public class JPAEntityListVariableType implements VariableType, CacheableVariable {

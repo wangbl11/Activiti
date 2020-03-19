@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.examples.task;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.ActivitiOptimisticLockingException;
 import org.activiti.engine.history.HistoricVariableInstance;
 import org.activiti.engine.impl.history.HistoryLevel;
@@ -133,7 +132,7 @@ public class StandaloneTaskTest extends PluggableActivitiTestCase {
 
     taskService.deleteTask(task.getId(), true);
   }
-  
+
   public void testHistoricVariableOkOnUpdate() {
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.AUDIT)) {
   		// 1. create a task
@@ -142,22 +141,22 @@ public class StandaloneTaskTest extends PluggableActivitiTestCase {
   		task.setOwner("josOwner");
   		task.setAssignee("JosAssignee");
   		taskService.saveTask(task);
-  		 
+
   		// 2. set task variables
   		Map<String, Object> taskVariables = new HashMap<String, Object>();
   		taskVariables.put("finishedAmount", 0);
   		taskService.setVariables(task.getId(), taskVariables);
-  		 
+
   		// 3. complete this task with a new variable
   		Map<String, Object> finishVariables = new HashMap<String, Object>();
   		finishVariables.put("finishedAmount", 40);
   		taskService.complete(task.getId(), finishVariables);
-  		 
+
   		// 4. get completed variable
   		List<HistoricVariableInstance> hisVarList = historyService.createHistoricVariableInstanceQuery().taskId(task.getId()).list();
   		assertEquals(1, hisVarList.size());
   		assertEquals(40, hisVarList.get(0).getValue());
-  		
+
   		// Cleanup
   		historyService.deleteHistoricTaskInstance(task.getId());
     }

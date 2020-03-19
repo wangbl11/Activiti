@@ -1,7 +1,6 @@
 package org.activiti.spring.process.variable.types;
 
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 
 /**

@@ -16,9 +16,6 @@
 
 package org.activiti.spring.boot.process;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Java6Assertions.tuple;
-
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.ProcessInstance.ProcessInstanceStatus;
@@ -32,17 +29,16 @@ import org.activiti.api.runtime.shared.query.Pageable;
 import org.activiti.spring.boot.process.listener.DummyBPMNSignalReceivedListener;
 import org.activiti.spring.boot.security.util.SecurityUtil;
 import org.activiti.spring.boot.test.util.ProcessCleanUpUtil;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.tuple;
 import org.assertj.core.groups.Tuple;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Import(DummyBPMNSignalReceivedListener.class)
 public class ProcessRuntimeBPMNSignalReceivedIT {
@@ -61,12 +57,12 @@ public class ProcessRuntimeBPMNSignalReceivedIT {
     @Autowired
     private ProcessCleanUpUtil processCleanUpUtil;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         listener.clear();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         processCleanUpUtil.cleanUpWithAdmin();
     }
@@ -159,7 +155,7 @@ public class ProcessRuntimeBPMNSignalReceivedIT {
                               boundarySignalProcInst2.getId()
                         )
                 );
-        
+
         assertThat(process.getStatus()).isEqualTo(ProcessInstanceStatus.COMPLETED);
     }
 
@@ -197,6 +193,6 @@ public class ProcessRuntimeBPMNSignalReceivedIT {
         assertThat(event.getEntity().getSignalPayload().getVariables().size()).isEqualTo(1);
         assertThat(event.getEntity().getSignalPayload().getVariables().get("signal_variable")).isEqualTo("test");
     }
-    
-    
+
+
 }

@@ -2,7 +2,6 @@ package org.activiti.engine.impl;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.runtime.NativeProcessInstanceQuery;

@@ -18,7 +18,6 @@ package org.activiti.spring.boot.process.listener;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.activiti.api.process.model.events.BPMNErrorReceivedEvent;
 import org.activiti.api.process.runtime.events.listener.BPMNElementEventListener;
 import org.springframework.boot.test.context.TestComponent;

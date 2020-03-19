@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@
 package org.activiti.engine.impl.persistence.entity;
 
 import java.text.MessageFormat;
-
 import org.activiti.bpmn.model.Signal;
 
 /**
@@ -24,14 +23,14 @@ import org.activiti.bpmn.model.Signal;
 public class SignalEventSubscriptionEntityImpl extends EventSubscriptionEntityImpl implements SignalEventSubscriptionEntity {
 
   private static final long serialVersionUID = 1L;
-  
+
   // Using json here, but not worth of adding json dependency lib for this
   private static final String CONFIGURATION_TEMPLATE = "'{'\"scope\":\"{0}\"'}'";
 
   public SignalEventSubscriptionEntityImpl() {
     eventType = EVENT_TYPE;
   }
-  
+
   @Override
   public void setConfiguration(String configuration) {
     if (configuration != null && configuration.contains("{\"scope\":")) {

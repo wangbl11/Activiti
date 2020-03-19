@@ -1,12 +1,11 @@
 package org.activiti.editor.language.xml;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.Task;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class TaskConverterTest extends AbstractConverterTest {
 

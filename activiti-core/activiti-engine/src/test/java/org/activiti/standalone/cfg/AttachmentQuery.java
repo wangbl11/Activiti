@@ -1,10 +1,9 @@
 /**
- * 
+ *
  */
 package org.activiti.standalone.cfg;
 
 import java.util.List;
-
 import org.activiti.engine.ManagementService;
 import org.activiti.engine.impl.AbstractQuery;
 import org.activiti.engine.impl.Page;
@@ -13,7 +12,7 @@ import org.activiti.engine.task.Attachment;
 
 /**
 
- * 
+ *
  */
 public class AttachmentQuery extends AbstractQuery<AttachmentQuery, Attachment> {
 

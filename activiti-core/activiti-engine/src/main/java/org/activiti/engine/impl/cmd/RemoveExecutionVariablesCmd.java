@@ -1,7 +1,6 @@
 package org.activiti.engine.impl.cmd;
 
 import java.util.Collection;
-
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 

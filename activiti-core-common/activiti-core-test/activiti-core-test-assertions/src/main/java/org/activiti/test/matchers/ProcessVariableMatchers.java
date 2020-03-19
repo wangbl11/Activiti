@@ -18,11 +18,10 @@ package org.activiti.test.matchers;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.activiti.api.model.shared.event.VariableCreatedEvent;
 import org.activiti.api.model.shared.event.VariableEvent;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 public class ProcessVariableMatchers {
 

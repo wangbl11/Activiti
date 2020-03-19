@@ -3,9 +3,9 @@ package org.activiti.engine.test.bpmn.event.timer;
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ package org.activiti.engine.test.bpmn.event.timer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -46,14 +45,14 @@ public class IntermediateTimerEventRepeatWithEndTest extends PluggableActivitiTe
     calendar.add(Calendar.MINUTE, 10);
     // after 10 minutes the end Date will be reached but the intermediate timers will ignore it
     // since the end date is validated only when a new timer is going to be created
-    
+
     DateTime dt = new DateTime(calendar.getTime());
     String dateStr1 = fmt.print(dt);
 
     calendar.setTime(baseTime);
     calendar.add(Calendar.HOUR, 1);
     calendar.add(Calendar.MINUTE, 30);
-    
+
     dt = new DateTime(calendar.getTime());
     String dateStr2 = fmt.print(dt);
 
@@ -80,9 +79,9 @@ public class IntermediateTimerEventRepeatWithEndTest extends PluggableActivitiTe
 
     Job timerJob = managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).singleResult();
     assertNotNull(timerJob);
-    
+
     waitForJobExecutorToProcessAllJobs(2000, 500);
-    
+
     // Expected that job isn't executed because the timer is in t0");
     Job timerJobAfter = managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).singleResult();
     assertEquals(timerJob.getId(), timerJobAfter.getId());

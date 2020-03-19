@@ -1,8 +1,5 @@
 package org.activiti.runtime.api.impl;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +11,8 @@ import org.activiti.engine.impl.el.ExpressionManager;
 import org.activiti.engine.impl.persistence.entity.VariableInstance;
 import org.activiti.spring.process.model.Extension;
 import org.activiti.spring.process.model.VariableDefinition;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 public class ExpressionResolverHelper {
 

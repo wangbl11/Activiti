@@ -16,14 +16,12 @@
 
 package org.activiti.test;
 
-import static java.util.stream.Collectors.collectingAndThen;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import static java.util.stream.Collectors.collectingAndThen;
 import org.activiti.api.model.shared.event.RuntimeEvent;
 import org.activiti.api.process.model.events.ProcessRuntimeEvent;
 import org.activiti.api.task.model.events.TaskRuntimeEvent;

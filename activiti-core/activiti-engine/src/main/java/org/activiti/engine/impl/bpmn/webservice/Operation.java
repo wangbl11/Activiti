@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,12 +14,11 @@ package org.activiti.engine.impl.bpmn.webservice;
 
 import java.net.URL;
 import java.util.concurrent.ConcurrentMap;
-
 import javax.xml.namespace.QName;
 
 /**
  * An Operation is part of an {@link BpmnInterface} and it defines Messages that are consumed and (optionally) produced when the Operation is called.
- * 
+ *
 
  */
 public class Operation {
@@ -49,7 +48,7 @@ public class Operation {
     setInterface(bpmnInterface);
     setInMessage(inMessage);
   }
-  
+
   public MessageInstance sendMessage(MessageInstance message, ConcurrentMap<QName, URL> overridenEndpointAddresses) throws Exception {
     return this.implementation.sendFor(message, this, overridenEndpointAddresses);
   }

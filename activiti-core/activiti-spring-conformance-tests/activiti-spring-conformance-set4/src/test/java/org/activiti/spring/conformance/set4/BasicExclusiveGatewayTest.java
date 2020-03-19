@@ -10,15 +10,6 @@ import org.activiti.api.task.model.Task;
 import org.activiti.api.task.model.builders.TaskPayloadBuilder;
 import org.activiti.api.task.runtime.TaskRuntime;
 import org.activiti.spring.conformance.util.security.SecurityUtil;
-import org.activiti.test.operations.ProcessOperations;
-import org.activiti.test.operations.TaskOperations;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import static org.activiti.test.matchers.BPMNStartEventMatchers.startEvent;
 import static org.activiti.test.matchers.ExclusiveGatewayMatchers.exclusiveGateway;
 import static org.activiti.test.matchers.ProcessInstanceMatchers.processInstance;
@@ -26,9 +17,14 @@ import static org.activiti.test.matchers.ProcessTaskMatchers.taskWithName;
 import static org.activiti.test.matchers.SequenceFlowMatchers.sequenceFlow;
 import static org.activiti.test.matchers.TaskMatchers.task;
 import static org.activiti.test.matchers.TaskMatchers.withAssignee;
-import static org.assertj.core.api.Assertions.*;
+import org.activiti.test.operations.ProcessOperations;
+import org.activiti.test.operations.TaskOperations;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class BasicExclusiveGatewayTest {
 
@@ -45,17 +41,17 @@ public class BasicExclusiveGatewayTest {
 
     @Autowired
     private ProcessAdminRuntime processAdminRuntime;
-    
+
     @Autowired
     private ProcessOperations processOperations;
-    
+
     @Autowired
     private TaskOperations taskOperations;
 
     @Test
     public void shouldCreateAndCompleteATaskAndDontSeeNext() {
         securityUtil.logInAs("user1");
-        
+
         //given
         ProcessInstance processInstance = processOperations.start(ProcessPayloadBuilder
                 .start()
@@ -68,7 +64,7 @@ public class BasicExclusiveGatewayTest {
                 .expectFields(processInstance().status(ProcessInstance.ProcessInstanceStatus.RUNNING),
                               processInstance().name("my-process-instance-name"),
                               processInstance().businessKey("my-business-key"))
-       
+
                 .expect(processInstance().hasTask("Task 1 User 1",
                                                   Task.TaskStatus.ASSIGNED,
                                                   withAssignee("user1")))
@@ -80,7 +76,7 @@ public class BasicExclusiveGatewayTest {
                               taskWithName("Task 1 User 1").hasBeenAssigned()
                 )
                 .andReturn();
-    
+
         // I should be able to get the process instance from the Runtime because it is still running
         ProcessInstance processInstanceById = processRuntime.processInstance(processInstance.getId());
         assertThat(processInstanceById).isEqualTo(processInstance);
@@ -101,8 +97,8 @@ public class BasicExclusiveGatewayTest {
         //then
                 .expectEvents(task().hasBeenCompleted(),
                               sequenceFlow("SequenceFlow_0pdm5j0").hasBeenTaken(),
-                              exclusiveGateway("ExclusiveGateway_1ri35t5").hasBeenStarted(), 
-                              exclusiveGateway("ExclusiveGateway_1ri35t5").hasBeenCompleted(), 
+                              exclusiveGateway("ExclusiveGateway_1ri35t5").hasBeenStarted(),
+                              exclusiveGateway("ExclusiveGateway_1ri35t5").hasBeenCompleted(),
                               sequenceFlow("SequenceFlow_1tut9mk").hasBeenTaken(),
                               taskWithName("Task 2 User 1").hasBeenCreated(),
                               taskWithName("Task 2 User 1").hasBeenAssigned())
@@ -118,7 +114,7 @@ public class BasicExclusiveGatewayTest {
         assertThat(task.getAssignee()).isEqualTo("user1");
     }
 
-    @After
+    @AfterEach
     public void cleanup() {
         securityUtil.logInAs("admin");
         Page<ProcessInstance> processInstancePage = processAdminRuntime.processInstances(Pageable.of(0, 50));
@@ -126,5 +122,5 @@ public class BasicExclusiveGatewayTest {
             processAdminRuntime.delete(ProcessPayloadBuilder.delete(pi.getId()));
         }
     }
-    
+
 }

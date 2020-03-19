@@ -17,12 +17,10 @@
 package org.activiti.spring.boot.process;
 
 import java.util.Map;
-
 import org.activiti.api.process.runtime.connector.Connector;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @Configuration
 public class ConnectorsConfiguration {

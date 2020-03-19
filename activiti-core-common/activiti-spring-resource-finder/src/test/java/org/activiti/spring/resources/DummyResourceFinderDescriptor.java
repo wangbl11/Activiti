@@ -19,7 +19,6 @@ package org.activiti.spring.resources;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.core.io.Resource;
 
 public class DummyResourceFinderDescriptor implements ResourceFinderDescriptor {

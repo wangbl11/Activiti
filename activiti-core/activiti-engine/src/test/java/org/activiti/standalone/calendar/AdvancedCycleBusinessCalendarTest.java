@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-
 import org.activiti.engine.impl.calendar.AdvancedCycleBusinessCalendar;
 import org.activiti.engine.impl.test.AbstractTestCase;
 import org.activiti.engine.impl.util.DefaultClockImpl;

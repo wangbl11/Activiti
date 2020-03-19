@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,10 +13,12 @@
 
 package org.activiti.engine.test.json;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricVariableInstance;
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -24,31 +26,27 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.test.Deployment;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 public class JsonTest extends PluggableActivitiTestCase {
 
   public static final String MY_JSON_OBJ = "myJsonObj";
   public static final String BIG_JSON_OBJ = "bigJsonObj";
 
   protected ObjectMapper objectMapper = new ObjectMapper();
-  
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();
   }
-  
+
   @Deployment
   public void testJsonObjectAvailable() {
     Map<String, Object> vars = new HashMap<String, Object>();
-   
+
     ObjectNode varNode = objectMapper.createObjectNode();
     varNode.put("var", "myValue");
     vars.put(MY_JSON_OBJ, varNode);
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("testJsonAvailableProcess", vars);
-    
+
     // Check JSON has been parsed as expected
     ObjectNode value = (ObjectNode) runtimeService.getVariable(processInstance.getId(), MY_JSON_OBJ);
     assertNotNull(value);
@@ -71,7 +69,7 @@ public class JsonTest extends PluggableActivitiTestCase {
     var3Node.put("var", "myValue");
     var3Node.put("var2", "myOtherValue");
     var3Node.put("var3", "myThirdValue");
-    
+
     vars = new HashMap<String, Object>();
     vars.put(MY_JSON_OBJ, var3Node);
     vars.put(BIG_JSON_OBJ, createBigJsonObject());
@@ -81,7 +79,7 @@ public class JsonTest extends PluggableActivitiTestCase {
     assertEquals("myValue", value.get("var").asText());
     assertEquals("myOtherValue", value.get("var2").asText());
     assertEquals("myThirdValue", value.get("var3").asText());
-    
+
     value = (ObjectNode) runtimeService.getVariable(processInstance.getId(), BIG_JSON_OBJ);
     assertNotNull(value);
     assertEquals(createBigJsonObject().toString(), value.toString());
@@ -89,17 +87,17 @@ public class JsonTest extends PluggableActivitiTestCase {
     task = taskService.createTaskQuery().active().singleResult();
     assertNotNull(task);
     assertEquals("userTaskSuccess", task.getTaskDefinitionKey());
-    
+
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.AUDIT)) {
       List<HistoricVariableInstance> historicVariableInstances = historyService.createHistoricVariableInstanceQuery()
           .processInstanceId(processInstance.getProcessInstanceId()).orderByVariableName().asc().list();
       assertEquals(2, historicVariableInstances.size());
-      
+
       assertEquals(BIG_JSON_OBJ, historicVariableInstances.get(0).getVariableName());
       value = (ObjectNode) historicVariableInstances.get(0).getValue();
       assertNotNull(value);
       assertEquals(createBigJsonObject().toString(), value.toString());
-      
+
       assertEquals(MY_JSON_OBJ, historicVariableInstances.get(1).getVariableName());
       value = (ObjectNode) historicVariableInstances.get(1).getValue();
       assertNotNull(value);
@@ -116,16 +114,16 @@ public class JsonTest extends PluggableActivitiTestCase {
     runtimeService.removeVariable(processInstance.getId(), BIG_JSON_OBJ);
     assertNull(runtimeService.getVariable(processInstance.getId(), BIG_JSON_OBJ));
   }
-  
+
   @Deployment
   public void testDirectJsonPropertyAccess() {
     Map<String, Object> vars = new HashMap<String, Object>();
-   
+
     ObjectNode varNode = objectMapper.createObjectNode();
     varNode.put("var", "myValue");
     vars.put("myJsonObj", varNode);
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("testJsonAvailableProcess", vars);
-    
+
     // Check JSON has been parsed as expected
     ObjectNode value = (ObjectNode) runtimeService.getVariable(processInstance.getId(), "myJsonObj");
     assertNotNull(value);
@@ -137,16 +135,16 @@ public class JsonTest extends PluggableActivitiTestCase {
     var3Node.put("var", "myValue");
     var3Node.put("var2", "myOtherValue");
     var3Node.put("var3", "myThirdValue");
-    
+
     vars.put("myJsonObj", var3Node);
     taskService.complete(task.getId(), vars);
-    
+
     value = (ObjectNode) runtimeService.getVariable(processInstance.getId(), "myJsonObj");
     assertNotNull(value);
     assertEquals("myValue", value.get("var").asText());
     assertEquals("myOtherValue", value.get("var2").asText());
     assertEquals("myThirdValue", value.get("var3").asText());
-    
+
     task = taskService.createTaskQuery().active().singleResult();
     assertNotNull(task);
     assertEquals("userTaskSuccess", task.getTaskDefinitionKey());
@@ -218,7 +216,7 @@ public class JsonTest extends PluggableActivitiTestCase {
       assertEquals("myThirdValue", value.get(2).get("var").asText());
     }
   }
-  
+
   protected ObjectNode createBigJsonObject() {
     ObjectNode valueNode = objectMapper.createObjectNode();
     for (int i = 0; i < 1000; i++) {

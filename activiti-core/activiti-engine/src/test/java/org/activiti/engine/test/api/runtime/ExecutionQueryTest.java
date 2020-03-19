@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,9 +14,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,19 +26,9 @@
 
 package org.activiti.engine.test.api.runtime;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.impl.identity.Authentication;
@@ -61,7 +51,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
   private static String SEQUENTIAL_PROCESS_NAME = "oneTaskProcessName";
   private static String CONCURRENT_PROCESS_CATEGORY = "org.activiti.enginge.test.api.runtime.concurrent.Category";
   private static String SEQUENTIAL_PROCESS_CATEGORY = "org.activiti.enginge.test.api.runtime.Category";
-  
+
 
   private List<String> concurrentProcessInstanceIds;
   private List<String> sequentialProcessInstanceIds;
@@ -92,7 +82,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     assertEquals(12, runtimeService.createExecutionQuery().processDefinitionKey(CONCURRENT_PROCESS_KEY).list().size());
     assertEquals(2, runtimeService.createExecutionQuery().processDefinitionKey(SEQUENTIAL_PROCESS_KEY).list().size());
   }
-  
+
   public void testQueryByProcessDefinitionKeyIn() {
     Set<String> includeIds = new HashSet<String>();
     assertEquals(14, runtimeService.createExecutionQuery().processDefinitionKeys(includeIds).list().size());
@@ -102,19 +92,19 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     assertEquals(14, runtimeService.createExecutionQuery().processDefinitionKeys(includeIds).list().size());
     includeIds.add("invalid");
     assertEquals(14, runtimeService.createExecutionQuery().processDefinitionKeys(includeIds).list().size());
-    
+
     includeIds.clear();
     includeIds.add("invalid");
     assertEquals(0, runtimeService.createExecutionQuery().processDefinitionKeys(includeIds).list().size());
   }
-  
+
   public void testQueryByInvalidProcessDefinitionKey() {
     ExecutionQuery query = runtimeService.createExecutionQuery().processDefinitionKey("invalid");
     assertNull(query.singleResult());
     assertEquals(0, query.list().size());
     assertEquals(0, query.count());
   }
-  
+
   public void testQueryByProcessDefinitionCategory() {
     // Concurrent process with 3 executions for each process instance
     assertEquals(12, runtimeService.createExecutionQuery().processDefinitionCategory(CONCURRENT_PROCESS_CATEGORY).list().size());
@@ -438,7 +428,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       assertEquals("name is null", ae.getMessage());
     }
   }
-  
+
   @Deployment(resources={"org/activiti/engine/test/api/oneTaskProcess.bpmn20.xml"})
   public void testQueryLike() {
     Map<String, Object> vars = new HashMap<String, Object>();
@@ -446,15 +436,15 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     vars.put("var2", "bbbbb");
     vars.put("var3", "ccccc");
     ProcessInstance processInstance1 = runtimeService.startProcessInstanceByKey("oneTaskProcess", vars);
-    
+
     Execution execution = runtimeService.createExecutionQuery().variableValueLike("var1", "aa%").singleResult();
     assertNotNull(execution);
     assertEquals(processInstance1.getId(), execution.getId());
-    
+
     execution = runtimeService.createExecutionQuery().variableValueLike("var2", "bb%").singleResult();
     assertNotNull(execution);
     assertEquals(processInstance1.getId(), execution.getId());
-    
+
     // Pass in null-value, should cause exception
     try {
       execution = runtimeService.createExecutionQuery().variableValueLike("var1", null).singleResult();
@@ -462,7 +452,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     } catch(ActivitiIllegalArgumentException ae) {
       assertEquals("Only string values can be used with 'like' condition", ae.getMessage());
     }
-    
+
     // Pass in null name, should cause exception
     try {
       execution = runtimeService.createExecutionQuery().variableValueLike(null, "abcdefg").singleResult();
@@ -471,7 +461,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       assertEquals("name is null", ae.getMessage());
     }
   }
-  
+
   @Deployment(resources={"org/activiti/engine/test/api/oneTaskProcess.bpmn20.xml"})
   public void testQueryLikeIgnoreCase() {
     Map<String, Object> vars = new HashMap<String, Object>();
@@ -479,24 +469,24 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     vars.put("lower", "ABCDEFG");
     vars.put("upper", "abcdefg");
     ProcessInstance processInstance1 = runtimeService.startProcessInstanceByKey("oneTaskProcess", vars);
-    
+
     Execution execution = runtimeService.createExecutionQuery().variableValueLikeIgnoreCase("mixed", "abcde%").singleResult();
     assertNotNull(execution);
     assertEquals(processInstance1.getId(), execution.getId());
-    
+
     execution = runtimeService.createExecutionQuery().variableValueLikeIgnoreCase("lower", "abcd%").singleResult();
     assertNotNull(execution);
     assertEquals(processInstance1.getId(), execution.getId());
-    
+
     execution = runtimeService.createExecutionQuery().variableValueLikeIgnoreCase("upper", "abcd%").singleResult();
     assertNotNull(execution);
     assertEquals(processInstance1.getId(), execution.getId());
-    
+
     // Pass in non-lower-case string
     execution = runtimeService.createExecutionQuery().variableValueLikeIgnoreCase("upper", "ABCde%").singleResult();
     assertNotNull(execution);
     assertEquals(processInstance1.getId(), execution.getId());
-    
+
     // Pass in null-value, should cause exception
     try {
       execution = runtimeService.createExecutionQuery().variableValueEqualsIgnoreCase("upper", null).singleResult();
@@ -504,7 +494,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     } catch(ActivitiIllegalArgumentException ae) {
       assertEquals("value is null", ae.getMessage());
     }
-    
+
     // Pass in null name, should cause exception
     try {
       execution = runtimeService.createExecutionQuery().variableValueEqualsIgnoreCase(null, "abcdefg").singleResult();
@@ -513,7 +503,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       assertEquals("name is null", ae.getMessage());
     }
   }
-  
+
   @Deployment(resources={
     "org/activiti/engine/test/api/oneTaskProcess.bpmn20.xml"})
   public void testQueryLongVariable() {
@@ -1405,7 +1395,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     assertEquals(3, runtimeService.createExecutionQuery().processInstanceId(pi.getId()).processVariableValueNotEqualsIgnoreCase("xIgnoreCase", "chilD").count());
 
   }
-  
+
   @Deployment(resources={"org/activiti/engine/test/api/runtime/executionLocalization.bpmn20.xml"})
   public void testLocalizeExecution() throws Exception {
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("executionLocalization");
@@ -1416,7 +1406,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       if (execution.getParentId() == null) {
         assertNull(execution.getName());
         assertNull(execution.getDescription());
-        
+
       } else if (execution.getParentId().equals(execution.getProcessInstanceId())) {
         assertNull(execution.getName());
         assertNull(execution.getDescription());
@@ -1430,13 +1420,13 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
 
     dynamicBpmnService.changeLocalizationName("en", "executionLocalization", "Process Name 'en'", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en", "executionLocalization", "Process Description 'en'", infoNode);
-    
+
     dynamicBpmnService.changeLocalizationName("en-GB", "subProcess", "SubProcess Name 'en-GB'", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en-GB", "subProcess", "SubProcess Description 'en-GB'", infoNode);
-    
+
     dynamicBpmnService.changeLocalizationName("en", "subProcess", "SubProcess Name 'en'", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en", "subProcess", "SubProcess Description 'en'", infoNode);
-    
+
     dynamicBpmnService.saveProcessDefinitionInfo(processInstance.getProcessDefinitionId(), infoNode);
 
     executions = runtimeService.createExecutionQuery().processInstanceId(processInstance.getId()).list();
@@ -1446,7 +1436,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       if (execution.getParentId() == null) {
         assertNull(execution.getName());
         assertNull(execution.getDescription());
-        
+
       } else if (execution.getParentId().equals(execution.getProcessInstanceId())) {
         assertNull(execution.getName());
         assertNull(execution.getDescription());
@@ -1460,20 +1450,20 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       if (execution.getParentId() == null) {
         assertEquals("Nombre del proceso", execution.getName());
         assertEquals("Descripción del proceso", execution.getDescription());
-        
+
       } else if (execution.getParentId().equals(execution.getProcessInstanceId())) {
         assertEquals("Nombre Subproceso", execution.getName());
         assertEquals("Subproceso Descripción", execution.getDescription());
       }
     }
-    
+
     executions = runtimeService.createExecutionQuery().processInstanceId(processInstance.getId()).locale("en-GB").list();
     assertEquals(3, executions.size());
     for (Execution execution : executions) {
       if (execution.getParentId() == null) {
         assertEquals("Process Name 'en-GB'", execution.getName());
         assertEquals("Process Description 'en-GB'", execution.getDescription());
-        
+
       } else if(execution.getParentId().equals(execution.getProcessInstanceId())) {
         assertEquals("SubProcess Name 'en-GB'", execution.getName());
         assertEquals("SubProcess Description 'en-GB'", execution.getDescription());
@@ -1486,7 +1476,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       if (execution.getParentId() == null) {
         assertNull(execution.getName());
         assertNull(execution.getDescription());
-        
+
       } else if (execution.getParentId().equals(execution.getProcessInstanceId())) {
         assertNull(execution.getName());
         assertNull(execution.getDescription());
@@ -1499,7 +1489,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       if (execution.getParentId() == null) {
         assertEquals("Nombre del proceso", execution.getName());
         assertEquals("Descripción del proceso", execution.getDescription());
-        
+
       } else if(execution.getParentId().equals(execution.getProcessInstanceId())) {
         assertEquals("Nombre Subproceso", execution.getName());
         assertEquals("Subproceso Descripción", execution.getDescription());
@@ -1512,7 +1502,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       if (execution.getParentId() == null) {
         assertEquals("Process Name 'en-GB'", execution.getName());
         assertEquals("Process Description 'en-GB'", execution.getDescription());
-        
+
       } else if(execution.getParentId().equals(execution.getProcessInstanceId())) {
         assertEquals("SubProcess Name 'en-GB'", execution.getName());
         assertEquals("SubProcess Description 'en-GB'", execution.getDescription());
@@ -1534,7 +1524,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     execution = runtimeService.createExecutionQuery().executionId(subProcessId).locale("es").singleResult();
     assertEquals("Nombre Subproceso", execution.getName());
     assertEquals("Subproceso Descripción", execution.getDescription());
-    
+
     execution = runtimeService.createExecutionQuery().executionId(processInstance.getId()).locale("en-GB").singleResult();
     assertEquals("Process Name 'en-GB'", execution.getName());
     assertEquals("Process Description 'en-GB'", execution.getDescription());
@@ -1542,7 +1532,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     execution = runtimeService.createExecutionQuery().executionId(subProcessId).locale("en-GB").singleResult();
     assertEquals("SubProcess Name 'en-GB'", execution.getName());
     assertEquals("SubProcess Description 'en-GB'", execution.getDescription());
-    
+
     execution = runtimeService.createExecutionQuery().executionId(processInstance.getId()).locale("en-AU").withLocalizationFallback().singleResult();
     assertEquals("Process Name 'en'", execution.getName());
     assertEquals("Process Description 'en'", execution.getDescription());
@@ -1550,17 +1540,17 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
     execution = runtimeService.createExecutionQuery().executionId(subProcessId).locale("en-AU").withLocalizationFallback().singleResult();
     assertEquals("SubProcess Name 'en'", execution.getName());
     assertEquals("SubProcess Description 'en'", execution.getDescription());
-    
-    
+
+
     dynamicBpmnService.changeLocalizationName("en-US", "executionLocalization", "Process Name 'en-US'", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en-US", "executionLocalization", "Process Description 'en-US'", infoNode);
     dynamicBpmnService.saveProcessDefinitionInfo(processInstance.getProcessDefinitionId(), infoNode);
-    
+
     dynamicBpmnService.changeLocalizationName("en-US", "subProcess", "SubProcess Name 'en-US'", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en-US", "subProcess", "SubProcess Description 'en-US'", infoNode);
-    
+
     dynamicBpmnService.saveProcessDefinitionInfo(processInstance.getProcessDefinitionId(), infoNode);
-    
+
     execution = runtimeService.createExecutionQuery().executionId(processInstance.getId()).locale("en-US").singleResult();
     assertEquals("Process Name 'en-US'", execution.getName());
     assertEquals("Process Description 'en-US'", execution.getDescription());
@@ -1628,7 +1618,7 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
 
     assertEquals(1, executions.size());
   }
-  
+
   @Deployment(resources={"org/activiti/engine/test/api/runtime/multipleSubProcess.bpmn20.xml",
 		                 "org/activiti/engine/test/api/runtime/subProcess.bpmn20.xml"})
   public void testOnlySubProcessExecutions() throws Exception {
@@ -1646,8 +1636,8 @@ public class ExecutionQueryTest extends PluggableActivitiTestCase {
       }
     }
   }
-  
-    @Deployment(resources = {"org/activiti/engine/test/api/runtime/superProcess.bpmn20.xml", 
+
+    @Deployment(resources = {"org/activiti/engine/test/api/runtime/superProcess.bpmn20.xml",
                              "org/activiti/engine/test/api/runtime/subProcess.bpmn20.xml"})
     public void testExecutionQueryParentProcessInstanceIdResultMapping() throws Exception {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("subProcessQueryTest");

@@ -13,6 +13,9 @@
 
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import org.activiti.bpmn.model.Activity;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.FlowNode;
@@ -24,10 +27,6 @@ import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Implementation of the Parallel Gateway/AND gateway as defined in the BPMN 2.0 specification.

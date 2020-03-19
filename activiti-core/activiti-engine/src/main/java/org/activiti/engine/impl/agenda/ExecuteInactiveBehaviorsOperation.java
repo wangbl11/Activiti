@@ -1,5 +1,7 @@
 package org.activiti.engine.impl.agenda;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import org.activiti.bpmn.model.FlowNode;
 import org.activiti.bpmn.model.Process;
 import org.activiti.engine.impl.delegate.InactiveActivityBehavior;
@@ -9,9 +11,6 @@ import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Operation that usually gets scheduled as last operation of handling a {@link Command}.

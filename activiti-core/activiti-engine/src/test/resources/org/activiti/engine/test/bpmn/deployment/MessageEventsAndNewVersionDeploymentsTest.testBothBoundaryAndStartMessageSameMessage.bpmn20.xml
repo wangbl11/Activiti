@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20160203194307674" modeler:modelId="973075" modeler:modelVersion="1" modeler:modelLastUpdated="1454528585209">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler"
+             modeler:version="1.0en" modeler:exportDateTime="20160203194307674" modeler:modelId="973075"
+             modeler:modelVersion="1" modeler:modelLastUpdated="1454528585209">
   <message id="myMessage" name="myMessage" activiti:scope="global"/>
   <process id="messageTest" name="messageStartAndBoundaryTest" isExecutable="true">
     <startEvent id="sid-44938EAC-3F57-484C-9C22-8174B7E3A15E">

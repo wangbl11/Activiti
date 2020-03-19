@@ -16,10 +16,9 @@
 
 package org.activiti.api.task.model;
 
-import org.activiti.api.model.shared.model.ApplicationElement;
-
 import java.util.Date;
 import java.util.List;
+import org.activiti.api.model.shared.model.ApplicationElement;
 
 public interface Task extends ApplicationElement {
 
@@ -63,13 +62,13 @@ public interface Task extends ApplicationElement {
     Date getCompletedDate();
 
     Long getDuration();
-    
+
     Integer getProcessDefinitionVersion();
-    
+
     String getBusinessKey();
 
     boolean isStandalone();
-    
+
     String getTaskDefinitionKey();
 
     List<String> getCandidateUsers();

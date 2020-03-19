@@ -13,11 +13,10 @@
 
 package org.activiti.spring.process.conf;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.activiti.common.util.DateFormatterProvider;
 import org.activiti.engine.RepositoryService;
 import org.activiti.spring.process.ProcessExtensionResourceReader;

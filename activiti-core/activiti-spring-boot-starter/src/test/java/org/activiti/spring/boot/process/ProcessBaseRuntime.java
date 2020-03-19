@@ -17,7 +17,6 @@
 package org.activiti.spring.boot.process;
 
 import java.util.List;
-
 import org.activiti.api.model.shared.model.VariableInstance;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.builders.ProcessPayloadBuilder;

@@ -2,7 +2,6 @@ package org.activiti.engine.impl.event.logger.handler;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
 import org.activiti.engine.delegate.event.ActivitiEntityWithVariablesEvent;
 import org.activiti.engine.impl.interceptor.CommandContext;
@@ -16,7 +15,7 @@ public class TaskCompletedEventHandler extends AbstractTaskEventHandler {
 
   @Override
   public EventLogEntryEntity generateEventLogEntry(CommandContext commandContext) {
-    
+
     ActivitiEntityEvent activitiEntityEvent = (ActivitiEntityEvent) event;
 
     TaskEntity task = (TaskEntity) activitiEntityEvent.getEntity();
@@ -38,9 +37,9 @@ public class TaskCompletedEventHandler extends AbstractTaskEventHandler {
           putInMapIfNotNull(data, Fields.VARIABLES, variableMap);
         }
       }
-  
+
     }
-    
+
     return createEventLogEntry(task.getProcessDefinitionId(), task.getProcessInstanceId(), task.getExecutionId(), task.getId(), data);
   }
 

@@ -13,10 +13,8 @@
 package org.activiti.validation.validator.impl;
 
 import java.util.List;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.FlowNode;
-import org.activiti.bpmn.model.MessageFlow;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.validation.ValidationError;
 import org.activiti.validation.validator.Problems;

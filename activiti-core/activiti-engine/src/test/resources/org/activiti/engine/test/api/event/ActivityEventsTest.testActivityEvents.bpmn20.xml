@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:activiti="http://activiti.org/bpmn" targetNamespace="Examples">
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             targetNamespace="Examples">
 
 
   <signal id="mySignal" name="signal" />
@@ -18,7 +18,7 @@
       <sequenceFlow sourceRef="subProcessStart"  targetRef="subTask" />
       <userTask id="subTask" name="Subtask" />
       <sequenceFlow sourceRef="subTask"  targetRef="gateway" />
-      
+
       <exclusiveGateway id="gateway" />
       <sequenceFlow sourceRef="gateway"  targetRef="throwMessageEvent">
         <conditionExpression xsi:type="tFormalExpression">${true}</conditionExpression>
@@ -31,13 +31,13 @@
         <signalEventDefinition signalRef="mySignal"/>
       </intermediateThrowEvent>
       <sequenceFlow sourceRef="throwMessageEvent"  targetRef="endSubProcess"/>
-      
+
       <endEvent id="endSubProcess" />
     </subProcess>
 
     <sequenceFlow sourceRef="subProcess" targetRef="theEnd" />
     <endEvent id="theEnd" />
-    
+
   </process>
 
 

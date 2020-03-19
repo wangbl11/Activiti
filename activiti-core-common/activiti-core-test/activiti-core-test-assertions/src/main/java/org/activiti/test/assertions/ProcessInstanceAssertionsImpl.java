@@ -17,16 +17,14 @@
 package org.activiti.test.assertions;
 
 import java.util.List;
-
 import org.activiti.api.model.shared.event.RuntimeEvent;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.test.EventSource;
 import org.activiti.test.TaskSource;
+import static org.activiti.test.matchers.OperationScopeImpl.processInstanceScope;
 import org.activiti.test.matchers.OperationScopeMatcher;
 import org.activiti.test.matchers.ProcessResultMatcher;
 import org.activiti.test.matchers.ProcessTaskMatcher;
-
-import static org.activiti.test.matchers.OperationScopeImpl.processInstanceScope;
 
 public class ProcessInstanceAssertionsImpl implements ProcessInstanceAssertions {
 

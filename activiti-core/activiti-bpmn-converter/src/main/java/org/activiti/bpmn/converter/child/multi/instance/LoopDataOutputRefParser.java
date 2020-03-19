@@ -16,10 +16,9 @@
 
 package org.activiti.bpmn.converter.child.multi.instance;
 
-import static org.activiti.bpmn.constants.BpmnXMLConstants.ELEMENT_MULTI_INSTANCE_DATA_OUTPUT;
-
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import static org.activiti.bpmn.constants.BpmnXMLConstants.ELEMENT_MULTI_INSTANCE_DATA_OUTPUT;
 import org.activiti.bpmn.converter.child.ElementParser;
 import org.activiti.bpmn.model.MultiInstanceLoopCharacteristics;
 

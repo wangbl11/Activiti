@@ -14,7 +14,6 @@
 package org.activiti.spring.test.expression;
 
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;

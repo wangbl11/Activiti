@@ -21,10 +21,9 @@ import org.activiti.api.process.runtime.connector.Connector;
 import org.activiti.bpmn.model.ServiceTask;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.bpmn.behavior.AbstractBpmnActivityBehavior;
+import static org.activiti.runtime.api.impl.MappingExecutionContext.buildMappingExecutionContext;
 import org.activiti.runtime.api.impl.VariablesMappingProvider;
 import org.springframework.context.ApplicationContext;
-
-import static org.activiti.runtime.api.impl.MappingExecutionContext.buildMappingExecutionContext;
 
 public class DefaultServiceTaskBehavior extends AbstractBpmnActivityBehavior {
 

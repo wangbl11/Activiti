@@ -2,7 +2,6 @@ package org.activiti.examples.bpmn.executionlistener;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.ExecutionListener;
 

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,23 +12,12 @@
  */
 package org.activiti.editor.language.json.converter;
 
-import java.util.Map;
-
-import org.activiti.bpmn.model.BaseElement;
-import org.activiti.bpmn.model.ErrorEventDefinition;
-import org.activiti.bpmn.model.Event;
-import org.activiti.bpmn.model.EventDefinition;
-import org.activiti.bpmn.model.ExtensionElement;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.MessageEventDefinition;
-import org.activiti.bpmn.model.SignalEventDefinition;
-import org.activiti.bpmn.model.StartEvent;
-import org.activiti.bpmn.model.TimerEventDefinition;
-import org.activiti.editor.language.json.model.ModelInfo;
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.Map;
+import org.activiti.bpmn.model.*;
+import org.activiti.editor.language.json.model.ModelInfo;
+import org.apache.commons.lang3.StringUtils;
 
 /**
 
@@ -141,7 +130,7 @@ public class StartEventJsonConverter extends BaseBpmnJsonConverter implements Fo
   public void setFormMap(Map<String, String> formMap) {
     this.formMap = formMap;
   }
-  
+
   @Override
   public void setFormKeyMap(Map<String, ModelInfo> formKeyMap) {
     this.formKeyMap = formKeyMap;

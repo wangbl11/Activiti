@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,15 +12,8 @@
  */
 package org.activiti.examples.variables;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.*;
 import org.activiti.engine.history.HistoricVariableInstance;
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.impl.persistence.entity.VariableInstance;
@@ -32,8 +25,6 @@ import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.test.Deployment;
-
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class VariablesTest extends PluggableActivitiTestCase {
 
@@ -218,17 +209,17 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertNotNull(variableInstance);
     assertEquals("stringVar", variableInstance.getName());
     assertEquals("coca-cola", variableInstance.getValue());
-    
+
     // Verify TaskService behavior
     Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
-    
+
     variableInstances = taskService.getVariableInstances(task.getId());
     assertEquals(2, variableInstances.size());
     assertEquals("stringVar", variableInstances.get("stringVar").getName());
     assertEquals("coca-cola", variableInstances.get("stringVar").getValue());
     assertEquals("intVar", variableInstances.get("intVar").getName());
     assertEquals(null, variableInstances.get("intVar").getValue());
-    
+
     variableNames = new ArrayList<String>();
     variableNames.add("stringVar");
 
@@ -239,7 +230,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("coca-cola", variableInstances.get("stringVar").getValue());
 
     taskService.setVariableLocal(task.getId(), "stringVar", "pepsi-cola");
-    
+
     // getVariableInstancesLocal via names
     variableInstances = taskService.getVariableInstancesLocal(task.getId(), variableNames);
     assertEquals(1, variableInstances.size());
@@ -258,7 +249,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar", variableInstance.getName());
     assertEquals("pepsi-cola", variableInstance.getValue());
   }
-  
+
   @Deployment
   public void testLocalizeDataObjects() {
     // Start process instance with different types of variables
@@ -266,7 +257,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     variables.put("stringVar", "coca-cola");
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("localizeVariables", variables);
     Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
-    
+
     ObjectNode infoNode = dynamicBpmnService.getProcessDefinitionInfo(processInstance.getProcessDefinitionId());
     dynamicBpmnService.changeLocalizationName("en-US", "stringVarId", "stringVar 'en-US' Name", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en-US", "stringVarId", "stringVar 'en-US' Description", infoNode);
@@ -274,14 +265,14 @@ public class VariablesTest extends PluggableActivitiTestCase {
     dynamicBpmnService.changeLocalizationDescription("en-AU", "stringVarId", "stringVar 'en-AU' Description", infoNode);
     dynamicBpmnService.changeLocalizationName("en", "stringVarId", "stringVar 'en' Name", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en", "stringVarId", "stringVar 'en' Description", infoNode);
-    
+
     dynamicBpmnService.changeLocalizationName("en-US", "intVarId", "intVar 'en-US' Name", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en-US", "intVarId", "intVar 'en-US' Description", infoNode);
     dynamicBpmnService.changeLocalizationName("en-AU", "intVarId", "intVar 'en-AU' Name", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en-AU", "intVarId", "intVar 'en-AU' Description", infoNode);
     dynamicBpmnService.changeLocalizationName("en", "intVarId", "intVar 'en' Name", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en", "intVarId", "intVar 'en' Description", infoNode);
-    
+
     dynamicBpmnService.saveProcessDefinitionInfo(processInstance.getProcessDefinitionId(), infoNode);
 
     Map<String, DataObject> dataObjects = runtimeService.getDataObjects(processInstance.getId(), "es", false);
@@ -311,7 +302,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-AU' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(processInstance.getId(), "en-GB", true);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -320,7 +311,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(processInstance.getId(), "en-GB", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -329,7 +320,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     List<String> variableNames = new ArrayList<String>();
     variableNames.add("stringVar");
 
@@ -342,7 +333,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-US' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(processInstance.getId(), variableNames, "en-AU", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -351,7 +342,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-AU' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(processInstance.getId(), variableNames, "en-GB", true);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -360,7 +351,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(processInstance.getId(), variableNames, "en-GB", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -369,7 +360,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     // getDataObjectsLocal
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), "en-US", false);
     assertEquals(1, dataObjects.size());
@@ -379,7 +370,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-US' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), "en-AU", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -388,7 +379,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-AU' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), "en-GB", true);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -397,7 +388,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), "en-GB", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -406,7 +397,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), "ja-JA", true);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -415,7 +406,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     // getDataObjectsLocal via names
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), variableNames, "en-US", false);
     assertEquals(1, dataObjects.size());
@@ -425,7 +416,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-US' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), variableNames, "en-AU", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -434,7 +425,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-AU' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), variableNames, "en-GB", true);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -443,7 +434,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(processInstance.getId(), variableNames, "en-GB", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -452,7 +443,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     // getDataObject
     DataObject dataObject = runtimeService.getDataObject(processInstance.getId(), "stringVar", "en-GB", false);
     assertNotNull(dataObject);
@@ -462,7 +453,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObject = runtimeService.getDataObject(processInstance.getId(), "stringVar","en-US", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -471,7 +462,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-US' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObject = runtimeService.getDataObject(processInstance.getId(), "stringVar", "en-AU", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -480,7 +471,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-AU' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObject = runtimeService.getDataObject(processInstance.getId(), "stringVar", "en-GB", true);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -489,7 +480,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObject = runtimeService.getDataObject(processInstance.getId(), "stringVar", "en-GB", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -498,7 +489,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     // getDataObjectLocal
     dataObject = runtimeService.getDataObjectLocal(processInstance.getId(), "stringVar", "en-US", false);
     assertNotNull(dataObject);
@@ -508,7 +499,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-US' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObject = runtimeService.getDataObjectLocal(processInstance.getId(), "stringVar", "en-AU", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -525,7 +516,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en' Name", dataObject.getLocalizedName());
     assertEquals("stringVar 'en' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
-    
+
     dataObject = runtimeService.getDataObjectLocal(processInstance.getId(), "stringVar", "en-GB", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -534,9 +525,9 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObject.getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     Execution subprocess = runtimeService.createExecutionQuery().processInstanceId(processInstance.getId()).activityId("subprocess1").singleResult();
-    
+
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), "es", false);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -545,7 +536,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'es' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     // getDataObjects
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), "en-US", false);
     assertEquals(2, dataObjects.size());
@@ -561,7 +552,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), "en-AU", false);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -576,7 +567,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), "en-GB", true);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -591,7 +582,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), "en-GB", false);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -607,9 +598,9 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     // getDataObjects via names (from subprocess)
-    
+
     variableNames.add("intVar");
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), variableNames, "en-US", false);
     assertEquals(2, dataObjects.size());
@@ -625,7 +616,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), variableNames, "en-AU", false);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -640,7 +631,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), variableNames, "en-GB", true);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -655,7 +646,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjects(subprocess.getId(), variableNames, "en-GB", false);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -668,9 +659,9 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar", dataObjects.get("intVar").getLocalizedName());
     assertEquals("intVar 'default' description", dataObjects.get("intVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
-    assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey()); 
+    assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     // getDataObjectsLocal
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), "en-US", false);
     assertEquals(1, dataObjects.size());
@@ -680,7 +671,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-US' Description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), "en-AU", false);
     assertEquals(1, dataObjects.size());
     assertEquals("intVar", dataObjects.get("intVar").getName());
@@ -689,7 +680,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-AU' Description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), "en-GB", true);
     assertEquals(1, dataObjects.size());
     assertEquals("intVar", dataObjects.get("intVar").getName());
@@ -698,7 +689,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en' Description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), "en-GB", false);
     assertEquals(1, dataObjects.size());
     assertEquals("intVar", dataObjects.get("intVar").getName());
@@ -707,7 +698,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'default' description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), "ja-JA", true);
     assertEquals(1, dataObjects.size());
     assertEquals("intVar", dataObjects.get("intVar").getName());
@@ -716,7 +707,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'default' description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     // getDataObjectsLocal via names
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), variableNames, "en-US", false);
     assertEquals(1, dataObjects.size());
@@ -726,7 +717,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-US' Description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), variableNames, "en-AU", false);
     assertEquals(1, dataObjects.size());
     assertEquals("intVar", dataObjects.get("intVar").getName());
@@ -735,7 +726,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-AU' Description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), variableNames, "en-GB", true);
     assertEquals(1, dataObjects.size());
     assertEquals("intVar", dataObjects.get("intVar").getName());
@@ -744,7 +735,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en' Description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = runtimeService.getDataObjectsLocal(subprocess.getId(), variableNames, "en-GB", false);
     assertEquals(1, dataObjects.size());
     assertEquals("intVar", dataObjects.get("intVar").getName());
@@ -753,7 +744,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'default' description", dataObjects.get("intVar").getDescription());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     // getDataObject (in subprocess)
     dataObject = runtimeService.getDataObject(subprocess.getId(), "intVar", "en-GB", false);
     assertNotNull(dataObject);
@@ -763,7 +754,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'default' description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     dataObject = runtimeService.getDataObject(subprocess.getId(), "intVar","en-US", false);
     assertNotNull(dataObject);
     assertEquals("intVar", dataObject.getName());
@@ -772,7 +763,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-US' Description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     dataObject = runtimeService.getDataObject(subprocess.getId(), "intVar", "en-AU", false);
     assertNotNull(dataObject);
     assertEquals("intVar", dataObject.getName());
@@ -781,7 +772,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-AU' Description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     dataObject = runtimeService.getDataObject(subprocess.getId(), "intVar", "en-GB", true);
     assertNotNull(dataObject);
     assertEquals("intVar", dataObject.getName());
@@ -790,7 +781,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en' Description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     dataObject = runtimeService.getDataObject(subprocess.getId(), "intVar", "en-GB", false);
     assertNotNull(dataObject);
     assertEquals("intVar", dataObject.getName());
@@ -799,7 +790,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'default' description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     // getDataObjectLocal (in subprocess)
     dataObject = runtimeService.getDataObjectLocal(subprocess.getId(), "intVar", "en-US", false);
     assertNotNull(dataObject);
@@ -809,7 +800,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-US' Description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     dataObject = runtimeService.getDataObjectLocal(subprocess.getId(), "intVar", "en-AU", false);
     assertNotNull(dataObject);
     assertEquals("intVar", dataObject.getName());
@@ -818,7 +809,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en-AU' Description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     dataObject = runtimeService.getDataObjectLocal(subprocess.getId(), "intVar", "en-GB", true);
     assertNotNull(dataObject);
     assertEquals("intVar", dataObject.getName());
@@ -827,7 +818,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'en' Description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
+
     dataObject = runtimeService.getDataObjectLocal(subprocess.getId(), "intVar", "en-GB", false);
     assertNotNull(dataObject);
     assertEquals("intVar", dataObject.getName());
@@ -836,8 +827,8 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("intVar 'default' description", dataObject.getDescription());
     assertEquals("intVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("int", dataObject.getType());
-    
-    // Verify TaskService behavior   
+
+    // Verify TaskService behavior
     dataObjects = taskService.getDataObjects(task.getId());
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -883,7 +874,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     dataObjects = taskService.getDataObjects(task.getId(), "en-AU", false);
     assertEquals(2, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -928,10 +919,10 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("intVarId", dataObjects.get("intVar").getDataObjectDefinitionKey());
     assertEquals("int", dataObjects.get("intVar").getType());
-    
+
     variableNames = new ArrayList<String>();
     variableNames.add("stringVar");
-    
+
     // getDataObjects via names
     dataObjects = taskService.getDataObjects(task.getId(), variableNames, "en-US", false);
     assertEquals(1, dataObjects.size());
@@ -941,7 +932,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-US' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = taskService.getDataObjects(task.getId(), variableNames, "en-AU", false);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -950,7 +941,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-AU' Description", dataObjects.get("stringVar").getDescription());
     assertEquals("stringVarId", dataObjects.get("stringVar").getDataObjectDefinitionKey());
     assertEquals("string", dataObjects.get("stringVar").getType());
-    
+
     dataObjects = taskService.getDataObjects(task.getId(), variableNames, "en-GB", true);
     assertEquals(1, dataObjects.size());
     assertEquals("stringVar", dataObjects.get("stringVar").getName());
@@ -988,7 +979,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'default' description", dataObject.getDescription());
     assertEquals("stringVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("string", dataObject.getType());
-    
+
     dataObject = taskService.getDataObject(task.getId(), "stringVar","en-US", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -997,7 +988,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-US' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("string", dataObject.getType());
-    
+
     dataObject = taskService.getDataObject(task.getId(), "stringVar", "en-AU", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -1006,7 +997,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en-AU' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("string", dataObject.getType());
-    
+
     dataObject = taskService.getDataObject(task.getId(), "stringVar", "en-GB", true);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -1015,7 +1006,7 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("stringVar 'en' Description", dataObject.getDescription());
     assertEquals("stringVarId", dataObject.getDataObjectDefinitionKey());
     assertEquals("string", dataObject.getType());
-    
+
     dataObject = taskService.getDataObject(task.getId(), "stringVar", "en-GB", false);
     assertNotNull(dataObject);
     assertEquals("stringVar", dataObject.getName());
@@ -1244,7 +1235,7 @@ class CustomVariableType implements VariableType {
 
   @Override
   public void setValue(Object o, ValueFields valueFields) {
-    // ensure calling setBytes multiple times no longer causes any problems 
+    // ensure calling setBytes multiple times no longer causes any problems
     valueFields.setBytes(new byte[] { 1, 2, 3 });
     valueFields.setBytes(null);
     valueFields.setBytes(new byte[] { 4, 5, 6 });

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,6 +12,7 @@
  */
 package org.activiti.engine.test.api.runtime;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,8 +25,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.impl.history.HistoryLevel;
@@ -54,7 +53,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
   private static final String PROCESS_DEFINITION_NAME_2 = "oneTaskProcess2Name";
   private static final String PROCESS_DEFINITION_CATEGORY = "org.activiti.enginge.test.api.runtime.Category";
   private static final String PROCESS_DEFINITION_CATEGORY_2 = "org.activiti.enginge.test.api.runtime.2Category";
-  
+
 
   private org.activiti.engine.repository.Deployment deployment;
   private List<String> processInstanceIds;
@@ -160,12 +159,12 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
       assertEquals(1, runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).list().size());
     }
   }
-  
+
   public void testQueryByProcessDefinitionCategory() {
     assertEquals(PROCESS_DEFINITION_KEY_DEPLOY_COUNT, runtimeService.createProcessInstanceQuery().processDefinitionCategory(PROCESS_DEFINITION_CATEGORY).count());
     assertEquals(PROCESS_DEFINITION_KEY_2_DEPLOY_COUNT, runtimeService.createProcessInstanceQuery().processDefinitionCategory(PROCESS_DEFINITION_CATEGORY_2).count());
   }
-  
+
   public void testOrQueryByProcessDefinitionCategory() {
     assertEquals(PROCESS_DEFINITION_KEY_DEPLOY_COUNT, runtimeService.createProcessInstanceQuery().or().processDefinitionCategory(PROCESS_DEFINITION_CATEGORY).processDefinitionId("undefined").endOr().count());
     assertEquals(PROCESS_DEFINITION_KEY_2_DEPLOY_COUNT, runtimeService.createProcessInstanceQuery().or().processDefinitionCategory(PROCESS_DEFINITION_CATEGORY_2).processDefinitionId("undefined").endOr().count());
@@ -183,7 +182,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     runtimeService.setProcessInstanceName(processInstanceIds.get(0), "new name");
     assertNotNull(runtimeService.createProcessInstanceQuery().or().processInstanceName("new name").processDefinitionId("undefined").endOr().singleResult());
     assertEquals(1, runtimeService.createProcessInstanceQuery().or().processInstanceName("new name").processDefinitionId("undefined").endOr().list().size());
-    
+
     assertNotNull(runtimeService.createProcessInstanceQuery()
         .or()
           .processInstanceName("new name")
@@ -193,9 +192,9 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
           .processDefinitionKey(PROCESS_DEFINITION_KEY)
           .processDefinitionId("undefined")
         .singleResult());
-    
+
     assertNull(runtimeService.createProcessInstanceQuery().or().processInstanceName("unexisting").processDefinitionId("undefined").endOr().singleResult());
-    
+
     assertNull(runtimeService.createProcessInstanceQuery()
         .or()
           .processInstanceName("unexisting")
@@ -377,7 +376,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     assertEquals(new Integer(1), processInstance.getProcessDefinitionVersion());
     assertEquals(PROCESS_DEFINITION_KEY, processInstance.getProcessDefinitionKey());
     assertEquals("oneTaskProcessName", processInstance.getProcessDefinitionName());
-    
+
     instances = runtimeService.createProcessInstanceQuery()
         .or()
           .deploymentId(deployment.getId())
@@ -389,7 +388,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
         .endOr()
         .list();
     assertEquals(4, instances.size());
-    
+
     instances = runtimeService.createProcessInstanceQuery()
         .or()
           .deploymentId(deployment.getId())
@@ -401,9 +400,9 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
         .endOr()
         .list();
     assertEquals(0, instances.size());
-    
+
     assertEquals(PROCESS_DEPLOY_COUNT, runtimeService.createProcessInstanceQuery().or().deploymentId(deployment.getId()).processDefinitionId("undefined").endOr().count());
-    
+
     assertEquals(4, runtimeService.createProcessInstanceQuery()
         .or()
           .deploymentId(deployment.getId())
@@ -414,7 +413,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
           .processDefinitionId("undefined")
         .endOr()
         .count());
-    
+
     assertEquals(0, runtimeService.createProcessInstanceQuery()
         .or()
           .deploymentId(deployment.getId())
@@ -487,14 +486,14 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery()
                                                .superProcessInstanceId(superProcessInstance.getId())
                                                .includeProcessVariables();
-    
+
     ProcessInstance subProcessInstance = query.singleResult();
     assertNotNull(subProcessInstance);
     assertEquals(1, query.list().size());
     assertEquals(1, query.count());
     assertEquals(superProcessInstance.getId(), subProcessInstance.getParentProcessInstanceId());
   }
-  
+
   @Deployment(resources = { "org/activiti/engine/test/api/runtime/superProcess.bpmn20.xml", "org/activiti/engine/test/api/runtime/subProcess.bpmn20.xml" })
   public void testOrQueryBySuperProcessInstanceId() {
     ProcessInstance superProcessInstance = runtimeService.startProcessInstanceByKey("subProcessQueryTest");
@@ -1025,7 +1024,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     List<ProcessInstance> processInstances = query.list();
     assertNotNull(processInstances);
     assertEquals(2, processInstances.size());
-    
+
     query = runtimeService.createProcessInstanceQuery()
         .or()
           .variableValueEquals("integerVar", 12345)
@@ -1038,7 +1037,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     processInstances = query.list();
     assertNotNull(processInstances);
     assertEquals(2, processInstances.size());
-  
+
     // Query on two integer variables, should result in single value
     query = runtimeService.createProcessInstanceQuery().variableValueEquals("integerVar", 12345).or().variableValueEquals("integerVar2", 67890).processDefinitionId("undefined").endOr();
     ProcessInstance resultInstance = query.singleResult();
@@ -1058,7 +1057,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     resultInstance = runtimeService.createProcessInstanceQuery().or().variableValueGreaterThan("integerVar", 44444).processDefinitionId("undefined").endOr().singleResult();
     assertNotNull(resultInstance);
     assertEquals(processInstance3.getId(), resultInstance.getId());
-    
+
     resultInstance = runtimeService.createProcessInstanceQuery()
         .or()
           .variableValueGreaterThan("integerVar", 44444)
@@ -1071,7 +1070,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
         .singleResult();
     assertNotNull(resultInstance);
     assertEquals(processInstance3.getId(), resultInstance.getId());
-    
+
     assertEquals(0, runtimeService.createProcessInstanceQuery().or().variableValueGreaterThan("integerVar", 55555).processDefinitionId("undefined").endOr().count());
     assertEquals(3, runtimeService.createProcessInstanceQuery().or().variableValueGreaterThan("integerVar", 1).processDefinitionId("undefined").endOr().count());
 
@@ -1603,7 +1602,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
       assertEquals("name is null", ae.getMessage());
     }
   }
-  
+
   @Deployment(resources={"org/activiti/engine/test/api/oneTaskProcess.bpmn20.xml"})
   public void testQueryLikeIgnoreCase() {
     Map<String, Object> vars = new HashMap<String, Object>();
@@ -1611,24 +1610,24 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     vars.put("upper", "ABCDEFG");
     vars.put("lower", "abcdefg");
     ProcessInstance processInstance1 = runtimeService.startProcessInstanceByKey("oneTaskProcess", vars);
-    
+
     ProcessInstance instance = runtimeService.createProcessInstanceQuery().variableValueLikeIgnoreCase("mixed", "abcd%").singleResult();
     assertNotNull(instance);
     assertEquals(processInstance1.getId(), instance.getId());
-    
+
     instance = runtimeService.createProcessInstanceQuery().variableValueLikeIgnoreCase("lower", "abcde%").singleResult();
     assertNotNull(instance);
     assertEquals(processInstance1.getId(), instance.getId());
-    
+
     instance = runtimeService.createProcessInstanceQuery().variableValueLikeIgnoreCase("upper", "abcd%").singleResult();
     assertNotNull(instance);
     assertEquals(processInstance1.getId(), instance.getId());
-    
+
     // Pass in non-lower-case string
     instance = runtimeService.createProcessInstanceQuery().variableValueLikeIgnoreCase("upper", "ABCde%").singleResult();
     assertNotNull(instance);
     assertEquals(processInstance1.getId(), instance.getId());
-    
+
     // Pass in null-value, should cause exception
     try {
       runtimeService.createProcessInstanceQuery().variableValueEqualsIgnoreCase("upper", null).singleResult();
@@ -1636,7 +1635,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     } catch(ActivitiIllegalArgumentException ae) {
       assertEquals("value is null", ae.getMessage());
     }
-    
+
     // Pass in null name, should cause exception
     try {
       runtimeService.createProcessInstanceQuery().variableValueEqualsIgnoreCase(null, "abcdefg").singleResult();
@@ -1645,7 +1644,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
       assertEquals("name is null", ae.getMessage());
     }
   }
-  
+
   @Deployment(resources={
     "org/activiti/engine/test/api/oneTaskProcess.bpmn20.xml"})
   public void testQueryInvalidTypes() throws Exception {
@@ -1828,7 +1827,7 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
   public void testNativeQueryPaging() {
     assertEquals(5, runtimeService.createNativeProcessInstanceQuery().sql("SELECT * FROM " + managementService.getTableName(ProcessInstance.class)).listPage(0, 5).size());
   }
-  
+
   public void testLocalizeProcess() throws Exception {
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
@@ -1841,11 +1840,11 @@ public class ProcessInstanceQueryTest extends PluggableActivitiTestCase {
     dynamicBpmnService.changeLocalizationName("en-GB", "oneTaskProcess", "The One Task Process 'en-GB' localized name", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en-GB", "oneTaskProcess", "The One Task Process 'en-GB' localized description", infoNode);
     dynamicBpmnService.saveProcessDefinitionInfo(processInstance.getProcessDefinitionId(), infoNode);
-   
+
     dynamicBpmnService.changeLocalizationName("en", "oneTaskProcess", "The One Task Process 'en' localized name", infoNode);
     dynamicBpmnService.changeLocalizationDescription("en", "oneTaskProcess", "The One Task Process 'en' localized description", infoNode);
     dynamicBpmnService.saveProcessDefinitionInfo(processInstance.getProcessDefinitionId(), infoNode);
-   
+
     processes = runtimeService.createProcessInstanceQuery().processInstanceId(processInstance.getId()).list();
     assertEquals(1, processes.size());
     assertNull(processes.get(0).getName());

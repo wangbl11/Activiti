@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.model.impl;
 
 import org.activiti.engine.repository.ProcessDefinition;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

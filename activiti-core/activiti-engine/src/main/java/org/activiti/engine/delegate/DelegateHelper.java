@@ -15,13 +15,8 @@ package org.activiti.engine.delegate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.ExtensionElement;
-import org.activiti.bpmn.model.FieldExtension;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.SequenceFlow;
-import org.activiti.bpmn.model.TaskWithFieldExtensions;
+import org.activiti.bpmn.model.Process;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.delegate.ActivityBehavior;
@@ -30,7 +25,6 @@ import org.activiti.engine.impl.el.FixedValue;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.activiti.bpmn.model.Process;
 
 /**
  * Class that provides helper operations for use in the {@link JavaDelegate},

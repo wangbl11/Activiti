@@ -2,7 +2,6 @@ package org.activiti.engine.test.api.runtime;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
 import org.activiti.engine.task.IdentityLinkType;

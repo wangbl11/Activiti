@@ -3,7 +3,6 @@ package org.activiti.engine.test.profiler;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.engine.cfg.ProcessEngineConfigurator;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.interceptor.CommandInterceptor;
@@ -43,7 +42,7 @@ public class ActivitiProfiler implements ProcessEngineConfigurator {
     public int getPriority() {
         return 0;
     }
-    
+
     public void reset() {
       if (currentProfileSession != null) {
         stopCurrentProfileSession();

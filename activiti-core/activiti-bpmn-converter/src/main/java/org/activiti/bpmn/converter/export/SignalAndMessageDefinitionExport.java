@@ -1,17 +1,9 @@
 package org.activiti.bpmn.converter.export;
 
 import javax.xml.stream.XMLStreamWriter;
-
 import org.activiti.bpmn.constants.BpmnXMLConstants;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.Event;
-import org.activiti.bpmn.model.EventDefinition;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.Message;
-import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.Signal;
-import org.activiti.bpmn.model.SignalEventDefinition;
+import org.activiti.bpmn.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 public class SignalAndMessageDefinitionExport implements BpmnXMLConstants {

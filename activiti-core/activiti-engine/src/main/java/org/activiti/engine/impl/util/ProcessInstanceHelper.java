@@ -12,22 +12,9 @@
  */
 package org.activiti.engine.impl.util;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.EventDefinition;
-import org.activiti.bpmn.model.EventSubProcess;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.Message;
-import org.activiti.bpmn.model.MessageEventDefinition;
+import java.util.*;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.StartEvent;
-import org.activiti.bpmn.model.ValuedDataObject;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.Expression;

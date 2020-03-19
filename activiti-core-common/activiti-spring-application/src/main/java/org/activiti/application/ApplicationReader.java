@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
 import org.apache.commons.io.IOUtils;
 
 public class ApplicationReader {

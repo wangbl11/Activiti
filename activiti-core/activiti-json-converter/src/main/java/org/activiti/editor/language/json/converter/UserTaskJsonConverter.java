@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,10 +12,12 @@
  */
 package org.activiti.editor.language.json.converter;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.ExtensionElement;
 import org.activiti.bpmn.model.FlowElement;
@@ -24,10 +26,6 @@ import org.activiti.editor.language.json.converter.util.CollectionUtils;
 import org.activiti.editor.language.json.model.ModelInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
 
@@ -301,13 +299,13 @@ public class UserTaskJsonConverter extends BaseBpmnJsonConverter implements Form
     } else {
       JsonNode formReferenceNode = getProperty(PROPERTY_FORM_REFERENCE, elementNode);
       if (formReferenceNode != null && formReferenceNode.get("id") != null) {
-        
+
         if (formMap != null && formMap.containsKey(formReferenceNode.get("id").asText())) {
           task.setFormKey(formMap.get(formReferenceNode.get("id").asText()));
         }
       }
     }
-    
+
     task.setDueDate(getPropertyValueAsString(PROPERTY_USERTASK_DUEDATE, elementNode));
     task.setCategory(getPropertyValueAsString(PROPERTY_USERTASK_CATEGORY, elementNode));
 
@@ -553,12 +551,12 @@ public class UserTaskJsonConverter extends BaseBpmnJsonConverter implements Form
       elementNode.put(propertyName, extensionElementList.get(0).getElementText());
     }
   }
-  
+
   @Override
   public void setFormMap(Map<String, String> formMap) {
     this.formMap = formMap;
   }
-  
+
   @Override
   public void setFormKeyMap(Map<String, ModelInfo> formKeyMap) {
     this.formKeyMap = formKeyMap;

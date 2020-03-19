@@ -17,7 +17,6 @@
 package org.activiti.api.task.model.impl;
 
 import java.util.Objects;
-
 import org.activiti.api.task.model.TaskCandidateUser;
 
 public class TaskCandidateUserImpl extends TaskCandidateImpl implements TaskCandidateUser {

@@ -18,9 +18,8 @@ package org.activiti.runtime.api.event.impl;
 
 import org.activiti.api.runtime.event.impl.RuntimeEventImpl;
 import org.activiti.api.task.model.Task;
-import org.activiti.api.task.runtime.events.TaskActivatedEvent;
-
 import static org.activiti.api.task.model.events.TaskRuntimeEvent.TaskEvents;
+import org.activiti.api.task.runtime.events.TaskActivatedEvent;
 
 public class TaskActivatedImpl extends RuntimeEventImpl<Task, TaskEvents> implements TaskActivatedEvent {
 

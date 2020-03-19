@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.impl.JobQueryImpl;
 import org.activiti.engine.impl.Page;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
@@ -33,9 +32,9 @@ import org.activiti.engine.runtime.Job;
 
  */
 public class MybatisJobDataManager extends AbstractDataManager<JobEntity> implements JobDataManager {
-  
+
   protected CachedEntityMatcher<JobEntity> jobsByExecutionIdMatcher = new JobsByExecutionIdMatcher();
-  
+
   public MybatisJobDataManager(ProcessEngineConfigurationImpl processEngineConfiguration) {
     super(processEngineConfiguration);
   }
@@ -44,12 +43,12 @@ public class MybatisJobDataManager extends AbstractDataManager<JobEntity> implem
   public Class<? extends JobEntity> getManagedEntityClass() {
     return JobEntityImpl.class;
   }
-  
+
   @Override
   public JobEntity create() {
     return new JobEntityImpl();
   }
-  
+
   @Override
   @SuppressWarnings("unchecked")
   public List<JobEntity> findJobsToExecute(Page page) {
@@ -95,7 +94,7 @@ public class MybatisJobDataManager extends AbstractDataManager<JobEntity> implem
     final String query = "selectJobByQueryCriteria";
     return getDbSqlSession().selectList(query, jobQuery, page);
   }
-  
+
   @Override
   public long findJobCountByQueryCriteria(JobQueryImpl jobQuery) {
     return (Long) getDbSqlSession().selectOne("selectJobCountByQueryCriteria", jobQuery);
@@ -108,12 +107,12 @@ public class MybatisJobDataManager extends AbstractDataManager<JobEntity> implem
     params.put("tenantId", newTenantId);
     getDbSqlSession().update("updateJobTenantIdForDeployment", params);
   }
-  
+
   @Override
   public void resetExpiredJob(String jobId) {
     Map<String, Object> params = new HashMap<String, Object>(2);
     params.put("id", jobId);
     getDbSqlSession().update("resetExpiredJob", params);
   }
-  
+
 }

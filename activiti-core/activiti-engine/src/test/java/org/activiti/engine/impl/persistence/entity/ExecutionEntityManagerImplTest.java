@@ -16,12 +16,6 @@
 
 package org.activiti.engine.impl.persistence.entity;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import java.util.ArrayList;
 import java.util.Date;
 import org.activiti.engine.delegate.event.ActivitiEventDispatcher;
@@ -30,10 +24,15 @@ import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.persistence.entity.data.ExecutionDataManager;
 import org.activiti.engine.runtime.Clock;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ExecutionEntityManagerImplTest {
 

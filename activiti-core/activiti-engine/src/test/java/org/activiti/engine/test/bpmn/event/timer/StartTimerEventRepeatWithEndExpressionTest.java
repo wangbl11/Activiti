@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.test.bpmn.event.timer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -93,7 +92,7 @@ public class StartTimerEventRepeatWithEndExpressionTest extends PluggableActivit
     // job and will create a new one
     moveByMinutes(60 * 24);
     waitForJobExecutorToProcessAllJobsAndExecutableTimerJobs(2000L, 200);
-    
+
     // there must be a pending job because the endDate is not reached yet");
     assertEquals(1, managementService.createTimerJobQuery().count());
 
@@ -118,7 +117,7 @@ public class StartTimerEventRepeatWithEndExpressionTest extends PluggableActivit
     // 12 dec (last execution)
     moveByMinutes(60 * 24);
     waitForJobExecutorToProcessAllJobsAndExecutableTimerJobs(2000, 200);
-    
+
     // After the second startEvent Execution should have 2 process instances started
     // (since the first one was not completed)
     processInstances = runtimeService.createProcessInstanceQuery().list();

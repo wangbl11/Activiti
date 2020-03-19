@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,19 +17,9 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.activiti.engine.ActivitiException;
-import org.activiti.engine.history.HistoricActivityInstance;
-import org.activiti.engine.history.HistoricDetail;
-import org.activiti.engine.history.HistoricProcessInstance;
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.history.HistoricVariableInstance;
-import org.activiti.engine.history.HistoricVariableUpdate;
+import org.activiti.engine.history.*;
 import org.activiti.engine.impl.TablePageQueryImpl;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.db.DbSqlSession;
@@ -70,7 +60,7 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
     entityToTableNameMap.put(TimerJobEntity.class, "ACT_RU_TIMER_JOB");
     entityToTableNameMap.put(SuspendedJobEntity.class, "ACT_RU_SUSPENDED_JOB");
     entityToTableNameMap.put(DeadLetterJobEntity.class, "ACT_RU_DEADLETTER_JOB");
-    
+
 
     entityToTableNameMap.put(EventSubscriptionEntity.class, "ACT_RU_EVENT_SUBSCR");
     entityToTableNameMap.put(CompensateEventSubscriptionEntity.class, "ACT_RU_EVENT_SUBSCR");
@@ -103,7 +93,7 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
     entityToTableNameMap.put(PropertyEntity.class, "ACT_GE_PROPERTY");
     entityToTableNameMap.put(ByteArrayEntity.class, "ACT_GE_BYTEARRAY");
     entityToTableNameMap.put(ResourceEntity.class, "ACT_GE_BYTEARRAY");
-    
+
     entityToTableNameMap.put(EventLogEntryEntity.class, "ACT_EVT_LOG");
 
     // and now the map for the API types (does not cover all cases)
@@ -127,7 +117,7 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
     // TODO: Identity skipped for the moment as no SQL injection is provided
     // here
   }
-  
+
   protected DbSqlSession getDbSqlSession() {
     return getSession(DbSqlSession.class);
   }
@@ -164,12 +154,12 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
         if ("oracle".equals(getDbSqlSession().getDbSqlSessionFactory().getDatabaseType())) {
           tableNameFilter = databaseTablePrefix + "ACT" + databaseMetaData.getSearchStringEscape() + "_%";
         }
-        
+
         String catalog = null;
         if (getProcessEngineConfiguration().getDatabaseCatalog() != null && getProcessEngineConfiguration().getDatabaseCatalog().length() > 0) {
           catalog = getProcessEngineConfiguration().getDatabaseCatalog();
         }
-        
+
         String schema = null;
         if (getProcessEngineConfiguration().getDatabaseSchema() != null && getProcessEngineConfiguration().getDatabaseSchema().length() > 0) {
           if ("oracle".equals(getDbSqlSession().getDbSqlSessionFactory().getDatabaseType())) {
@@ -178,7 +168,7 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
             schema = getProcessEngineConfiguration().getDatabaseSchema();
           }
         }
-        
+
         tables = databaseMetaData.getTables(catalog, schema, tableNameFilter, DbSqlSession.JDBC_METADATA_TABLE_TYPES);
         while (tables.next()) {
           String tableName = tables.getString("TABLE_NAME");
@@ -245,12 +235,12 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
       if ("postgres".equals(getDbSqlSession().getDbSqlSessionFactory().getDatabaseType())) {
         tableName = tableName.toLowerCase();
       }
-      
+
       String catalog = null;
       if (getProcessEngineConfiguration().getDatabaseCatalog() != null && getProcessEngineConfiguration().getDatabaseCatalog().length() > 0) {
         catalog = getProcessEngineConfiguration().getDatabaseCatalog();
       }
-      
+
       String schema = null;
       if (getProcessEngineConfiguration().getDatabaseSchema() != null && getProcessEngineConfiguration().getDatabaseSchema().length() > 0) {
         if ("oracle".equals(getDbSqlSession().getDbSqlSessionFactory().getDatabaseType())) {
@@ -274,7 +264,7 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
             }
           }
         }
-        
+
         if (!wrongSchema) {
           String name = resultSet.getString("COLUMN_NAME").toUpperCase();
           String type = resultSet.getString("TYPE_NAME").toUpperCase();

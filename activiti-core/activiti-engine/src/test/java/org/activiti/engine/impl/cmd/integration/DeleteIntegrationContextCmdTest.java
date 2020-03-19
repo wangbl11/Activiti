@@ -22,9 +22,8 @@ import org.activiti.engine.impl.persistence.entity.integration.IntegrationContex
 import org.activiti.engine.impl.persistence.entity.integration.IntegrationContextManager;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-
 import static org.mockito.BDDMockito.given;
+import org.mockito.Mock;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;

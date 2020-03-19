@@ -15,7 +15,6 @@ package org.activiti.engine.test.db;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-
 import org.activiti.engine.impl.ProcessEngineImpl;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;

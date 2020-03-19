@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions id="definitions"
-	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-	xmlns:activiti="http://activiti.org/bpmn"
-	xmlns:fox="http://www.camunda.com/fox"
-	targetNamespace="Examples">
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:activiti="http://activiti.org/bpmn"
+             targetNamespace="Examples">
 
 	<process id="failedJobRetry">
 
@@ -15,11 +14,11 @@
 	       		<activiti:failedJobRetryTimeCycle>R2/PT6S</activiti:failedJobRetryTimeCycle>
 	       	</extensionElements>
 		</serviceTask>
-        
+
 		<sequenceFlow id="flow2" sourceRef="failingServiceTask" targetRef="theEnd" />
-		
+
 		<endEvent id="theEnd" />
 
 	</process>
-	
+
 </definitions>

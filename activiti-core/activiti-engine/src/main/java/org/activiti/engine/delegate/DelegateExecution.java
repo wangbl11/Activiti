@@ -14,7 +14,6 @@
 package org.activiti.engine.delegate;
 
 import java.util.List;
-
 import org.activiti.bpmn.model.ActivitiListener;
 import org.activiti.bpmn.model.FlowElement;
 

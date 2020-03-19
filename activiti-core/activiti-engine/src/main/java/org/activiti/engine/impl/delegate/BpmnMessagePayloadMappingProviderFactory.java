@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@ package org.activiti.engine.impl.delegate;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.bpmn.model.Event;
 import org.activiti.bpmn.model.FieldExtension;
 import org.activiti.bpmn.model.MessageEventDefinition;
@@ -27,17 +26,17 @@ import org.apache.commons.lang3.StringUtils;
 public class BpmnMessagePayloadMappingProviderFactory implements MessagePayloadMappingProviderFactory {
 
     @Override
-    public MessagePayloadMappingProvider create(Event bpmnEvent, 
+    public MessagePayloadMappingProvider create(Event bpmnEvent,
                                                 MessageEventDefinition messageEventDefinition,
                                                 ExpressionManager expressionManager) {
-        
+
         List<FieldDeclaration> fieldDeclarations = createFieldDeclarations(messageEventDefinition.getFieldExtensions(),
                                                                            expressionManager);
-        
+
         return new BpmnMessagePayloadMappingProvider(fieldDeclarations);
     }
-    
-    public List<FieldDeclaration> createFieldDeclarations(List<FieldExtension> fieldList, 
+
+    public List<FieldDeclaration> createFieldDeclarations(List<FieldExtension> fieldList,
                                                           ExpressionManager expressionManager) {
         List<FieldDeclaration> fieldDeclarations = new ArrayList<FieldDeclaration>();
 
@@ -52,6 +51,6 @@ public class BpmnMessagePayloadMappingProviderFactory implements MessagePayloadM
           fieldDeclarations.add(fieldDeclaration);
         }
         return fieldDeclarations;
-      }    
+      }
 
 }

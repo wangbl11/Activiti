@@ -19,7 +19,6 @@ package org.activiti.api.process.model.builders;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-
 import org.activiti.api.process.model.payloads.ReceiveMessagePayload;
 
 public class ReceiveMessagePayloadBuilder {
@@ -103,8 +102,8 @@ public class ReceiveMessagePayloadBuilder {
         if (getClass() != obj.getClass())
             return false;
         ReceiveMessagePayloadBuilder other = (ReceiveMessagePayloadBuilder) obj;
-        return Objects.equals(correlationKey, other.correlationKey) 
-                && Objects.equals(name, other.name) 
+        return Objects.equals(correlationKey, other.correlationKey)
+                && Objects.equals(name, other.name)
                 && Objects.equals(variables, other.variables);
     }
 }

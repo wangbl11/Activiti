@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,7 +13,6 @@
 package org.activiti.engine.delegate.event.impl;
 
 import java.util.Map;
-
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.delegate.event.ActivitiProcessStartedEvent;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
@@ -36,7 +35,7 @@ public class ActivitiProcessStartedEventImpl extends ActivitiEntityWithVariables
       if (!executionEntity.isProcessInstanceType()) {
         executionEntity = executionEntity.getParent();
       }
-      
+
       final ExecutionEntity superExecution = executionEntity.getSuperExecution();
       if (superExecution != null) {
         this.nestedProcessDefinitionId = superExecution.getProcessDefinitionId();
@@ -45,7 +44,7 @@ public class ActivitiProcessStartedEventImpl extends ActivitiEntityWithVariables
         this.nestedProcessDefinitionId = null;
         this.nestedProcessInstanceId = null;
       }
-      
+
     } else {
       this.nestedProcessDefinitionId = null;
       this.nestedProcessInstanceId = null;

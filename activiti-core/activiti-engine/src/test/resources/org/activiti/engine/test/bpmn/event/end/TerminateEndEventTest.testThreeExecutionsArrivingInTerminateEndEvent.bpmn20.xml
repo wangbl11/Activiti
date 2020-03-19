@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions expressionLanguage="http://www.w3.org/1999/XPath"
-    id="definitions" targetNamespace="testapp"
-    typeLanguage="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-    xmlns:activiti="http://activiti.org/bpmn"
-    xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
-    xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
-    xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             id="definitions" targetNamespace="testapp"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <signal id="badpixelsignal" name="bad pixel signal"/>
     <process id="skybox_image_pull_request" isExecutable="true" name="Handles Request for Nominal Images">
         <startEvent id="start" name="Start">

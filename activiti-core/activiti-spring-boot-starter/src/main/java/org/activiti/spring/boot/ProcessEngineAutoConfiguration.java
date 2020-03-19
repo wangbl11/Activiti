@@ -14,14 +14,8 @@
 package org.activiti.spring.boot;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-
+import java.util.*;
 import javax.sql.DataSource;
-
 import org.activiti.api.process.model.events.ProcessDeployedEvent;
 import org.activiti.api.process.model.events.StartMessageDeployedEvent;
 import org.activiti.api.process.runtime.events.listener.ProcessRuntimeEventListener;
@@ -205,7 +199,7 @@ public class ProcessEngineAutoConfiguration extends AbstractProcessEngineAutoCon
                         .orElse(Collections.emptyList()),
                 eventPublisher);
     }
-    
+
     @Bean
     @ConditionalOnMissingBean
     public StartMessageDeployedEventProducer startMessageDeployedEventProducer(RepositoryService repositoryService,
@@ -221,7 +215,7 @@ public class ProcessEngineAutoConfiguration extends AbstractProcessEngineAutoCon
                                                      listeners,
                                                      eventPublisher);
     }
-    
+
 
     @Bean(name = BEHAVIOR_FACTORY_MAPPING_CONFIGURER)
     @ConditionalOnMissingBean(name = BEHAVIOR_FACTORY_MAPPING_CONFIGURER)

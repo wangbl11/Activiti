@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,34 +13,13 @@
 
 package org.activiti.engine.impl.scripting;
 
+import de.odysseus.el.util.SimpleResolver;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
-import javax.el.ArrayELResolver;
-import javax.el.BeanELResolver;
-import javax.el.CompositeELResolver;
-import javax.el.ELContext;
-import javax.el.ELException;
-import javax.el.ELResolver;
-import javax.el.ExpressionFactory;
-import javax.el.FunctionMapper;
-import javax.el.ListELResolver;
-import javax.el.MapELResolver;
-import javax.el.ResourceBundleELResolver;
-import javax.el.ValueExpression;
-import javax.el.VariableMapper;
-import javax.script.AbstractScriptEngine;
-import javax.script.Bindings;
-import javax.script.Compilable;
-import javax.script.CompiledScript;
-import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineFactory;
-import javax.script.ScriptException;
-import javax.script.SimpleBindings;
-
+import javax.el.*;
+import javax.script.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.bpmn.data.ItemInstance;
 import org.activiti.engine.impl.el.DynamicBeanPropertyELResolver;
@@ -48,13 +27,11 @@ import org.activiti.engine.impl.el.ExpressionFactoryResolver;
 import org.activiti.engine.impl.el.JsonNodeELResolver;
 import org.activiti.engine.impl.util.ReflectUtil;
 
-import de.odysseus.el.util.SimpleResolver;
-
 /**
  * ScriptEngine that used JUEL for script evaluation and compilation (JSR-223).
- * 
+ *
  * Uses EL 1.1 if available, to resolve expressions. Otherwise it reverts to EL 1.0, using {@link ExpressionFactoryResolver}.
- * 
+ *
 
  */
 public class JuelScriptEngine extends AbstractScriptEngine implements Compilable {
@@ -236,7 +213,7 @@ public class JuelScriptEngine extends AbstractScriptEngine implements Compilable
 
   /**
    * Class representing a compiled script using JUEL.
-   * 
+   *
 
    */
   private class JuelCompiledScript extends CompiledScript {
@@ -259,7 +236,7 @@ public class JuelScriptEngine extends AbstractScriptEngine implements Compilable
 
   /**
    * ValueMapper that uses the ScriptContext to get variable values or value expressions.
-   * 
+   *
 
    */
   private class ScriptContextVariableMapper extends VariableMapper {
@@ -296,7 +273,7 @@ public class JuelScriptEngine extends AbstractScriptEngine implements Compilable
 
   /**
    * FunctionMapper that uses the ScriptContext to resolve functions in EL.
-   * 
+   *
 
    */
   private class ScriptContextFunctionMapper extends FunctionMapper {

@@ -16,12 +16,6 @@
 
 package org.activiti.runtime.api.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -40,10 +34,17 @@ import org.activiti.spring.process.variable.types.DateVariableType;
 import org.activiti.spring.process.variable.types.JavaObjectVariableType;
 import org.activiti.spring.process.variable.types.JsonObjectVariableType;
 import org.activiti.spring.process.variable.types.VariableType;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.Mock;
+import static org.mockito.Mockito.any;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class ProcessVariablesPayloadValidatorTest {
 
     @Mock
@@ -62,10 +63,8 @@ public class ProcessVariablesPayloadValidatorTest {
         objectMapper,
         new DefaultDelegateInterceptor());
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        initMocks(this);
-
         VariableDefinition variableDefinitionName = new VariableDefinition();
         variableDefinitionName.setName("name");
         variableDefinitionName.setType("string");

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.bpmn.behavior;
 
 import java.util.List;
-
 import org.activiti.bpmn.model.BoundaryEvent;
 import org.activiti.bpmn.model.Signal;
 import org.activiti.bpmn.model.SignalEventDefinition;
@@ -48,7 +47,7 @@ public class BoundarySignalEventActivityBehavior extends BoundaryEventActivityBe
   public void execute(DelegateExecution execution) {
     CommandContext commandContext = Context.getCommandContext();
     ExecutionEntity executionEntity = (ExecutionEntity) execution;
-    
+
     String signalName = null;
     if (StringUtils.isNotEmpty(signalEventDefinition.getSignalRef())) {
       signalName = signalEventDefinition.getSignalRef();
@@ -57,7 +56,7 @@ public class BoundarySignalEventActivityBehavior extends BoundaryEventActivityBe
           .createExpression(signalEventDefinition.getSignalExpression());
       signalName = signalExpression.getValue(execution).toString();
     }
-    
+
     commandContext.getEventSubscriptionEntityManager().insertSignalEvent(signalName, signal, executionEntity);
   }
 

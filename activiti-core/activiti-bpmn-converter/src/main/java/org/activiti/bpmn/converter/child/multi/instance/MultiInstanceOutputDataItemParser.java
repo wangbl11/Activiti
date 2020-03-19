@@ -16,10 +16,9 @@
 
 package org.activiti.bpmn.converter.child.multi.instance;
 
+import javax.xml.stream.XMLStreamReader;
 import static org.activiti.bpmn.constants.BpmnXMLConstants.ATTRIBUTE_NAME;
 import static org.activiti.bpmn.constants.BpmnXMLConstants.ELEMENT_MULTI_INSTANCE_OUTPUT_DATA_ITEM;
-
-import javax.xml.stream.XMLStreamReader;
 import org.activiti.bpmn.converter.child.ElementParser;
 import org.activiti.bpmn.model.MultiInstanceLoopCharacteristics;
 

@@ -12,6 +12,7 @@
  */
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.List;
 import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.event.impl.ActivitiEventBuilder;
@@ -23,8 +24,6 @@ import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntity;
 import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntityManager;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.MessageEventSubscriptionEntity;
-
-import java.util.List;
 
 public class IntermediateCatchMessageEventActivityBehavior extends IntermediateCatchEventActivityBehavior {
 
@@ -41,7 +40,7 @@ public class IntermediateCatchMessageEventActivityBehavior extends IntermediateC
 
   public void execute(DelegateExecution execution) {
     CommandContext commandContext = Context.getCommandContext();
-    
+
     MessageEventSubscriptionEntity subscription = messageExecutionContext.createMessageEventSubscription(commandContext,
                                                                                                          execution);
     if (commandContext.getProcessEngineConfiguration().getEventDispatcher().isEnabled()) {
@@ -57,11 +56,11 @@ public class IntermediateCatchMessageEventActivityBehavior extends IntermediateC
     ExecutionEntity executionEntity = deleteMessageEventSubScription(execution);
     leaveIntermediateCatchEvent(executionEntity);
   }
-  
+
   @Override
   public void eventCancelledByEventGateway(DelegateExecution execution) {
     deleteMessageEventSubScription(execution);
-    Context.getCommandContext().getExecutionEntityManager().deleteExecutionAndRelatedData((ExecutionEntity) execution, 
+    Context.getCommandContext().getExecutionEntityManager().deleteExecutionAndRelatedData((ExecutionEntity) execution,
         DeleteReason.EVENT_BASED_GATEWAY_CANCEL);
   }
 
@@ -69,7 +68,7 @@ public class IntermediateCatchMessageEventActivityBehavior extends IntermediateC
     ExecutionEntity executionEntity = (ExecutionEntity) execution;
     // Should we use triggerName and triggerData, because message name expression can change?
     String messageName = messageExecutionContext.getMessageName(execution);
-    
+
     EventSubscriptionEntityManager eventSubscriptionEntityManager = Context.getCommandContext().getEventSubscriptionEntityManager();
     List<EventSubscriptionEntity> eventSubscriptions = executionEntity.getEventSubscriptions();
     for (EventSubscriptionEntity eventSubscription : eventSubscriptions) {
@@ -87,5 +86,5 @@ public class IntermediateCatchMessageEventActivityBehavior extends IntermediateC
   public MessageExecutionContext getMessageExecutionContext() {
     return messageExecutionContext;
   }
-  
+
 }

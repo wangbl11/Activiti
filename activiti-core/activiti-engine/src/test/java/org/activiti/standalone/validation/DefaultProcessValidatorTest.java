@@ -12,8 +12,6 @@
  */
 package org.activiti.standalone.validation;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,6 +29,7 @@ import org.activiti.validation.ProcessValidatorFactory;
 import org.activiti.validation.ValidationError;
 import org.activiti.validation.validator.Problems;
 import org.activiti.validation.validator.ValidatorSetNames;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

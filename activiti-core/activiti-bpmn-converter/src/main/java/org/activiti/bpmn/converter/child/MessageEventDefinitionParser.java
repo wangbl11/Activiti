@@ -20,11 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.xml.stream.XMLStreamReader;
 import org.activiti.bpmn.converter.util.BpmnXMLUtil;
-import org.activiti.bpmn.model.BaseElement;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.Event;
-import org.activiti.bpmn.model.ExtensionAttribute;
-import org.activiti.bpmn.model.MessageEventDefinition;
+import org.activiti.bpmn.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 public class MessageEventDefinitionParser extends BaseChildElementParser {
@@ -48,7 +44,7 @@ public class MessageEventDefinitionParser extends BaseChildElementParser {
     if(!attributes.isEmpty()) {
         eventDefinition.setAttributes(Collections.singletonMap(ACTIVITI_EXTENSIONS_PREFIX, attributes));
     }
-    
+
     if (!StringUtils.isEmpty(eventDefinition.getMessageRef())) {
 
       int indexOfP = eventDefinition.getMessageRef().indexOf(':');

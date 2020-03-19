@@ -18,7 +18,6 @@ package org.activiti.runtime.api.connector;
 
 import org.activiti.bpmn.model.ServiceTask;
 import org.activiti.engine.delegate.DelegateExecution;
-
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 

@@ -16,17 +16,16 @@
 
 package org.activiti.engine.impl.runtime;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import org.activiti.engine.impl.RuntimeServiceImpl;
 import org.activiti.engine.runtime.ProcessInstance;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ProcessInstanceBuilderImplTest {
 

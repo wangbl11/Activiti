@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,12 +15,11 @@ package org.activiti.engine.impl.util;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.ActivitiIllegalArgumentException;
 
 /**
  * helper/convenience methods for working with collections.
- * 
+ *
 
  */
 public class CollectionUtil {
@@ -31,7 +30,7 @@ public class CollectionUtil {
 
   /**
    * Helper method that creates a singleton map.
-   * 
+   *
    * Alternative for Collections.singletonMap(), since that method returns a generic typed map <K,T> depending on the input type, but we often need a <String, Object> map.
    */
   public static Map<String, Object> singletonMap(String key, Object value) {
@@ -42,7 +41,7 @@ public class CollectionUtil {
 
   /**
    * Helper method to easily create a map.
-   * 
+   *
    * Takes as input a varargs containing the key1, value1, key2, value2, etc. Note: although an Object, we will cast the key to String internally.
    */
   public static Map<String, Object> map(Object... objects) {
@@ -58,7 +57,7 @@ public class CollectionUtil {
 
     return map;
   }
-  
+
   public static boolean isEmpty(@SuppressWarnings("rawtypes") Collection collection) {
     return (collection == null || collection.isEmpty());
   }

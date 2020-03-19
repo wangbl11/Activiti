@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,12 +12,7 @@
  */
 package org.activiti.bpmn.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 public class Process extends BaseElement implements FlowElementsContainer, HasExecutionListeners {
@@ -35,14 +30,14 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
   protected List<String> candidateStarterGroups = new ArrayList<String>();
   protected List<EventListener> eventListeners = new ArrayList<EventListener>();
   protected Map<String, FlowElement> flowElementMap = new LinkedHashMap<String, FlowElement>();
-  
+
   // Added during process definition parsing
   protected FlowElement initialFlowElement;
 
   public Process() {
 
   }
-  
+
   public String getDocumentation() {
     return documentation;
   }
@@ -90,7 +85,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
   public void setLanes(List<Lane> lanes) {
     this.lanes = lanes;
   }
-  
+
   public Map<String, FlowElement> getFlowElementMap() {
     return flowElementMap;
   }
@@ -98,7 +93,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
   public void setFlowElementMap(Map<String, FlowElement> flowElementMap) {
     this.flowElementMap = flowElementMap;
   }
-  
+
   public boolean containsFlowElementId(String id) {
     return flowElementMap.containsKey(id);
   }
@@ -117,11 +112,11 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
       return findFlowElementInList(flowElementId);
     }
   }
-  
+
   public List<Association> findAssociationsWithSourceRefRecursive(String sourceRef) {
     return findAssociationsWithSourceRefRecursive(this, sourceRef);
   }
-  
+
   protected List<Association> findAssociationsWithSourceRefRecursive(FlowElementsContainer flowElementsContainer, String sourceRef) {
     List<Association> associations = new ArrayList<Association>();
     for (Artifact artifact : flowElementsContainer.getArtifacts()) {
@@ -132,7 +127,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
         }
       }
     }
-    
+
     for (FlowElement flowElement : flowElementsContainer.getFlowElements()) {
       if (flowElement instanceof FlowElementsContainer) {
         associations.addAll(findAssociationsWithSourceRefRecursive((FlowElementsContainer) flowElement, sourceRef));
@@ -140,11 +135,11 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
     }
     return associations;
   }
-  
+
   public List<Association> findAssociationsWithTargetRefRecursive(String targetRef) {
     return findAssociationsWithTargetRefRecursive(this, targetRef);
   }
-  
+
   protected List<Association> findAssociationsWithTargetRefRecursive(FlowElementsContainer flowElementsContainer, String targetRef) {
     List<Association> associations = new ArrayList<Association>();
     for (Artifact artifact : flowElementsContainer.getArtifacts()) {
@@ -155,7 +150,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
         }
       }
     }
-    
+
     for (FlowElement flowElement : flowElementsContainer.getFlowElements()) {
       if (flowElement instanceof FlowElementsContainer) {
         associations.addAll(findAssociationsWithTargetRefRecursive((FlowElementsContainer) flowElement, targetRef));
@@ -184,7 +179,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
     }
     return null;
   }
-  
+
   protected FlowElement findFlowElementInList(String flowElementId) {
     for (FlowElement f : flowElementList) {
       if (f.getId() != null && f.getId().equals(flowElementId)) {
@@ -208,7 +203,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
       flowElementMap.putAll(((FlowElementsContainer) element).getFlowElementMap());
     }
   }
-  
+
   public void addFlowElementToMap(FlowElement element) {
     if (element != null && StringUtils.isNotEmpty(element.getId())) {
       flowElementMap.put(element.getId(), element);
@@ -222,7 +217,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
       flowElementMap.remove(element.getId());
     }
   }
-  
+
   public void removeFlowElementFromMap(String elementId) {
     if (StringUtils.isNotEmpty(elementId)) {
       flowElementMap.remove(elementId);
@@ -382,7 +377,7 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
 
     /*
      * This is required because data objects in Designer have no DI info and are added as properties, not flow elements
-     * 
+     *
      * Determine the differences between the 2 elements' data object
      */
     for (ValuedDataObject thisObject : getDataObjects()) {
@@ -427,5 +422,5 @@ public class Process extends BaseElement implements FlowElementsContainer, HasEx
   public void setInitialFlowElement(FlowElement initialFlowElement) {
     this.initialFlowElement = initialFlowElement;
   }
-  
+
 }

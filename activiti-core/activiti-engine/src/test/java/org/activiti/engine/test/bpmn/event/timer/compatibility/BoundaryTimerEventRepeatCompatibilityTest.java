@@ -3,7 +3,6 @@ package org.activiti.engine.test.bpmn.event.timer.compatibility;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.engine.impl.persistence.entity.TimerJobEntity;
 import org.activiti.engine.runtime.Job;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -57,7 +56,7 @@ public class BoundaryTimerEventRepeatCompatibilityTest extends TimerEventCompati
     // boundary events
 
     waitForJobExecutorToProcessAllJobs(2000, 100);
-    
+
     // a new job must be prepared because there are 10 repeats 2 seconds interval
     jobs = managementService.createTimerJobQuery().list();
     assertEquals(1, jobs.size());
@@ -67,7 +66,7 @@ public class BoundaryTimerEventRepeatCompatibilityTest extends TimerEventCompati
       processEngineConfiguration.getClock().setCurrentTime(nextTimeCal.getTime());
       waitForJobExecutorToProcessAllJobs(2000, 100);
       // a new job must be prepared because there are 10 repeats 2 seconds interval
-      
+
       jobs = managementService.createTimerJobQuery().list();
       assertEquals(1, jobs.size());
     }
@@ -80,7 +79,7 @@ public class BoundaryTimerEventRepeatCompatibilityTest extends TimerEventCompati
     } catch (Exception ex) {
       fail("Should not have any other jobs because the endDate is reached");
     }
-    
+
     tasks = taskService.createTaskQuery().list();
     task = tasks.get(0);
     assertEquals("Task B", task.getName());

@@ -16,14 +16,13 @@
 
 package org.activiti.runtime.api.event.internal;
 
+import java.util.List;
 import org.activiti.api.model.shared.event.VariableCreatedEvent;
 import org.activiti.api.runtime.shared.events.VariableEventListener;
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.engine.delegate.event.ActivitiVariableEvent;
 import org.activiti.runtime.api.event.impl.ToVariableCreatedConverter;
-
-import java.util.List;
 
 public class VariableCreatedListenerDelegate implements ActivitiEventListener {
 

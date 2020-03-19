@@ -16,11 +16,10 @@
 
 package org.activiti.runtime.api.event.impl;
 
+import java.util.Optional;
 import org.activiti.api.process.runtime.events.ProcessCancelledEvent;
 import org.activiti.api.runtime.model.impl.ProcessInstanceImpl;
 import org.activiti.engine.delegate.event.ActivitiCancelledEvent;
-
-import java.util.Optional;
 
 public class ToProcessCancelledConverter implements EventConverter<ProcessCancelledEvent, ActivitiCancelledEvent> {
 

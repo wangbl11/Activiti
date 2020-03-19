@@ -13,16 +13,15 @@
 
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import org.activiti.bpmn.model.EventSubProcess;
 import org.activiti.bpmn.model.StartEvent;
 import org.activiti.bpmn.model.ValuedDataObject;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Implementation of the BPMN 2.0 event subprocess start event.

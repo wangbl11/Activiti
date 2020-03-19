@@ -13,20 +13,10 @@
 
 package org.activiti.engine.impl.el;
 
+import de.odysseus.el.ExpressionFactoryImpl;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.el.ArrayELResolver;
-import javax.el.BeanELResolver;
-import javax.el.CompositeELResolver;
-import javax.el.ELContext;
-import javax.el.ELResolver;
-import javax.el.ExpressionFactory;
-import javax.el.ListELResolver;
-import javax.el.MapELResolver;
-import javax.el.ValueExpression;
-
-import de.odysseus.el.ExpressionFactoryImpl;
+import javax.el.*;
 import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.delegate.VariableScope;
 import org.activiti.engine.impl.bpmn.data.ItemInstance;

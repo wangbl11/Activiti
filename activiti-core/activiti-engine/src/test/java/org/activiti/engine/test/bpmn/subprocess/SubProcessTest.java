@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.history.HistoryLevel;
@@ -77,12 +76,12 @@ public class SubProcessTest extends PluggableActivitiTestCase {
     // The subprocess should be left, and the escalated task should be active
     Task escalationTask = taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();
     assertEquals("Fix escalated problem", escalationTask.getName());
-    
+
     // Verify history for task that was killed
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.ACTIVITY)) {
       HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery().taskName("Task in subprocess").singleResult();
       assertNotNull(historicTaskInstance.getEndTime());
-      
+
       HistoricActivityInstance historicActivityInstance = historyService.createHistoricActivityInstanceQuery().activityId("subProcessTask").singleResult();
       assertNotNull(historicActivityInstance.getEndTime());
     }
@@ -140,7 +139,7 @@ public class SubProcessTest extends PluggableActivitiTestCase {
     assertNotNull(taskAfterSubProcesses);
     assertEquals("Task after subprocesses", taskAfterSubProcesses.getName());
     taskService.complete(taskAfterSubProcesses.getId());
-    
+
     assertProcessEnded(pi.getId());
   }
 
@@ -232,7 +231,7 @@ public class SubProcessTest extends PluggableActivitiTestCase {
 
     // Completing the task after the timer ends the process instance
     taskService.complete(taskAfterTimer.getId());
-    
+
     assertProcessEnded(processInstance.getId());
   }
 
@@ -425,8 +424,8 @@ public class SubProcessTest extends PluggableActivitiTestCase {
         fail("Variable not expected " + varName);
       }
     }
-    
-    currentTask = taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();  
+
+    currentTask = taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();
     // Verify there are no local variables assigned to the current task. (subprocess variables are gone).
     variables = runtimeService.getVariablesLocal(currentTask.getExecutionId());
     assertEquals(0, variables.size());

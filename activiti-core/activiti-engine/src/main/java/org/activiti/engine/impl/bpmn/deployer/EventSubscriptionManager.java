@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,26 +13,14 @@
 package org.activiti.engine.impl.bpmn.deployer;
 
 import java.util.List;
-
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.EventDefinition;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.Message;
-import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.Signal;
-import org.activiti.bpmn.model.SignalEventDefinition;
-import org.activiti.bpmn.model.StartEvent;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.event.MessageEventHandler;
 import org.activiti.engine.impl.event.SignalEventHandler;
 import org.activiti.engine.impl.interceptor.CommandContext;
-import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntity;
-import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntityManager;
-import org.activiti.engine.impl.persistence.entity.MessageEventSubscriptionEntity;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.persistence.entity.SignalEventSubscriptionEntity;
+import org.activiti.engine.impl.persistence.entity.*;
 import org.activiti.engine.impl.util.CollectionUtil;
 
 /**

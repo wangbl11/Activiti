@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.model.impl;
 
 import java.util.Objects;
-
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.runtime.model.impl.ProcessDefinitionImpl;
 import org.activiti.bpmn.model.BpmnModel;

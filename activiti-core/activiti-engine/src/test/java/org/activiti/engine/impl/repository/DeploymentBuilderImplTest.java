@@ -18,24 +18,19 @@ package org.activiti.engine.impl.repository;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.activiti.engine.ActivitiException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Answers;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 import org.mockito.Spy;
 import org.springframework.core.io.Resource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 public class DeploymentBuilderImplTest {
 

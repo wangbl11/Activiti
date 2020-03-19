@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,30 +14,13 @@ package org.activiti.bpmn.converter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
-
-import org.activiti.bpmn.converter.export.BPMNDIExport;
-import org.activiti.bpmn.converter.export.CollaborationExport;
-import org.activiti.bpmn.converter.export.DataStoreExport;
-import org.activiti.bpmn.converter.export.DefinitionsRootExport;
-import org.activiti.bpmn.converter.export.ProcessExport;
-import org.activiti.bpmn.converter.export.SignalAndMessageDefinitionExport;
+import org.activiti.bpmn.converter.export.*;
 import org.activiti.bpmn.exceptions.XMLException;
-import org.activiti.bpmn.model.Artifact;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.DataObject;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.GraphicInfo;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.SequenceFlow;
-import org.activiti.bpmn.model.SubProcess;
+import org.activiti.bpmn.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,7 +119,7 @@ public class SubprocessXMLConverter extends BpmnXMLConverter {
       if (element instanceof SubProcess) {
         subModels.addAll(parseSubModels(element, locations, flowLocations, labelLocations));
       }
-      
+
       if (element instanceof SequenceFlow && null != flowLocations.get(elementId)) {
         // must be an edge
         mainModel.getFlowLocationMap().put(elementId, flowLocations.get(elementId));
@@ -158,7 +141,7 @@ public class SubprocessXMLConverter extends BpmnXMLConverter {
     return subModels;
   }
 
-  private List<BpmnModel> parseSubModels(FlowElement subElement, Map<String, GraphicInfo> locations, 
+  private List<BpmnModel> parseSubModels(FlowElement subElement, Map<String, GraphicInfo> locations,
                                          Map<String, List<GraphicInfo>> flowLocations, Map<String, GraphicInfo> labelLocations) {
     List<BpmnModel> subModels = new ArrayList<BpmnModel>();
     BpmnModel subModel = new BpmnModel();
@@ -178,7 +161,7 @@ public class SubprocessXMLConverter extends BpmnXMLConverter {
       if (element instanceof SubProcess) {
         subModels.addAll(parseSubModels(element, locations, flowLocations, labelLocations));
       }
-      
+
       if (element instanceof SequenceFlow && null != flowLocations.get(elementId)) {
         // must be an edge
         subModel.getFlowLocationMap().put(elementId, flowLocations.get(elementId));

@@ -30,15 +30,7 @@ import org.activiti.api.task.model.TaskCandidateUser;
 import org.activiti.api.task.model.impl.TaskCandidateGroupImpl;
 import org.activiti.api.task.model.impl.TaskCandidateUserImpl;
 import org.activiti.api.task.model.impl.TaskImpl;
-import org.activiti.api.task.model.payloads.ClaimTaskPayload;
-import org.activiti.api.task.model.payloads.CompleteTaskPayload;
-import org.activiti.api.task.model.payloads.CreateTaskPayload;
-import org.activiti.api.task.model.payloads.DeleteTaskPayload;
-import org.activiti.api.task.model.payloads.GetTaskVariablesPayload;
-import org.activiti.api.task.model.payloads.GetTasksPayload;
-import org.activiti.api.task.model.payloads.ReleaseTaskPayload;
-import org.activiti.api.task.model.payloads.SaveTaskPayload;
-import org.activiti.api.task.model.payloads.UpdateTaskPayload;
+import org.activiti.api.task.model.payloads.*;
 import org.activiti.api.task.model.results.TaskResult;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
@@ -82,7 +74,7 @@ public class TaskModelAutoConfiguration {
 
         module.registerSubtypes(new NamedType(SaveTaskPayload.class,
                                               SaveTaskPayload.class.getSimpleName()));
-        
+
         module.registerSubtypes(new NamedType(CreateTaskPayload.class,
                                               CreateTaskPayload.class.getSimpleName()));
 

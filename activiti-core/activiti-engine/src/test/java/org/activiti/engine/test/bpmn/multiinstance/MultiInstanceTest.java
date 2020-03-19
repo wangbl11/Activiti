@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,16 +13,8 @@
 
 package org.activiti.engine.test.bpmn.multiinstance;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.ExecutionListener;
@@ -354,10 +346,10 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
 
     Execution waitState = runtimeService.createExecutionQuery().activityId("waitState").singleResult();
     assertNotNull(waitState);
-    
+
     assertEquals(3, runtimeService.getVariable(processInstance.getId(), "taskListenerCounter"));
     assertEquals(3, runtimeService.getVariable(processInstance.getId(), "executionListenerCounter"));
-    
+
     runtimeService.trigger(waitState.getId());
     assertProcessEnded(processInstance.getId());
   }
@@ -656,7 +648,7 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
     for (Task task : tasks) {
       taskService.complete(task.getId());
     }
-    
+
     assertProcessEnded(procId);
   }
 
@@ -705,16 +697,16 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
     String procId = runtimeService.startProcessInstanceByKey("miParallelSubprocessCompletionCondition").getId();
     List<Task> tasks = taskService.createTaskQuery().list();
     assertEquals(4, tasks.size());
-    
+
     List<Task> subProcessTasks1 = taskService.createTaskQuery().taskDefinitionKey("subProcessTask1").list();
     assertEquals(2, subProcessTasks1.size());
-    
+
     List<Task> subProcessTasks2 = taskService.createTaskQuery().taskDefinitionKey("subProcessTask2").list();
     assertEquals(2, subProcessTasks2.size());
-    
+
     Execution taskExecution = runtimeService.createExecutionQuery().executionId(subProcessTasks1.get(0).getExecutionId()).singleResult();
     String parentExecutionId = taskExecution.getParentId();
-    
+
     Task subProcessTask2 = null;
     for (Task task : subProcessTasks2) {
       Execution toFindExecution = runtimeService.createExecutionQuery().executionId(task.getExecutionId()).singleResult();
@@ -727,23 +719,23 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
     assertNotNull(subProcessTask2);
     taskService.complete(tasks.get(0).getId());
     taskService.complete(subProcessTask2.getId());
-    
+
     assertProcessEnded(procId);
   }
 
   @Deployment
   public void testParallelSubProcessAllAutomatic() {
     String procId = runtimeService.startProcessInstanceByKey("miParallelSubprocessAllAutomatics", CollectionUtil.singletonMap(NR_OF_LOOPS_KEY, 5)).getId();
-    
+
     for (int i = 0; i < 5; i++) {
       List<Execution> waitSubExecutions = runtimeService.createExecutionQuery().activityId("subProcessWait").list();
       assertTrue(waitSubExecutions.size() > 0);
       runtimeService.trigger(waitSubExecutions.get(0).getId());
     }
-    
+
     List<Execution> waitSubExecutions = runtimeService.createExecutionQuery().activityId("subProcessWait").list();
     assertEquals(0, waitSubExecutions.size());
-    
+
     Execution waitState = runtimeService.createExecutionQuery().activityId("waitState").singleResult();
     assertEquals(10, runtimeService.getVariable(waitState.getId(), "sum"));
 
@@ -754,16 +746,16 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
   @Deployment(resources = { "org/activiti/engine/test/bpmn/multiinstance/MultiInstanceTest.testParallelSubProcessAllAutomatic.bpmn20.xml" })
   public void testParallelSubProcessAllAutomaticCompletionCondition() {
     String procId = runtimeService.startProcessInstanceByKey("miParallelSubprocessAllAutomatics", CollectionUtil.singletonMap(NR_OF_LOOPS_KEY, 10)).getId();
-    
+
     for (int i = 0; i < 6; i++) {
       List<Execution> waitSubExecutions = runtimeService.createExecutionQuery().activityId("subProcessWait").list();
       assertTrue(waitSubExecutions.size() > 0);
       runtimeService.trigger(waitSubExecutions.get(0).getId());
     }
-    
+
     List<Execution> waitSubExecutions = runtimeService.createExecutionQuery().activityId("subProcessWait").list();
     assertEquals(0, waitSubExecutions.size());
-    
+
     Execution waitState = runtimeService.createExecutionQuery().activityId("waitState").singleResult();
     assertEquals(12, runtimeService.getVariable(procId, "sum"));
 
@@ -1214,7 +1206,7 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
     assertProcessEnded(processInstance.getId());
   }
 
-  
+
   @Deployment(resources = { "org/activiti/engine/test/bpmn/multiinstance/MultiInstanceTest.testSequentialSubprocessEmptyCollection.bpmn20.xml" })
   public void testSequentialSubprocessEmptyCollection() {
 	Collection<String> collection = Collections.emptyList();
@@ -1309,11 +1301,11 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
       Map<String, Object> vars = new HashMap<String, Object>();
       vars.put("messages", Collections.EMPTY_LIST);
       ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("parallelUserTaskMi", vars);
-      
+
       assertEquals(1L, historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstance.getId()).finished().count());
     }
   }
-  
+
   @Deployment
   public void testZeroLoopCardinalityOnParallelUserTask() {
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.AUDIT)) {
@@ -1343,7 +1335,7 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
       assertEquals(1L, historyService.createHistoricProcessInstanceQuery().finished().count());
     }
   }
-  
+
   @Deployment
   public void testExecutionListenersOnMultiInstanceSubprocess() {
   	resetTestCounts();
@@ -1354,57 +1346,57 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
 		assignees.add("matt");
 		variableMap.put("assignees", assignees );
 		runtimeService.startProcessInstanceByKey("MultiInstanceTest", variableMap);
-		
+
 		assertEquals(3, TestStartExecutionListener.countWithLoopCounter.get());
 		assertEquals(3, TestEndExecutionListener.countWithLoopCounter.get());
-		
+
 		assertEquals(1, TestStartExecutionListener.countWithoutLoopCounter.get());
 		assertEquals(1, TestEndExecutionListener.countWithoutLoopCounter.get());
   }
-  
-  
+
+
   @Deployment
   public void testExecutionListenersOnMultiInstanceUserTask() {
   	resetTestCounts();
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("testExecutionListenersOnMultiInstanceUserTask");
-		
+
 		List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
 		for (Task task : tasks) {
 			taskService.complete(task.getId());
 		}
-		
+
 		assertEquals(4, TestTaskCompletionListener.count.get());
-		
+
 		assertEquals(4, TestStartExecutionListener.countWithLoopCounter.get());
 		assertEquals(4, TestEndExecutionListener.countWithLoopCounter.get());
-		
+
 		assertEquals(1, TestStartExecutionListener.countWithoutLoopCounter.get());
 		assertEquals(1, TestEndExecutionListener.countWithoutLoopCounter.get());
   }
-  
+
   @Deployment
   public void testParallelAfterSequentialMultiInstance() {
-    
+
     // Used to throw a nullpointer exception
-    
+
     runtimeService.startProcessInstanceByKey("multiInstance");
     assertEquals(0, runtimeService.createExecutionQuery().count());
   }
-  
+
   @Deployment
   public void testEndTimeOnMiSubprocess() {
-    
+
     if (!processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.AUDIT)) {
       return;
     }
-    
+
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("multiInstanceSubProcessParallelTasks");
-    
+
     List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
     assertEquals(2, tasks.size());
     assertEquals("User Task 1", tasks.get(0).getName());
     assertEquals("User Task 1", tasks.get(1).getName());
-    
+
     // End time should not be set for the subprocess
     List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery().activityId("subprocess1").list();
     assertEquals(2, historicActivityInstances.size());
@@ -1412,7 +1404,7 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
       assertNotNull(historicActivityInstance.getStartTime());
       assertNull(historicActivityInstance.getEndTime());
     }
-    
+
     // Complete one of the user tasks. This should not trigger setting of end time of the subprocess, but due to a bug it did exactly that
     taskService.complete(tasks.get(0).getId());
     historicActivityInstances = historyService.createHistoricActivityInstanceQuery().activityId("subprocess1").list();
@@ -1420,14 +1412,14 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
     for (HistoricActivityInstance historicActivityInstance : historicActivityInstances) {
       assertNull(historicActivityInstance.getEndTime());
     }
-    
+
     taskService.complete(tasks.get(1).getId());
     historicActivityInstances = historyService.createHistoricActivityInstanceQuery().activityId("subprocess1").list();
     assertEquals(2, historicActivityInstances.size());
     for (HistoricActivityInstance historicActivityInstance : historicActivityInstances) {
       assertNull(historicActivityInstance.getEndTime());
     }
-    
+
     tasks = taskService.createTaskQuery().processInstanceId(processInstance.getId()).taskName("User Task 3").list();
     assertEquals(2, tasks.size());
     for (Task task : tasks) {
@@ -1438,21 +1430,21 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
         assertNull(historicActivityInstance.getEndTime());
       }
     }
-    
+
     // Finishing the tasks should also set the end time
     tasks = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
     assertEquals(2, tasks.size());
     for (Task task : tasks) {
       taskService.complete(task.getId());
     }
-    
+
     historicActivityInstances = historyService.createHistoricActivityInstanceQuery().activityId("subprocess1").list();
     assertEquals(2, historicActivityInstances.size());
     for (HistoricActivityInstance historicActivityInstance : historicActivityInstances) {
       assertNotNull(historicActivityInstance.getEndTime());
     }
   }
-  
+
   @Deployment
   public void testChangingCollection() {
     Map<String, Object> vars = new HashMap<String, Object>();
@@ -1466,7 +1458,7 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
     List<ProcessInstance> instances = runtimeService.createProcessInstanceQuery().list();
     assertEquals(0, instances.size());
   }
-  
+
   protected void resetTestCounts() {
   	TestStartExecutionListener.countWithLoopCounter.set(0);
   	TestStartExecutionListener.countWithoutLoopCounter.set(0);
@@ -1474,9 +1466,9 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
   	TestEndExecutionListener.countWithoutLoopCounter.set(0);
   	TestTaskCompletionListener.count.set(0);
   }
-  
+
   public static class TestStartExecutionListener implements ExecutionListener {
-  	
+
   	public static AtomicInteger countWithLoopCounter = new AtomicInteger(0);
   	public static AtomicInteger countWithoutLoopCounter = new AtomicInteger(0);
 
@@ -1491,9 +1483,9 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
   	}
 
   }
-  
+
   public static class TestEndExecutionListener implements ExecutionListener {
-  	
+
   	public static AtomicInteger countWithLoopCounter = new AtomicInteger(0);
   	public static AtomicInteger countWithoutLoopCounter = new AtomicInteger(0);
 
@@ -1508,16 +1500,16 @@ public class MultiInstanceTest extends PluggableActivitiTestCase {
   	}
 
   }
-  
+
   public static class TestTaskCompletionListener implements TaskListener {
-  	
+
   	public static AtomicInteger count = new AtomicInteger(0);
-  	
+
   	@Override
   	public void notify(DelegateTask delegateTask) {
   		count.incrementAndGet();
   	}
-  	
+
   }
 
 

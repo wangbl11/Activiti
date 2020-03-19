@@ -3,9 +3,9 @@ package org.activiti.engine.test.bpmn.event.timer;
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ package org.activiti.engine.test.bpmn.event.timer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -93,7 +92,7 @@ public class StartTimerEventRepeatWithEndTest extends PluggableActivitiTestCase 
     // advance the clock to 11 dec -> the system will execute the pending job and will create a new one
     moveByMinutes(60 * 25);
     waitForJobExecutorToProcessAllJobs(2000, 200);
-    
+
     // there must be a pending job because the endDate is not reached yet
     jobs = managementService.createTimerJobQuery().list();
     assertEquals(1, jobs.size());

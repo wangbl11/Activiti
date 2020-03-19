@@ -16,6 +16,9 @@
 
 package org.activiti.runtime.api.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import org.activiti.api.model.shared.model.VariableInstance;
 import org.activiti.api.runtime.shared.NotFoundException;
 import org.activiti.api.runtime.shared.query.Page;
@@ -24,19 +27,7 @@ import org.activiti.api.runtime.shared.security.SecurityManager;
 import org.activiti.api.task.model.Task;
 import org.activiti.api.task.model.builders.TaskPayloadBuilder;
 import org.activiti.api.task.model.impl.TaskImpl;
-import org.activiti.api.task.model.payloads.CandidateGroupsPayload;
-import org.activiti.api.task.model.payloads.CandidateUsersPayload;
-import org.activiti.api.task.model.payloads.ClaimTaskPayload;
-import org.activiti.api.task.model.payloads.CompleteTaskPayload;
-import org.activiti.api.task.model.payloads.CreateTaskPayload;
-import org.activiti.api.task.model.payloads.CreateTaskVariablePayload;
-import org.activiti.api.task.model.payloads.DeleteTaskPayload;
-import org.activiti.api.task.model.payloads.GetTaskVariablesPayload;
-import org.activiti.api.task.model.payloads.GetTasksPayload;
-import org.activiti.api.task.model.payloads.ReleaseTaskPayload;
-import org.activiti.api.task.model.payloads.SaveTaskPayload;
-import org.activiti.api.task.model.payloads.UpdateTaskPayload;
-import org.activiti.api.task.model.payloads.UpdateTaskVariablePayload;
+import org.activiti.api.task.model.payloads.*;
 import org.activiti.api.task.runtime.TaskRuntime;
 import org.activiti.api.task.runtime.conf.TaskRuntimeConfiguration;
 import org.activiti.engine.TaskService;
@@ -47,10 +38,6 @@ import org.activiti.runtime.api.model.impl.APITaskConverter;
 import org.activiti.runtime.api.model.impl.APIVariableInstanceConverter;
 import org.activiti.runtime.api.query.impl.PageImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @PreAuthorize("hasRole('ACTIVITI_USER')")
 public class TaskRuntimeImpl implements TaskRuntime {
@@ -153,9 +140,9 @@ public class TaskRuntimeImpl implements TaskRuntime {
         if (!task.getAssignee().equals(authenticatedUserId)) {
             throw new IllegalStateException("You cannot complete the task if you are not assigned to it");
         }
-        
+
         taskRuntimeHelper.handleCompleteTaskPayload(completeTaskPayload);
-                
+
         taskService.complete(completeTaskPayload.getTaskId(),
                 completeTaskPayload.getVariables(), true);
 
@@ -435,7 +422,7 @@ public class TaskRuntimeImpl implements TaskRuntime {
         taskRuntimeHelper.assertHasAccessToTask(saveTaskPayload.getTaskId());
 
         taskRuntimeHelper.handleSaveTaskPayload(saveTaskPayload);
-        
+
         taskService.setVariablesLocal(saveTaskPayload.getTaskId(),
                 saveTaskPayload.getVariables());
     }

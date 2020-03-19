@@ -17,7 +17,6 @@
 package org.activiti.api.runtime.model.impl;
 
 import java.util.Objects;
-
 import org.activiti.api.process.model.BPMNElement;
 
 public class BPMNElementImpl implements BPMNElement {
@@ -43,13 +42,13 @@ public class BPMNElementImpl implements BPMNElement {
     public void setProcessDefinitionId(String processDefinitionId) {
         this.processDefinitionId = processDefinitionId;
     }
-    
- 
+
+
     @Override
     public String getElementId() {
         return elementId;
     }
-    
+
     public void setElementId(String elementId) {
         this.elementId = elementId;
     }

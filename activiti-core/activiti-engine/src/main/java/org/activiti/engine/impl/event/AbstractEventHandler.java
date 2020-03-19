@@ -14,7 +14,6 @@
 package org.activiti.engine.impl.event;
 
 import java.util.Map;
-
 import org.activiti.bpmn.model.FlowNode;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.context.Context;

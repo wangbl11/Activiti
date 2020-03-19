@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
@@ -30,11 +29,11 @@ public class GetExecutionsVariablesCmd implements Command<List<VariableInstance>
 
   private static final long serialVersionUID = 1L;
   protected Set<String> executionIds;
-  
+
   public GetExecutionsVariablesCmd(Set<String> executionIds) {
     this.executionIds = executionIds;
   }
-  
+
   @Override
   public List<VariableInstance> execute(CommandContext commandContext) {
     // Verify existence of executions
@@ -44,7 +43,7 @@ public class GetExecutionsVariablesCmd implements Command<List<VariableInstance>
     if (executionIds.isEmpty()){
       throw new ActivitiIllegalArgumentException("Set of executionIds is empty");
     }
-    
+
     List<VariableInstance> instances = new ArrayList<VariableInstance>();
     List<VariableInstanceEntity> entities = commandContext.getVariableInstanceEntityManager().findVariableInstancesByExecutionIds(executionIds);
     for (VariableInstanceEntity entity : entities){

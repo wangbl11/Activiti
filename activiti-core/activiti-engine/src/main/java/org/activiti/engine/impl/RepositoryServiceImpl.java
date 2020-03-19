@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,49 +16,14 @@ package org.activiti.engine.impl;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.impl.cmd.ActivateProcessDefinitionCmd;
-import org.activiti.engine.impl.cmd.AddEditorSourceExtraForModelCmd;
-import org.activiti.engine.impl.cmd.AddEditorSourceForModelCmd;
-import org.activiti.engine.impl.cmd.AddIdentityLinkForProcessDefinitionCmd;
-import org.activiti.engine.impl.cmd.ChangeDeploymentTenantIdCmd;
-import org.activiti.engine.impl.cmd.CreateModelCmd;
-import org.activiti.engine.impl.cmd.DeleteDeploymentCmd;
-import org.activiti.engine.impl.cmd.DeleteIdentityLinkForProcessDefinitionCmd;
-import org.activiti.engine.impl.cmd.DeleteModelCmd;
-import org.activiti.engine.impl.cmd.DeployCmd;
-import org.activiti.engine.impl.cmd.GetBpmnModelCmd;
-import org.activiti.engine.impl.cmd.GetDeploymentProcessDefinitionCmd;
-import org.activiti.engine.impl.cmd.GetDeploymentProcessModelCmd;
-import org.activiti.engine.impl.cmd.GetDeploymentResourceCmd;
-import org.activiti.engine.impl.cmd.GetDeploymentResourceNamesCmd;
-import org.activiti.engine.impl.cmd.GetIdentityLinksForProcessDefinitionCmd;
-import org.activiti.engine.impl.cmd.GetModelCmd;
-import org.activiti.engine.impl.cmd.GetModelEditorSourceCmd;
-import org.activiti.engine.impl.cmd.GetModelEditorSourceExtraCmd;
-import org.activiti.engine.impl.cmd.IsProcessDefinitionSuspendedCmd;
-import org.activiti.engine.impl.cmd.SaveModelCmd;
-import org.activiti.engine.impl.cmd.SetDeploymentCategoryCmd;
-import org.activiti.engine.impl.cmd.SetDeploymentKeyCmd;
-import org.activiti.engine.impl.cmd.SetProcessDefinitionCategoryCmd;
-import org.activiti.engine.impl.cmd.SuspendProcessDefinitionCmd;
-import org.activiti.engine.impl.cmd.ValidateBpmnModelCmd;
+import org.activiti.engine.impl.cmd.*;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ModelEntity;
 import org.activiti.engine.impl.repository.DeploymentBuilderImpl;
-import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.DeploymentBuilder;
-import org.activiti.engine.repository.DeploymentQuery;
-import org.activiti.engine.repository.Model;
-import org.activiti.engine.repository.ModelQuery;
-import org.activiti.engine.repository.NativeDeploymentQuery;
-import org.activiti.engine.repository.NativeModelQuery;
-import org.activiti.engine.repository.NativeProcessDefinitionQuery;
-import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.activiti.engine.repository.*;
 import org.activiti.engine.task.IdentityLink;
 import org.activiti.validation.ValidationError;
 
@@ -97,7 +62,7 @@ public class RepositoryServiceImpl extends ServiceImpl implements RepositoryServ
   public void setDeploymentCategory(String deploymentId, String category) {
     commandExecutor.execute(new SetDeploymentCategoryCmd(deploymentId, category));
   }
-  
+
   public void setDeploymentKey(String deploymentId, String key) {
     commandExecutor.execute(new SetDeploymentKeyCmd(deploymentId, key));
   }
@@ -137,7 +102,7 @@ public class RepositoryServiceImpl extends ServiceImpl implements RepositoryServ
   public ProcessDefinition getProcessDefinition(String processDefinitionId) {
     return commandExecutor.execute(new GetDeploymentProcessDefinitionCmd(processDefinitionId));
   }
-  
+
   public BpmnModel getBpmnModel(String processDefinitionId) {
     return commandExecutor.execute(new GetBpmnModelCmd(processDefinitionId));
   }
@@ -145,7 +110,7 @@ public class RepositoryServiceImpl extends ServiceImpl implements RepositoryServ
   public ProcessDefinition getDeployedProcessDefinition(String processDefinitionId) {
     return commandExecutor.execute(new GetDeploymentProcessDefinitionCmd(processDefinitionId));
   }
-  
+
   public boolean isProcessDefinitionSuspended(String processDefinitionId) {
     return commandExecutor.execute(new IsProcessDefinitionSuspendedCmd(processDefinitionId));
   }

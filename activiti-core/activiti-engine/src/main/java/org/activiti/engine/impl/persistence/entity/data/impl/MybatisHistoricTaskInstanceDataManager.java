@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.impl.persistence.entity.data.impl;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.HistoricTaskInstanceQueryImpl;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
@@ -39,29 +38,29 @@ public class MybatisHistoricTaskInstanceDataManager extends AbstractDataManager<
   public Class<? extends HistoricTaskInstanceEntity> getManagedEntityClass() {
     return HistoricTaskInstanceEntityImpl.class;
   }
-  
+
   @Override
   public HistoricTaskInstanceEntity create() {
     return new HistoricTaskInstanceEntityImpl();
   }
-  
+
   @Override
   public HistoricTaskInstanceEntity create(TaskEntity task, ExecutionEntity execution) {
     return new HistoricTaskInstanceEntityImpl(task, execution);
   }
-  
+
   @SuppressWarnings("unchecked")
   @Override
   public List<HistoricTaskInstanceEntity> findHistoricTasksByParentTaskId(String parentTaskId) {
     return getDbSqlSession().selectList("selectHistoricTasksByParentTaskId", parentTaskId);
   }
-  
+
   @Override
   @SuppressWarnings("unchecked")
   public List<HistoricTaskInstanceEntity> findHistoricTaskInstanceByProcessInstanceId(String processInstanceId) {
     return getDbSqlSession().selectList("selectHistoricTaskInstancesByProcessInstanceId", processInstanceId);
   }
-  
+
   @Override
   public long findHistoricTaskInstanceCountByQueryCriteria(HistoricTaskInstanceQueryImpl historicTaskInstanceQuery) {
     return (Long) getDbSqlSession().selectOne("selectHistoricTaskInstanceCountByQueryCriteria", historicTaskInstanceQuery);
@@ -109,10 +108,10 @@ public class MybatisHistoricTaskInstanceDataManager extends AbstractDataManager<
         return instanceList.subList(0, toIndex);
       }
     }
-    
+
     return instanceList;
   }
-  
+
   @Override
   @SuppressWarnings("unchecked")
   public List<HistoricTaskInstance> findHistoricTaskInstancesByNativeQuery(Map<String, Object> parameterMap, int firstResult, int maxResults) {
@@ -123,5 +122,5 @@ public class MybatisHistoricTaskInstanceDataManager extends AbstractDataManager<
   public long findHistoricTaskInstanceCountByNativeQuery(Map<String, Object> parameterMap) {
     return (Long) getDbSqlSession().selectOne("selectHistoricTaskInstanceCountByNativeQuery", parameterMap);
   }
-  
+
 }

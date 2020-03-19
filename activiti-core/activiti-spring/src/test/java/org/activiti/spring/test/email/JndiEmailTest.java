@@ -4,13 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.mail.NoSuchProviderException;
 import javax.mail.Provider;
 import javax.mail.Provider.Type;
 import javax.mail.Session;
 import javax.naming.NamingException;
-
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.test.Deployment;
 import org.activiti.spring.impl.test.SpringActivitiTestCase;

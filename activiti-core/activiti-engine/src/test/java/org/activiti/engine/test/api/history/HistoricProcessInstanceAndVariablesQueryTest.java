@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.impl.history.HistoryLevel;
@@ -33,7 +32,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
   private static String PROCESS_DEFINITION_NAME_2 = "oneTaskProcess2Name";
   private static String PROCESS_DEFINITION_CATEGORY_2 = "org.activiti.enginge.test.api.runtime.2Category";
   private static String PROCESS_DEFINITION_KEY_3 = "oneTaskProcess3";
-  
+
   private List<String> processInstanceIds;
 
   /**
@@ -46,7 +45,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       .addClasspathResource("org/activiti/engine/test/api/runtime/oneTaskProcess2.bpmn20.xml")
       .addClasspathResource("org/activiti/engine/test/api/runtime/oneTaskProcess3.bpmn20.xml")
       .deploy();
-    
+
     Map<String, Object> startMap = new HashMap<String, Object>();
     startMap.put("test", "test");
     startMap.put("test2", "test2");
@@ -61,7 +60,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
     startMap.clear();
     startMap.put("anothertest", 123);
     processInstanceIds.add(runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY_2, "1", startMap).getId());
-    
+
     startMap.clear();
     startMap.put("casetest", "MyTest");
     processInstanceIds.add(runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY_3, "1", startMap).getId());
@@ -83,7 +82,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
 
       List<HistoricProcessInstance> instanceList = historyService.createHistoricProcessInstanceQuery().includeProcessVariables().list();
       assertEquals(6, instanceList.size());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery().includeProcessVariables().processDefinitionKey(PROCESS_DEFINITION_KEY).list();
       assertEquals(4, instanceList.size());
       processInstance = instanceList.get(0);
@@ -107,46 +106,46 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       instanceList = historyService.createHistoricProcessInstanceQuery().includeProcessVariables().listPage(0, 50);
       assertEquals(6, instanceList.size());
       assertEquals(6, historyService.createHistoricProcessInstanceQuery().includeProcessVariables().count());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery()
           .variableValueEquals("test", "test")
           .includeProcessVariables()
           .listPage(0, 50);
       assertEquals(4, instanceList.size());
       assertEquals(4, historyService.createHistoricProcessInstanceQuery().variableValueEquals("test", "test").includeProcessVariables().count());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery()
           .variableValueLike("test", "te%")
           .includeProcessVariables()
           .list();
       assertEquals(4, instanceList.size());
       assertEquals(4, historyService.createHistoricProcessInstanceQuery().variableValueLike("test", "te%").includeProcessVariables().count());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery()
           .variableValueLike("test2", "te%2")
           .includeProcessVariables()
           .list();
       assertEquals(4, instanceList.size());
       assertEquals(4, historyService.createHistoricProcessInstanceQuery().variableValueLike("test2", "te%2").includeProcessVariables().count());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery()
           .variableValueLikeIgnoreCase("test", "te%")
           .includeProcessVariables()
           .list();
       assertEquals(4, instanceList.size());
       assertEquals(4, historyService.createHistoricProcessInstanceQuery().variableValueLikeIgnoreCase("test", "te%").includeProcessVariables().count());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery()
           .variableValueLikeIgnoreCase("test", "t3%")
           .includeProcessVariables()
           .list();
       assertEquals(0, instanceList.size());
       assertEquals(0, historyService.createHistoricProcessInstanceQuery().variableValueLikeIgnoreCase("test", "t3%").includeProcessVariables().count());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery().includeProcessVariables().listPage(0, 50);
       assertEquals(6, instanceList.size());
       assertEquals(6, historyService.createHistoricProcessInstanceQuery().includeProcessVariables().count());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery()
           .variableValueEquals("test", "test")
           .includeProcessVariables()
@@ -182,7 +181,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       assertEquals(4, instanceList.size());
     }
   }
-  
+
   public void testQueryByprocessDefinition() {
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.ACTIVITY)) {
         // DeploymentId
@@ -193,11 +192,11 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
         assertEquals(1, variableMap.size());
         assertEquals(123, variableMap.get("anothertest"));
         assertEquals(deploymentId, processInstance.getDeploymentId());
-        
+
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .variableValueEquals("anothertest", "invalid").deploymentId(deploymentId).singleResult();
         assertNull(processInstance);
-        
+
       // ProcessDefinitionName
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .variableValueEquals("anothertest", 123).processDefinitionName(PROCESS_DEFINITION_NAME_2).singleResult();
@@ -205,18 +204,18 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
         assertEquals(1, variableMap.size());
         assertEquals(123, variableMap.get("anothertest"));
         assertEquals(PROCESS_DEFINITION_NAME_2, processInstance.getProcessDefinitionName());
-        
+
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .variableValueEquals("test", "test").processDefinitionName(PROCESS_DEFINITION_NAME_2).singleResult();
         assertNull(processInstance);
-        
+
         // ProcessDefinitionCategory
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .variableValueEquals("anothertest", 123).processDefinitionCategory(PROCESS_DEFINITION_CATEGORY_2).singleResult();
         variableMap = processInstance.getProcessVariables();
         assertEquals(1, variableMap.size());
         assertEquals(123, variableMap.get("anothertest"));
-        
+
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .variableValueEquals("test", "test").processDefinitionCategory(PROCESS_DEFINITION_CATEGORY_2).singleResult();
         assertNull(processInstance);
@@ -230,7 +229,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       Map<String, Object> variableMap = processInstance.getProcessVariables();
       assertEquals(1, variableMap.size());
       assertEquals(123, variableMap.get("anothertest"));
-      
+
       processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
               .or()
                 .variableValueEquals("anothertest", 123)
@@ -244,7 +243,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       variableMap = processInstance.getProcessVariables();
       assertEquals(1, variableMap.size());
       assertEquals(123, variableMap.get("anothertest"));
-      
+
       processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
           .or()
             .variableValueEquals("anothertest", 123)
@@ -256,7 +255,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
           .endOr()
           .singleResult();
       assertNull(processInstance);
-      
+
       processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
           .or()
             .variableValueLikeIgnoreCase("casetest", "mytest")
@@ -267,7 +266,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       variableMap = processInstance.getProcessVariables();
       assertEquals(1, variableMap.size());
       assertEquals("MyTest", variableMap.get("casetest"));
-      
+
       List<HistoricProcessInstance> instanceList = historyService.createHistoricProcessInstanceQuery().includeProcessVariables().or()
           .processDefinitionKey(PROCESS_DEFINITION_KEY).processDefinitionId("undefined").endOr().list();
       assertEquals(4, instanceList.size());
@@ -325,7 +324,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       instanceList = historyService.createHistoricProcessInstanceQuery().or().variableValueEquals("test", "test").processDefinitionId("undefined").endOr().includeProcessVariables()
           .orderByProcessInstanceId().asc().listPage(0, 50);
       assertEquals(4, instanceList.size());
-      
+
       instanceList = historyService.createHistoricProcessInstanceQuery()
           .or()
             .variableValueEquals("test", "test")
@@ -342,7 +341,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       assertEquals(4, instanceList.size());
     }
   }
-  
+
   public void testOrQueryMultipleVariableValues() {
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.ACTIVITY)) {
       HistoricProcessInstanceQuery query0 = historyService.createHistoricProcessInstanceQuery().includeProcessVariables().or();
@@ -393,7 +392,7 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
       assertEquals(123, variableMap.get("anothertest"));
     }
   }
-  
+
   public void testOrQueryByprocessDefinition() {
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.ACTIVITY)) {
         // DeploymentId
@@ -408,11 +407,11 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
         for(HistoricProcessInstance processInstance : historicprocessInstanceQuery.list()){
           assertEquals(deploymentId, processInstance.getDeploymentId());
         }
-        
+
         HistoricProcessInstance processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .or().variableValueEquals("anothertest", "invalid").deploymentId("invalid").endOr().singleResult();
         assertNull(processInstance);
-        
+
         // ProcessDefinitionName
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .or().variableValueEquals("anothertest", "invalid").processDefinitionName(PROCESS_DEFINITION_NAME_2).endOr().singleResult();
@@ -420,18 +419,18 @@ public class HistoricProcessInstanceAndVariablesQueryTest extends PluggableActiv
         assertEquals(1, variableMap.size());
         assertEquals(123, variableMap.get("anothertest"));
         assertEquals(PROCESS_DEFINITION_NAME_2, processInstance.getProcessDefinitionName());
-        
+
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .or().variableValueEquals("anothertest", "invalid").processDefinitionName("invalid").endOr().singleResult();
         assertNull(processInstance);
-        
+
         // ProcessDefinitionCategory
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .or().variableValueEquals("anothertest", "invalid").processDefinitionCategory(PROCESS_DEFINITION_CATEGORY_2).endOr().singleResult();
         variableMap = processInstance.getProcessVariables();
         assertEquals(1, variableMap.size());
         assertEquals(123, variableMap.get("anothertest"));
-        
+
         processInstance = historyService.createHistoricProcessInstanceQuery().includeProcessVariables()
                 .or().variableValueEquals("anothertest", "invalid").processDefinitionCategory("invalid").endOr().singleResult();
         assertNull(processInstance);

@@ -2,7 +2,6 @@ package org.activiti.api.process.model.builders;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.payloads.RemoveProcessVariablesPayload;
 

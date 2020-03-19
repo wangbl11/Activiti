@@ -17,13 +17,11 @@
 package org.activiti.test.assertions;
 
 import java.util.List;
-
 import org.activiti.api.model.shared.event.RuntimeEvent;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.test.EventSource;
-import org.activiti.test.matchers.OperationScopeMatcher;
-
 import static org.activiti.test.matchers.OperationScopeImpl.processInstanceScope;
+import org.activiti.test.matchers.OperationScopeMatcher;
 
 public class SignalAssertionsImpl implements SignalAssertions {
 

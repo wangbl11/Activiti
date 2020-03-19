@@ -1,23 +1,9 @@
 package org.activiti.engine.impl.agenda;
 
 import java.util.Collection;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.interceptor.CommandContext;
-import org.activiti.engine.impl.persistence.entity.DeadLetterJobEntity;
-import org.activiti.engine.impl.persistence.entity.DeadLetterJobEntityManager;
-import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
-import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
-import org.activiti.engine.impl.persistence.entity.JobEntity;
-import org.activiti.engine.impl.persistence.entity.JobEntityManager;
-import org.activiti.engine.impl.persistence.entity.SuspendedJobEntity;
-import org.activiti.engine.impl.persistence.entity.SuspendedJobEntityManager;
-import org.activiti.engine.impl.persistence.entity.TaskEntity;
-import org.activiti.engine.impl.persistence.entity.TaskEntityManager;
-import org.activiti.engine.impl.persistence.entity.TimerJobEntity;
-import org.activiti.engine.impl.persistence.entity.TimerJobEntityManager;
-import org.activiti.engine.impl.persistence.entity.VariableInstanceEntity;
-import org.activiti.engine.impl.persistence.entity.VariableInstanceEntityManager;
+import org.activiti.engine.impl.persistence.entity.*;
 
 /**
  * Destroys a scope (for example a subprocess): this means that all child executions,

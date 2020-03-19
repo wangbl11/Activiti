@@ -16,11 +16,10 @@
 
 package org.activiti.core.common.spring.security.policies;
 
-import org.activiti.api.process.model.builders.ProcessPayloadBuilder;
-import org.activiti.api.process.model.payloads.GetProcessDefinitionsPayload;
-
 import java.util.Set;
 import java.util.UUID;
+import org.activiti.api.process.model.builders.ProcessPayloadBuilder;
+import org.activiti.api.process.model.payloads.GetProcessDefinitionsPayload;
 
 public class SecurityPoliciesProcessDefinitionRestrictionApplier implements SecurityPoliciesRestrictionApplier<GetProcessDefinitionsPayload> {
 

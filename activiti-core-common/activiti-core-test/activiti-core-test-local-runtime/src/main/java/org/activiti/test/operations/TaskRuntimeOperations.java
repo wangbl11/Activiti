@@ -17,7 +17,6 @@
 package org.activiti.test.operations;
 
 import java.util.List;
-
 import org.activiti.api.task.model.Task;
 import org.activiti.api.task.model.payloads.ClaimTaskPayload;
 import org.activiti.api.task.model.payloads.CompleteTaskPayload;

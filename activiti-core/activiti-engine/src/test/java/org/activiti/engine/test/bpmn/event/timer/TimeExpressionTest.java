@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
 import org.activiti.engine.runtime.Job;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -12,7 +11,7 @@ import org.activiti.engine.test.Deployment;
 
 /**
  * Test timer expression according to act-865
- * 
+ *
 
  */
 

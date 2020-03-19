@@ -1,12 +1,6 @@
 package org.activiti.engine.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-
+import java.util.*;
 import org.activiti.engine.history.HistoricData;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.ProcessInstanceHistoryLog;

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,32 +14,17 @@ package org.activiti.engine.impl.bpmn.parser.factory;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.bpmn.model.ActivitiListener;
 import org.activiti.bpmn.model.EventListener;
 import org.activiti.bpmn.model.ImplementationType;
 import org.activiti.engine.ActivitiIllegalArgumentException;
-import org.activiti.engine.delegate.ExecutionListener;
 import org.activiti.engine.delegate.CustomPropertiesResolver;
+import org.activiti.engine.delegate.ExecutionListener;
 import org.activiti.engine.delegate.TaskListener;
 import org.activiti.engine.delegate.TransactionDependentTaskListener;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
-import org.activiti.engine.impl.bpmn.helper.BaseDelegateEventListener;
-import org.activiti.engine.impl.bpmn.helper.ClassDelegateFactory;
-import org.activiti.engine.impl.bpmn.helper.DefaultClassDelegateFactory;
-import org.activiti.engine.impl.bpmn.helper.DelegateActivitiEventListener;
-import org.activiti.engine.impl.bpmn.helper.DelegateExpressionActivitiEventListener;
-import org.activiti.engine.impl.bpmn.helper.ErrorThrowingEventListener;
-import org.activiti.engine.impl.bpmn.helper.MessageThrowingEventListener;
-import org.activiti.engine.impl.bpmn.helper.SignalThrowingEventListener;
-import org.activiti.engine.impl.bpmn.listener.DelegateExpressionCustomPropertiesResolver;
-import org.activiti.engine.impl.bpmn.listener.DelegateExpressionExecutionListener;
-import org.activiti.engine.impl.bpmn.listener.DelegateExpressionTaskListener;
-import org.activiti.engine.impl.bpmn.listener.DelegateExpressionTransactionDependentTaskListener;
-import org.activiti.engine.impl.bpmn.listener.ExpressionCustomPropertiesResolver;
-import org.activiti.engine.impl.bpmn.listener.ExpressionExecutionListener;
-import org.activiti.engine.impl.bpmn.listener.ExpressionTaskListener;
-import org.activiti.engine.impl.bpmn.listener.DelegateExpressionTransactionDependentExecutionListener;
+import org.activiti.engine.impl.bpmn.helper.*;
+import org.activiti.engine.impl.bpmn.listener.*;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.Execution;
@@ -52,7 +37,7 @@ import org.activiti.engine.task.Task;
 
 /**
  * Default implementation of the {@link ListenerFactory}. Used when no custom {@link ListenerFactory} is injected on the {@link ProcessEngineConfigurationImpl}.
- * 
+ *
 
  */
 public class DefaultListenerFactory extends AbstractBehaviorFactory implements ListenerFactory {

@@ -12,6 +12,8 @@
  */
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.Collection;
+import java.util.Iterator;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.delegate.InactiveActivityBehavior;
@@ -21,9 +23,6 @@ import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
 import org.activiti.engine.impl.util.ExecutionGraphUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Implementation of the Inclusive Gateway/OR gateway/inclusive data-based gateway as defined in the BPMN specification.

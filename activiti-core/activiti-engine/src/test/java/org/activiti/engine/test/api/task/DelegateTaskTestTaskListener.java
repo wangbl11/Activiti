@@ -2,7 +2,6 @@ package org.activiti.engine.test.api.task;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
 import org.activiti.engine.task.IdentityLink;

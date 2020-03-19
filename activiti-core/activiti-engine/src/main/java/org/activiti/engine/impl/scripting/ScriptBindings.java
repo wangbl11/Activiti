@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,16 +13,9 @@
 
 package org.activiti.engine.impl.scripting;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import java.util.*;
 import javax.script.Bindings;
 import javax.script.SimpleScriptContext;
-
 import org.activiti.engine.delegate.VariableScope;
 
 /**
@@ -32,12 +25,12 @@ import org.activiti.engine.delegate.VariableScope;
 public class ScriptBindings implements Bindings {
 
   /**
-   * The script engine implementations put some key/value pairs into the binding. 
+   * The script engine implementations put some key/value pairs into the binding.
    * This list contains those keys, such that they wouldn't be stored as process variable.
-   * 
+   *
    * This list contains the keywords for JUEL, Javascript and Groovy.
    */
-  protected static final Set<String> UNSTORED_KEYS = 
+  protected static final Set<String> UNSTORED_KEYS =
     new HashSet<String>(Arrays.asList("out", "out:print", "lang:import", "context", "elcontext", "print", "println", "nashorn.global"));
 
   protected List<Resolver> scriptResolvers;
@@ -124,9 +117,9 @@ public class ScriptBindings implements Bindings {
   public boolean isEmpty() {
     throw new UnsupportedOperationException();
   }
-  
+
   public void addUnstoredKey(String unstoredKey) {
   	UNSTORED_KEYS.add(unstoredKey);
   }
-  
+
 }

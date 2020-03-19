@@ -18,7 +18,6 @@ package org.activiti.examples;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.builders.ProcessPayloadBuilder;

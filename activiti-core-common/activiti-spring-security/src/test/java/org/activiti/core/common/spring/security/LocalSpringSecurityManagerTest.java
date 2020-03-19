@@ -16,12 +16,11 @@
 
 package org.activiti.core.common.spring.security;
 
+import java.util.List;
+import org.activiti.api.runtime.shared.security.SecurityManager;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-
-import org.activiti.api.runtime.shared.security.SecurityManager;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,26 +29,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
-
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class LocalSpringSecurityManagerTest {
 
     @MockBean
     private UserDetailsService userDetailsService;
-    
+
     @Autowired
     private SecurityManager securityManager;
-    
+
     @SpringBootApplication
     static class Application {
-        
+
     }
-    
+
     @Test
     public void contextLoads() {
         assertThat(securityManager).isInstanceOf(LocalSpringSecurityManager.class);
@@ -58,10 +52,10 @@ public class LocalSpringSecurityManagerTest {
     @Test
     @WithMockUser(username = "hruser", authorities = {"ROLE_user", "GROUP_users"})
     public void testGetAuthenticatedUserId() {
-        
+
         // when
         String result = securityManager.getAuthenticatedUserId();
-        
+
         // then
         assertThat(result).isEqualTo("hruser");
     }
@@ -69,10 +63,10 @@ public class LocalSpringSecurityManagerTest {
     @Test
     @WithMockUser(username = "hruser", authorities = {"ROLE_user", "GROUP_users"})
     public void testGetAuthenticatedUserGroups() {
-        
+
         // when
         List<String> result = securityManager.getAuthenticatedUserGroups();
-        
+
         // then
         assertThat(result).containsExactly("users");
     }
@@ -80,10 +74,10 @@ public class LocalSpringSecurityManagerTest {
     @Test
     @WithMockUser(username = "hruser", authorities = {"ROLE_user", "GROUP_users"})
     public void testGetAuthenticatedUserRoles() {
-        
+
         // when
         List<String> result = securityManager.getAuthenticatedUserRoles();
-        
+
         // then
         assertThat(result).containsExactly("user");
     }
@@ -91,22 +85,22 @@ public class LocalSpringSecurityManagerTest {
     @Test
     @WithAnonymousUser
     public void testGetAuthenticatedUserIdAnonymous() {
-        
+
         // when
         String result = securityManager.getAuthenticatedUserId();
-        
+
         // then
         assertThat(result).isEqualTo("anonymous");
     }
-    
+
     @Test
     public void testGetAuthenticatedUserIdInvalidUser() {
         // given
         SecurityContextHolder.clearContext();
-        
+
         // when
         Throwable result = catchThrowable(() -> securityManager.getAuthenticatedUserId());
-        
+
         // then
         assertThat(result).isInstanceOf(SecurityException.class);
     }
@@ -115,24 +109,24 @@ public class LocalSpringSecurityManagerTest {
     public void testGetAuthenticatedUserGroupInvalidUser() {
         // given
         SecurityContextHolder.clearContext();
-        
+
         // when
         Throwable result = catchThrowable(() -> securityManager.getAuthenticatedUserGroups());
-        
+
         // then
         assertThat(result).isInstanceOf(SecurityException.class);
     }
-    
+
     @Test
     public void testGetAuthenticatedUserRolesInvalidUser() {
         // given
         SecurityContextHolder.clearContext();
-        
+
         // when
         Throwable result = catchThrowable(() -> securityManager.getAuthenticatedUserRoles());
-        
+
         // then
         assertThat(result).isInstanceOf(SecurityException.class);
-    }    
-    
+    }
+
 }

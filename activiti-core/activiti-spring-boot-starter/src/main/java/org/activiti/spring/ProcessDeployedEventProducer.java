@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.process.model.events.ProcessDeployedEvent;
 import org.activiti.api.process.runtime.events.listener.ProcessRuntimeEventListener;
@@ -76,6 +75,6 @@ public class ProcessDeployedEventProducer extends AbstractActivitiSmartLifeCycle
     @Override
     public void doStop() {
         // nothing
-        
+
     }
 }

@@ -1,14 +1,13 @@
 package org.activiti.core.common.spring.security.policies;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import org.activiti.api.process.model.payloads.GetProcessDefinitionsPayload;
 import org.activiti.api.process.model.payloads.GetProcessInstancesPayload;
 import org.activiti.api.runtime.shared.security.SecurityManager;
 import org.activiti.core.common.spring.security.policies.conf.SecurityPoliciesProperties;
 import org.springframework.beans.factory.annotation.Value;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class ProcessSecurityPoliciesManagerImpl extends BaseSecurityPoliciesManagerImpl implements ProcessSecurityPoliciesManager{
 

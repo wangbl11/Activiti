@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,6 +13,10 @@
 
 package org.activiti.spring;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import javax.sql.DataSource;
+import org.activiti.api.runtime.shared.identity.UserGroupManager;
 import org.activiti.core.common.spring.project.ApplicationUpgradeContextService;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ProcessEngine;
@@ -23,23 +27,13 @@ import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.activiti.engine.impl.interceptor.CommandConfig;
 import org.activiti.engine.impl.interceptor.CommandInterceptor;
 import org.activiti.engine.impl.variable.EntityManagerSession;
-import org.activiti.api.runtime.shared.identity.UserGroupManager;
-import org.activiti.spring.autodeployment.AutoDeploymentStrategy;
-import org.activiti.spring.autodeployment.DefaultAutoDeploymentStrategy;
-import org.activiti.spring.autodeployment.FailOnNoProcessAutoDeploymentStrategy;
-import org.activiti.spring.autodeployment.NeverFailAutoDeploymentStrategy;
-import org.activiti.spring.autodeployment.ResourceParentFolderAutoDeploymentStrategy;
-import org.activiti.spring.autodeployment.SingleResourceAutoDeploymentStrategy;
+import org.activiti.spring.autodeployment.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
 
@@ -180,7 +174,7 @@ public class SpringProcessEngineConfiguration extends ProcessEngineConfiguration
   /**
    * Gets the {@link AutoDeploymentStrategy} for the provided mode. This method may be overridden to implement custom deployment strategies if required, but implementors should take care not to return
    * <code>null</code>.
-   * 
+   *
    * @param mode
    *          the mode to get the strategy for
    * @return the deployment strategy to use for the mode. Never <code>null</code>

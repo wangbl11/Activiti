@@ -1,7 +1,6 @@
 package org.activiti.spring.test.autodeployment;
 
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.spring.autodeployment.FailOnNoProcessAutoDeploymentStrategy;
 import org.activiti.spring.impl.test.SpringActivitiTestCase;

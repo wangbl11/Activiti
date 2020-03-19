@@ -14,7 +14,6 @@ package org.activiti.engine.test.impl.logger;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-
 import org.activiti.engine.impl.agenda.AbstractOperation;
 import org.slf4j.Logger;
 

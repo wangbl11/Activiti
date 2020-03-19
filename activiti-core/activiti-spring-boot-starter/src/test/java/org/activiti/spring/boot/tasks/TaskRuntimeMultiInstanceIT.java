@@ -16,10 +16,6 @@
 
 package org.activiti.spring.boot.tasks;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
-import static org.awaitility.Awaitility.await;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -28,12 +24,7 @@ import java.util.stream.Collectors;
 import org.activiti.api.model.shared.event.RuntimeEvent;
 import org.activiti.api.model.shared.model.VariableInstance;
 import org.activiti.api.process.model.ProcessInstance;
-import org.activiti.api.process.model.events.BPMNActivityCancelledEvent;
-import org.activiti.api.process.model.events.BPMNActivityCompletedEvent;
-import org.activiti.api.process.model.events.BPMNActivityEvent;
-import org.activiti.api.process.model.events.BPMNActivityStartedEvent;
-import org.activiti.api.process.model.events.BPMNTimerEvent;
-import org.activiti.api.process.model.events.ProcessRuntimeEvent;
+import org.activiti.api.process.model.events.*;
 import org.activiti.api.process.runtime.events.ProcessCompletedEvent;
 import org.activiti.api.process.runtime.events.ProcessStartedEvent;
 import org.activiti.api.runtime.shared.query.Page;
@@ -52,17 +43,17 @@ import org.activiti.spring.boot.process.listener.DummyBPMNTimerScheduledListener
 import org.activiti.spring.boot.security.util.SecurityUtil;
 import org.activiti.spring.boot.test.util.ProcessCleanUpUtil;
 import org.activiti.test.LocalEventSource;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+import static org.awaitility.Awaitility.await;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ActiveProfiles(ProcessRuntimeBPMNTimerIT.PROCESS_RUNTIME_BPMN_TIMER_IT)
 @Import({TimerTestConfigurator.class,
@@ -90,12 +81,12 @@ public class TaskRuntimeMultiInstanceIT {
     @Autowired
     private SecurityUtil securityUtil;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         localEventSource.clearEvents();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         processCleanUpUtil.cleanUpWithAdmin();
         processEngineConfiguration.getClock().reset();

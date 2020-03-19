@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions id="definitions"
-	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-	xmlns:activiti="http://activiti.org/bpmn" 
-	targetNamespace="Examples">
-	
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="Examples">
+
 	<error id="myError" errorCode="123" />
 
 	<process id="CatchErrorInEmbeddedSubProcess">
@@ -17,7 +16,7 @@
       <endEvent id="subprocessEnd">
         <errorEventDefinition errorRef="myError" />
       </endEvent>
-      
+
       <subProcess id="eventSubProcess" triggeredByEvent="true">
 		    <startEvent id="catchError">
 		      <errorEventDefinition /> <!-- no errorCode: catch any error -->
@@ -28,7 +27,7 @@
 
     </subProcess>
     <sequenceFlow id="flow3" sourceRef="subprocess" targetRef="theEnd" />
-		
+
 		<endEvent id="theEnd" />
 
 	</process>

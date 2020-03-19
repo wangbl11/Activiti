@@ -16,22 +16,9 @@
 
 package org.activiti.core.common.spring.security.config;
 
-import org.activiti.api.runtime.shared.security.PrincipalGroupsProvider;
-import org.activiti.api.runtime.shared.security.PrincipalIdentityProvider;
-import org.activiti.api.runtime.shared.security.PrincipalRolesProvider;
-import org.activiti.api.runtime.shared.security.SecurityContextPrincipalProvider;
 import org.activiti.api.runtime.shared.security.SecurityManager;
-import org.activiti.core.common.spring.security.AuthenticationPrincipalGroupsProvider;
-import org.activiti.core.common.spring.security.AuthenticationPrincipalIdentityProvider;
-import org.activiti.core.common.spring.security.AuthenticationPrincipalRolesProvider;
-import org.activiti.core.common.spring.security.GrantedAuthoritiesGroupsMapper;
-import org.activiti.core.common.spring.security.GrantedAuthoritiesResolver;
-import org.activiti.core.common.spring.security.GrantedAuthoritiesRolesMapper;
-import org.activiti.core.common.spring.security.LocalSpringSecurityContextPrincipalProvider;
-import org.activiti.core.common.spring.security.LocalSpringSecurityManager;
-import org.activiti.core.common.spring.security.SimpleGrantedAuthoritiesGroupsMapper;
-import org.activiti.core.common.spring.security.SimpleGrantedAuthoritiesResolver;
-import org.activiti.core.common.spring.security.SimpleGrantedAuthoritiesRolesMapper;
+import org.activiti.api.runtime.shared.security.*;
+import org.activiti.core.common.spring.security.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,10 +31,10 @@ public class ActivitiSpringSecurityAutoConfiguration {
     public GrantedAuthoritiesResolver grantedAuthoritiesResolver() {
         return new SimpleGrantedAuthoritiesResolver();
     }
-    
+
     @Bean
     @ConditionalOnMissingBean
-    public GrantedAuthoritiesGroupsMapper grantedAuthoritiesGroupsMapper() { 
+    public GrantedAuthoritiesGroupsMapper grantedAuthoritiesGroupsMapper() {
         return new SimpleGrantedAuthoritiesGroupsMapper();
     };
 
@@ -56,24 +43,24 @@ public class ActivitiSpringSecurityAutoConfiguration {
     public GrantedAuthoritiesRolesMapper grantedAuthoritiesRolesMapper() {
         return new SimpleGrantedAuthoritiesRolesMapper();
     }
-    
+
     @Bean
     @ConditionalOnMissingBean
     public SecurityContextPrincipalProvider securityContextPrincipalProvider() {
         return new LocalSpringSecurityContextPrincipalProvider();
-    }    
-    
+    }
+
     @Bean
     @ConditionalOnMissingBean
     public PrincipalIdentityProvider principalIdentityProvider() {
         return new AuthenticationPrincipalIdentityProvider();
-    }    
+    }
 
     @Bean
     @ConditionalOnMissingBean
     public PrincipalGroupsProvider principalGroupsProvider(GrantedAuthoritiesResolver grantedAuthoritiesResolver,
                                                            GrantedAuthoritiesGroupsMapper grantedAuthoritiesGroupsMapper) {
-        return new AuthenticationPrincipalGroupsProvider(grantedAuthoritiesResolver, 
+        return new AuthenticationPrincipalGroupsProvider(grantedAuthoritiesResolver,
                                                          grantedAuthoritiesGroupsMapper);
     }
 
@@ -81,10 +68,10 @@ public class ActivitiSpringSecurityAutoConfiguration {
     @ConditionalOnMissingBean
     public PrincipalRolesProvider principalRolessProvider(GrantedAuthoritiesResolver grantedAuthoritiesResolver,
                                                           GrantedAuthoritiesRolesMapper grantedAuthoritiesRolesMapper) {
-        return new AuthenticationPrincipalRolesProvider(grantedAuthoritiesResolver, 
+        return new AuthenticationPrincipalRolesProvider(grantedAuthoritiesResolver,
                                                         grantedAuthoritiesRolesMapper);
     }
-    
+
     @Bean
     @ConditionalOnMissingBean
     public SecurityManager securityManager(SecurityContextPrincipalProvider securityContextPrincipalProvider,

@@ -16,8 +16,6 @@
 
 package org.activiti.spring.boot.tasks;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.builders.ProcessPayloadBuilder;
 import org.activiti.api.process.runtime.ProcessRuntime;
@@ -29,20 +27,18 @@ import org.activiti.api.task.model.builders.UpdateTaskPayloadBuilder;
 import org.activiti.api.task.runtime.TaskRuntime;
 import org.activiti.spring.boot.security.util.SecurityUtil;
 import org.activiti.spring.boot.test.util.TaskCleanUpUtil;
-import org.junit.After;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ContextConfiguration
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class TaskRuntimeFormKeyTest {
 
     private static final String SINGLE_TASK_PROCESS = "SingleTaskProcess";
@@ -55,12 +51,12 @@ public class TaskRuntimeFormKeyTest {
     private SecurityUtil securityUtil;
     @Autowired
     private TaskCleanUpUtil taskCleanUpUtil;
-    
-    @After
+
+    @AfterEach
     public void taskCleanUp(){
         taskCleanUpUtil.cleanUpWithAdmin();
     }
-    
+
     @Test
     public void standaloneTaskHasFormKey() {
         securityUtil.logInAs("garth");

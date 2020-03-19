@@ -14,7 +14,6 @@ package org.activiti.examples.bpmn.executionlistener;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.history.HistoricProcessInstance;

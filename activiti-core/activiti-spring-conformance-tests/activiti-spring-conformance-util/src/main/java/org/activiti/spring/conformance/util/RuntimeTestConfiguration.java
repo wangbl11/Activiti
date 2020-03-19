@@ -1,30 +1,18 @@
 package org.activiti.spring.conformance.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.activiti.api.model.shared.event.RuntimeEvent;
 import org.activiti.api.model.shared.event.VariableCreatedEvent;
 import org.activiti.api.model.shared.event.VariableDeletedEvent;
 import org.activiti.api.model.shared.event.VariableUpdatedEvent;
-import org.activiti.api.process.model.events.BPMNActivityCancelledEvent;
-import org.activiti.api.process.model.events.BPMNActivityCompletedEvent;
-import org.activiti.api.process.model.events.BPMNActivityStartedEvent;
-import org.activiti.api.process.model.events.BPMNSequenceFlowTakenEvent;
-import org.activiti.api.process.model.events.BPMNSignalReceivedEvent;
-import org.activiti.api.process.runtime.events.ProcessCancelledEvent;
-import org.activiti.api.process.runtime.events.ProcessCompletedEvent;
-import org.activiti.api.process.runtime.events.ProcessCreatedEvent;
-import org.activiti.api.process.runtime.events.ProcessResumedEvent;
-import org.activiti.api.process.runtime.events.ProcessStartedEvent;
-import org.activiti.api.process.runtime.events.ProcessSuspendedEvent;
+import org.activiti.api.process.model.events.*;
+import org.activiti.api.process.runtime.events.*;
 import org.activiti.api.process.runtime.events.listener.BPMNElementEventListener;
 import org.activiti.api.process.runtime.events.listener.ProcessRuntimeEventListener;
 import org.activiti.api.runtime.shared.events.VariableEventListener;
 import org.activiti.api.runtime.shared.security.SecurityManager;
-import org.activiti.api.task.runtime.events.TaskAssignedEvent;
-import org.activiti.api.task.runtime.events.TaskCancelledEvent;
-import org.activiti.api.task.runtime.events.TaskCompletedEvent;
-import org.activiti.api.task.runtime.events.TaskCreatedEvent;
-import org.activiti.api.task.runtime.events.TaskSuspendedEvent;
-import org.activiti.api.task.runtime.events.TaskUpdatedEvent;
+import org.activiti.api.task.runtime.events.*;
 import org.activiti.api.task.runtime.events.listener.TaskEventListener;
 import org.activiti.core.common.spring.identity.ExtendedInMemoryUserDetailsManager;
 import org.activiti.spring.conformance.util.security.SecurityUtil;
@@ -39,14 +27,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @TestConfiguration
 public class RuntimeTestConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RuntimeTestConfiguration.class);
-    
+
     public static List<RuntimeEvent> collectedEvents = new ArrayList<>();
 
     @Bean
@@ -104,7 +89,7 @@ public class RuntimeTestConfiguration {
 
         return extendedInMemoryUserDetailsManager;
     }
-    
+
     @Bean
     public BPMNElementEventListener<BPMNActivityStartedEvent> bpmnActivityStartedListener() {
         return bpmnActivityStartedEvent -> collectedEvents.add(bpmnActivityStartedEvent);
@@ -196,13 +181,13 @@ public class RuntimeTestConfiguration {
     public TaskEventListener<TaskAssignedEvent> taskAssignedEventListener() {
         return taskAssignedEvent -> collectedEvents.add(taskAssignedEvent);
     }
-    
+
     @Bean
     public TaskEventListener<TaskCancelledEvent> taskCancelledEventListener() {
         return taskCancelledEvent -> collectedEvents.add(taskCancelledEvent);
     }
-    
-    
+
+
     @Bean
     public BPMNElementEventListener<BPMNSignalReceivedEvent> bpmnSignalReceivedListener() {
         return bpmnSignalReceivedEvent -> collectedEvents.add(bpmnSignalReceivedEvent);

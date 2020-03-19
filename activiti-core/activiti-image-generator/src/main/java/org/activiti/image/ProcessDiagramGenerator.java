@@ -17,7 +17,6 @@ package org.activiti.image;
 
 import java.io.InputStream;
 import java.util.List;
-
 import org.activiti.bpmn.model.BpmnModel;
 
 /**

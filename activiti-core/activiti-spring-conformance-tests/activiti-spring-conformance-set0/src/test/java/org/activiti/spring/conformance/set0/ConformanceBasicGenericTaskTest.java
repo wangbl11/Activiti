@@ -1,8 +1,5 @@
 package org.activiti.spring.conformance.set0;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-
 import org.activiti.api.model.shared.event.RuntimeEvent;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.builders.ProcessPayloadBuilder;
@@ -13,14 +10,13 @@ import org.activiti.api.process.runtime.ProcessRuntime;
 import org.activiti.api.runtime.shared.NotFoundException;
 import org.activiti.spring.conformance.util.RuntimeTestConfiguration;
 import org.activiti.spring.conformance.util.security.SecurityUtil;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class ConformanceBasicGenericTaskTest {
 
@@ -31,7 +27,7 @@ public class ConformanceBasicGenericTaskTest {
     @Autowired
     private SecurityUtil securityUtil;
 
-    @After
+    @AfterEach
     public void cleanUp() {
         RuntimeTestConfiguration.collectedEvents.clear();
     }

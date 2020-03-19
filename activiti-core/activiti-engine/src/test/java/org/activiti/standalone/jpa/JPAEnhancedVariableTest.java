@@ -1,14 +1,8 @@
 package org.activiti.standalone.jpa;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
@@ -23,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Test for JPA enhancement support
- * 
+ *
 
  */
 public class JPAEnhancedVariableTest extends AbstractActivitiTestCase {

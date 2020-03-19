@@ -18,14 +18,13 @@ package org.activiti.test.matchers;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.activiti.api.process.model.events.BPMNActivityEvent;
 import org.activiti.api.process.model.events.BPMNActivityStartedEvent;
 import org.activiti.api.task.model.events.TaskRuntimeEvent;
 import org.activiti.api.task.runtime.events.TaskAssignedEvent;
 import org.activiti.api.task.runtime.events.TaskCreatedEvent;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 public class ProcessTaskMatchers {
 

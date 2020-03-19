@@ -17,7 +17,6 @@ package org.activiti.engine.impl.persistence.entity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.db.BulkDeleteable;
@@ -48,7 +47,7 @@ public class HistoricProcessInstanceEntityImpl extends HistoricScopeInstanceEnti
   protected List<HistoricVariableInstanceEntity> queryVariables;
 
   public HistoricProcessInstanceEntityImpl() {
-    
+
   }
 
   public HistoricProcessInstanceEntityImpl(ExecutionEntity processInstance) {
@@ -153,11 +152,11 @@ public class HistoricProcessInstanceEntityImpl extends HistoricScopeInstanceEnti
   public String getLocalizedName() {
     return localizedName;
   }
-  
+
   public void setLocalizedName(String localizedName) {
     this.localizedName = localizedName;
   }
-  
+
   public String getDescription() {
     if (localizedDescription != null && localizedDescription.length() > 0) {
       return localizedDescription;
@@ -165,19 +164,19 @@ public class HistoricProcessInstanceEntityImpl extends HistoricScopeInstanceEnti
       return description;
     }
   }
-  
+
   public void setDescription(String description) {
     this.description = description;
   }
-  
+
   public String getLocalizedDescription() {
     return localizedDescription;
   }
-  
+
   public void setLocalizedDescription(String localizedDescription) {
     this.localizedDescription = localizedDescription;
   }
-  
+
   public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }

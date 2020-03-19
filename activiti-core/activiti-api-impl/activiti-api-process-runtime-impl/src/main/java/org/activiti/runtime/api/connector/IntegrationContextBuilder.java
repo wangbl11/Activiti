@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.connector;
 
 import java.util.Objects;
-
 import org.activiti.api.process.model.IntegrationContext;
 import org.activiti.api.runtime.model.impl.IntegrationContextImpl;
 import org.activiti.bpmn.model.ServiceTask;

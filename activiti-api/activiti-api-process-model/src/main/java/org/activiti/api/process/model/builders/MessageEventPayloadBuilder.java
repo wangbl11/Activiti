@@ -19,7 +19,6 @@ package org.activiti.api.process.model.builders;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-
 import org.activiti.api.process.model.payloads.MessageEventPayload;
 
 public class MessageEventPayloadBuilder {
@@ -71,13 +70,13 @@ public class MessageEventPayloadBuilder {
 
         return this;
     }
-    
+
     public MessageEventPayloadBuilder withBusinessKey(String businessKey) {
         this.businessKey = businessKey;
 
         return this;
     }
-    
+
 
     public MessageEventPayload build() {
         return new MessageEventPayload(name,
@@ -115,9 +114,9 @@ public class MessageEventPayloadBuilder {
         if (getClass() != obj.getClass())
             return false;
         MessageEventPayloadBuilder other = (MessageEventPayloadBuilder) obj;
-        return Objects.equals(correlationKey, other.correlationKey) 
-                && Objects.equals(businessKey, other.businessKey) 
-                && Objects.equals(name, other.name) 
+        return Objects.equals(correlationKey, other.correlationKey)
+                && Objects.equals(businessKey, other.businessKey)
+                && Objects.equals(name, other.name)
                 && Objects.equals(variables, other.variables);
     }
 }

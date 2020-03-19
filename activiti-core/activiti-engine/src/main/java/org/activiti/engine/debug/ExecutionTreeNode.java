@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@ package org.activiti.engine.debug;
 
 import java.util.Iterator;
 import java.util.List;
-
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
@@ -89,9 +88,9 @@ public class ExecutionTreeNode implements Iterable<ExecutionTreeNode> {
   }
 
   protected void internalToString(StringBuilder strb, String prefix, boolean isTail) {
-    strb.append(prefix + (isTail ? "└── " : "├── ") + getExecutionEntity().getId() + " : " 
+    strb.append(prefix + (isTail ? "└── " : "├── ") + getExecutionEntity().getId() + " : "
         + getCurrentFlowElementId()
-        + ", parent id " + getExecutionEntity().getParentId() 
+        + ", parent id " + getExecutionEntity().getParentId()
         + (getExecutionEntity().isActive() ? " (active)" : " (not active)")
         + (getExecutionEntity().isScope() ? " (scope)" : "")
         + (getExecutionEntity().isMultiInstanceRoot() ? " (multi instance root)" : "")
@@ -106,7 +105,7 @@ public class ExecutionTreeNode implements Iterable<ExecutionTreeNode> {
       }
     }
   }
-  
+
   protected String getCurrentFlowElementId() {
     FlowElement flowElement = getExecutionEntity().getCurrentFlowElement();
     if (flowElement instanceof SequenceFlow) {

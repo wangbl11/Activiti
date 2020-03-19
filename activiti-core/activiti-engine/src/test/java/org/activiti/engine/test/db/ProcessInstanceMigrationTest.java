@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@
 package org.activiti.engine.test.db;
 
 import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.ActivitiObjectNotFoundException;
@@ -173,7 +172,7 @@ public class ProcessInstanceMigrationTest extends PluggableActivitiTestCase {
     if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.ACTIVITY)) {
       HistoricProcessInstance historicPI = historyService.createHistoricProcessInstanceQuery().processInstanceId(pi.getId()).singleResult();
       assertEquals(newProcessDefinition.getId(), historicPI.getProcessDefinitionId());
-      
+
       List<HistoricActivityInstance> historicActivities = historyService
           .createHistoricActivityInstanceQuery()
           .processInstanceId(pi.getId())
@@ -263,7 +262,7 @@ public class ProcessInstanceMigrationTest extends PluggableActivitiTestCase {
       // check UserTask
       Task task = taskService.createTaskQuery().processInstanceId(pi.getId()).singleResult();
       assertEquals(newProcessDefinition.getId(), task.getProcessDefinitionId());
-      
+
       if (processEngineConfiguration.getHistoryLevel().isAtLeast(HistoryLevel.ACTIVITY)) {
         HistoricTaskInstance historicTask = historyService.createHistoricTaskInstanceQuery().processInstanceId(pi.getId()).singleResult();
         assertEquals(newProcessDefinition.getId(), historicTask.getProcessDefinitionId());

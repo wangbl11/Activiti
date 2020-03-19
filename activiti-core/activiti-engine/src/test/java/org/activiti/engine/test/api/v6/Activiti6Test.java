@@ -15,7 +15,6 @@ package org.activiti.engine.test.api.v6;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;

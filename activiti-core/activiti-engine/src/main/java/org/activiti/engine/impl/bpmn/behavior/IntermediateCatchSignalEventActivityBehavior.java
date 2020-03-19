@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.bpmn.behavior;
 
 import java.util.List;
-
 import org.activiti.bpmn.model.Signal;
 import org.activiti.bpmn.model.SignalEventDefinition;
 import org.activiti.engine.delegate.DelegateExecution;
@@ -42,7 +41,7 @@ public class IntermediateCatchSignalEventActivityBehavior extends IntermediateCa
   public void execute(DelegateExecution execution) {
     CommandContext commandContext = Context.getCommandContext();
     ExecutionEntity executionEntity = (ExecutionEntity) execution;
-    
+
     String signalName = null;
     if (StringUtils.isNotEmpty(signalEventDefinition.getSignalRef())) {
       signalName = signalEventDefinition.getSignalRef();
@@ -51,7 +50,7 @@ public class IntermediateCatchSignalEventActivityBehavior extends IntermediateCa
           .createExpression(signalEventDefinition.getSignalExpression());
       signalName = signalExpression.getValue(execution).toString();
     }
-    
+
     commandContext.getEventSubscriptionEntityManager().insertSignalEvent(signalName, signal, executionEntity);
   }
 
@@ -60,11 +59,11 @@ public class IntermediateCatchSignalEventActivityBehavior extends IntermediateCa
     ExecutionEntity executionEntity = deleteSignalEventSubscription(execution);
     leaveIntermediateCatchEvent(executionEntity);
   }
-  
+
   @Override
   public void eventCancelledByEventGateway(DelegateExecution execution) {
     deleteSignalEventSubscription(execution);
-    Context.getCommandContext().getExecutionEntityManager().deleteExecutionAndRelatedData((ExecutionEntity) execution, 
+    Context.getCommandContext().getExecutionEntityManager().deleteExecutionAndRelatedData((ExecutionEntity) execution,
         DeleteReason.EVENT_BASED_GATEWAY_CANCEL);
   }
 

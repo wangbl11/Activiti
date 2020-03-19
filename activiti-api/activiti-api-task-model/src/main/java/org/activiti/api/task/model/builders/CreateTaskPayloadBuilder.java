@@ -3,7 +3,6 @@ package org.activiti.api.task.model.builders;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.activiti.api.task.model.payloads.CreateTaskPayload;
 
 public class CreateTaskPayloadBuilder {
@@ -17,7 +16,7 @@ public class CreateTaskPayloadBuilder {
     private List<String> candidateUsers = new ArrayList<>();
     private String parentTaskId;
     private String formKey;
- 
+
     public CreateTaskPayloadBuilder withName(String name) {
         this.name = name;
         return this;

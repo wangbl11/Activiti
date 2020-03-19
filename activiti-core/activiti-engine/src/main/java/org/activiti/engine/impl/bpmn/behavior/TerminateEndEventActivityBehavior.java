@@ -12,9 +12,9 @@
  */
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.List;
 import org.activiti.bpmn.model.CallActivity;
 import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.FlowNode;
 import org.activiti.bpmn.model.SubProcess;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.event.ActivitiEventType;
@@ -27,8 +27,6 @@ import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
 import org.activiti.engine.impl.persistence.entity.HistoricActivityInstanceEntity;
-
-import java.util.List;
 
 /**
 
@@ -208,7 +206,7 @@ public class TerminateEndEventActivityBehavior extends FlowNodeActivityBehavior 
       dispatchExecutionCancelled(subProcessInstance, terminateEndEvent);
     }
   }
-  
+
 
   public static String createDeleteReason(String activityId) {
       return activityId != null ?  DeleteReason.TERMINATE_END_EVENT + ": " + activityId : DeleteReason.TERMINATE_END_EVENT;

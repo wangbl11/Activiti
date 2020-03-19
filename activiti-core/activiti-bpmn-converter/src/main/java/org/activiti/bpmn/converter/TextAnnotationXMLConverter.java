@@ -14,10 +14,8 @@ package org.activiti.bpmn.converter;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
-
 import org.activiti.bpmn.converter.child.BaseChildElementParser;
 import org.activiti.bpmn.converter.child.TextAnnotationTextParser;
 import org.activiti.bpmn.converter.util.BpmnXMLUtil;

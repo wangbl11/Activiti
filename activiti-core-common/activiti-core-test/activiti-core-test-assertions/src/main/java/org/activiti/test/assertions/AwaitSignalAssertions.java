@@ -18,7 +18,6 @@ package org.activiti.test.assertions;
 
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.test.matchers.OperationScopeMatcher;
-
 import static org.awaitility.Awaitility.await;
 
 public class AwaitSignalAssertions implements SignalAssertions {

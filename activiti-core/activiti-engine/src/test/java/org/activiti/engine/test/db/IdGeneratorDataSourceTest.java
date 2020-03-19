@@ -2,7 +2,6 @@ package org.activiti.engine.test.db;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.engine.impl.test.ResourceActivitiTestCase;
 import org.activiti.engine.test.Deployment;
 

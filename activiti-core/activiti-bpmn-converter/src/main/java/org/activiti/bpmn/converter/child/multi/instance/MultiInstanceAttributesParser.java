@@ -16,14 +16,8 @@
 
 package org.activiti.bpmn.converter.child.multi.instance;
 
-import static org.activiti.bpmn.constants.BpmnXMLConstants.ACTIVITI_EXTENSIONS_NAMESPACE;
-import static org.activiti.bpmn.constants.BpmnXMLConstants.ATTRIBUTE_MULTIINSTANCE_COLLECTION;
-import static org.activiti.bpmn.constants.BpmnXMLConstants.ATTRIBUTE_MULTIINSTANCE_INDEX_VARIABLE;
-import static org.activiti.bpmn.constants.BpmnXMLConstants.ATTRIBUTE_MULTIINSTANCE_SEQUENTIAL;
-import static org.activiti.bpmn.constants.BpmnXMLConstants.ATTRIBUTE_MULTIINSTANCE_VARIABLE;
-import static org.activiti.bpmn.constants.BpmnXMLConstants.ELEMENT_MULTIINSTANCE;
-
 import javax.xml.stream.XMLStreamReader;
+import static org.activiti.bpmn.constants.BpmnXMLConstants.*;
 import org.activiti.bpmn.converter.child.ElementParser;
 import org.activiti.bpmn.model.MultiInstanceLoopCharacteristics;
 

@@ -16,14 +16,13 @@
 
 package org.activiti.runtime.api.event.internal;
 
+import java.util.List;
 import org.activiti.api.process.model.events.BPMNActivityCompletedEvent;
 import org.activiti.api.process.runtime.events.listener.BPMNElementEventListener;
 import org.activiti.engine.delegate.event.ActivitiActivityEvent;
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.runtime.api.event.impl.ToActivityCompletedConverter;
-
-import java.util.List;
 
 public class ActivityCompletedListenerDelegate implements ActivitiEventListener {
 

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,13 +13,8 @@
 package org.activiti.validation.validator.impl;
 
 import java.util.List;
-
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.ImplementationType;
-import org.activiti.bpmn.model.Interface;
-import org.activiti.bpmn.model.Operation;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.ServiceTask;
+import org.activiti.bpmn.model.*;
 import org.activiti.validation.ValidationError;
 import org.activiti.validation.validator.Problems;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +53,7 @@ public class ServiceTaskValidator extends ExternalInvocationTaskValidator {
 
       if (!serviceTask.getType().equalsIgnoreCase("mail") && !serviceTask.getType().equalsIgnoreCase("mule") && !serviceTask.getType().equalsIgnoreCase("camel")
           && !serviceTask.getType().equalsIgnoreCase("shell") && !serviceTask.getType().equalsIgnoreCase("dmn")) {
-        
+
         addError(errors, Problems.SERVICE_TASK_INVALID_TYPE, process, serviceTask, "Invalid or unsupported service task type");
       }
 

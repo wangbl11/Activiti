@@ -2,8 +2,7 @@
 <definitions id="definitions"
              xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              xmlns:activiti="http://activiti.org/bpmn"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			 targetNamespace="Examples">
+             targetNamespace="Examples">
 
     <process id="repeatWithEnd">
 
@@ -37,7 +36,7 @@
 
         <sequenceFlow id="flow22" sourceRef="timerFiredTask" targetRef="nonInterruptingEnd"/>
         <endEvent id="nonInterruptingEnd"/>
- 
+
         <sequenceFlow id="flow3" sourceRef="task2" targetRef="task2Completed"/>
 
         <scriptTask id="task2Completed" name="Execute script" scriptFormat="groovy">

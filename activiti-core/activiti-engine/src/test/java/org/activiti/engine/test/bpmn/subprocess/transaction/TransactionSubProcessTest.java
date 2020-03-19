@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,6 @@
 package org.activiti.engine.test.bpmn.subprocess.transaction;
 
 import java.util.List;
-
 import org.activiti.engine.impl.EventSubscriptionQueryImpl;
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntity;
@@ -263,7 +262,7 @@ public class TransactionSubProcessTest extends PluggableActivitiTestCase {
 
   /*
    * The cancel end event cancels all instances, compensation is performed for all instances
-   * 
+   *
    * see spec page 470: "If the cancelActivity attribute is set, the Activity the Event is attached to is then cancelled (in case of a multi-instance, all its instances are cancelled);"
    */
   @Deployment

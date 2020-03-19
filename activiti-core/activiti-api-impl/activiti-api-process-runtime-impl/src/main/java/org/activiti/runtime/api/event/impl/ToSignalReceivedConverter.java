@@ -16,12 +16,11 @@
 
 package org.activiti.runtime.api.event.impl;
 
+import java.util.Optional;
 import org.activiti.api.process.model.events.BPMNSignalReceivedEvent;
 import org.activiti.api.runtime.event.impl.BPMNSignalReceivedEventImpl;
 import org.activiti.engine.delegate.event.ActivitiSignalEvent;
 import org.activiti.runtime.api.model.impl.ToSignalConverter;
-
-import java.util.Optional;
 
 public class ToSignalReceivedConverter implements EventConverter<BPMNSignalReceivedEvent, ActivitiSignalEvent> {
 

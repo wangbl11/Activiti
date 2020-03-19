@@ -17,7 +17,6 @@
 package org.activiti.api.runtime.model.impl;
 
 import java.util.Objects;
-
 import org.activiti.api.process.model.BPMNMessage;
 import org.activiti.api.process.model.payloads.MessageEventPayload;
 

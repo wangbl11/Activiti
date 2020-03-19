@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.impl.persistence.entity;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.TaskListener;
 import org.activiti.engine.delegate.event.ActivitiEventType;
@@ -33,26 +32,26 @@ import org.activiti.engine.task.Task;
 
  */
 public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> implements TaskEntityManager {
-  
+
   protected TaskDataManager taskDataManager;
-  
+
   public TaskEntityManagerImpl(ProcessEngineConfigurationImpl processEngineConfiguration, TaskDataManager taskDataManager) {
     super(processEngineConfiguration);
     this.taskDataManager = taskDataManager;
   }
-  
+
   @Override
   protected DataManager<TaskEntity> getDataManager() {
     return taskDataManager;
   }
-  
+
   @Override
   public TaskEntity create() {
     TaskEntity taskEntity = super.create();
     taskEntity.setCreateTime(getClock().getCurrentTime());
     return taskEntity;
   }
-  
+
   @Override
   public void insert(TaskEntity taskEntity, boolean fireCreateEvent) {
 
@@ -62,11 +61,11 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
     if (taskEntity.getAssignee() != null) {
       addAssigneeIdentityLinks(taskEntity);
     }
-    
+
     super.insert(taskEntity, fireCreateEvent);
-    
+
   }
-  
+
   @Override
   public void insert(TaskEntity taskEntity, ExecutionEntity execution) {
 
@@ -81,37 +80,37 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
       taskEntity.setProcessInstanceId(execution.getProcessInstanceId());
       taskEntity.setProcessDefinitionId(execution.getProcessDefinitionId());
       taskEntity.setAppVersion(execution.getAppVersion());
-      
+
       getHistoryManager().recordTaskExecutionIdChange(taskEntity.getId(), taskEntity.getExecutionId());
     }
-    
+
     insert(taskEntity, true);
-    
+
     if (execution != null && isExecutionRelatedEntityCountEnabled(execution)) {
       CountingExecutionEntity countingExecutionEntity = (CountingExecutionEntity) execution;
       countingExecutionEntity.setTaskCount(countingExecutionEntity.getTaskCount() + 1);
     }
-    
+
     getHistoryManager().recordTaskCreated(taskEntity, execution);
     getHistoryManager().recordTaskId(taskEntity);
     if (taskEntity.getFormKey() != null) {
       getHistoryManager().recordTaskFormKeyChange(taskEntity.getId(), taskEntity.getFormKey());
     }
   }
-  
-  
+
+
   @Override
   public void changeTaskAssignee(TaskEntity taskEntity, String assignee) {
     changeTaskAssignee(taskEntity, assignee, true);
   }
-  
+
   @Override
   public void changeTaskAssigneeNoEvents(TaskEntity taskEntity, String assignee) {
     changeTaskAssignee(taskEntity, assignee, false);
   }
-  
+
   private void changeTaskAssignee(TaskEntity taskEntity, String assignee, boolean fireEvents) {
-    if ( (taskEntity.getAssignee() != null && !taskEntity.getAssignee().equals(assignee)) 
+    if ( (taskEntity.getAssignee() != null && !taskEntity.getAssignee().equals(assignee))
         || (taskEntity.getAssignee() == null && assignee != null)) {
       taskEntity.setAssignee(assignee);
       if (fireEvents) {
@@ -119,7 +118,7 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
       } else {
         recordTaskAssignment(taskEntity);
       }
-      
+
       if (taskEntity.getId() != null) {
         getHistoryManager().recordTaskAssigneeChange(taskEntity.getId(), taskEntity.getAssignee());
         addAssigneeIdentityLinks(taskEntity);
@@ -127,13 +126,13 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
       }
     }
   }
-  
+
   @Override
   public void changeTaskOwner(TaskEntity taskEntity, String owner) {
-    if ( (taskEntity.getOwner() != null && !taskEntity.getOwner().equals(owner)) 
+    if ( (taskEntity.getOwner() != null && !taskEntity.getOwner().equals(owner))
         || (taskEntity.getOwner() == null && owner != null)) {
       taskEntity.setOwner(owner);
-      
+
       if (taskEntity.getId() != null) {
         getHistoryManager().recordTaskOwnerChange(taskEntity.getId(), taskEntity.getOwner());
         addOwnerIdentityLink(taskEntity, taskEntity.getOwner());
@@ -141,7 +140,7 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
       }
     }
   }
-  
+
   protected void fireAssignmentEvents(TaskEntity taskEntity) {
     recordTaskAssignment(taskEntity);
     if (getEventDispatcher().isEnabled()) {
@@ -149,7 +148,7 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
     }
 
   }
-  
+
   protected void recordTaskAssignment(TaskEntity taskEntity) {
     getProcessEngineConfiguration().getListenerNotificationHelper()
       .executeTaskListeners(taskEntity, TaskListener.EVENTNAME_ASSIGNMENT);
@@ -162,17 +161,17 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
       getIdentityLinkEntityManager().involveUser(taskEntity.getProcessInstance(), taskEntity.getAssignee(), IdentityLinkType.PARTICIPANT);
     }
   }
-  
+
   protected void addOwnerIdentityLink(TaskEntity taskEntity, String owner) {
     if (owner == null && taskEntity.getOwner() == null) {
       return;
     }
-    
+
     if (owner != null && taskEntity.getProcessInstanceId() != null) {
       getIdentityLinkEntityManager().involveUser(taskEntity.getProcessInstance(), owner, IdentityLinkType.PARTICIPANT);
     }
   }
-  
+
   @Override
   public void deleteTasksByProcessInstanceId(String processInstanceId, String deleteReason, boolean cascade) {
     List<TaskEntity> tasks = findTasksByProcessInstanceId(processInstanceId);
@@ -181,7 +180,7 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
     	if (getEventDispatcher().isEnabled() && !task.isCanceled()) {
     		task.setCanceled(true);
         getEventDispatcher().dispatchEvent(
-              ActivitiEventBuilder.createActivityCancelledEvent(task.getExecution().getActivityId(), task.getName(), 
+              ActivitiEventBuilder.createActivityCancelledEvent(task.getExecution().getActivityId(), task.getName(),
                   task.getExecutionId(), task.getProcessInstanceId(),
                   task.getProcessDefinitionId(), "userTask", deleteReason));
       }
@@ -189,7 +188,7 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
       deleteTask(task, deleteReason, cascade, false);
     }
   }
-  
+
   @Override
   public void deleteTask(TaskEntity task, String deleteReason, boolean cascade, boolean cancel) {
     if (!task.isDeleted()) {
@@ -232,11 +231,11 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
       }
     }
   }
-  
+
   @Override
   public void delete(TaskEntity entity, boolean fireDeleteEvent) {
     super.delete(entity, fireDeleteEvent);
-    
+
     if (entity.getExecutionId() != null && isExecutionRelatedEntityCountEnabledGlobally()) {
       CountingExecutionEntity countingExecutionEntity = (CountingExecutionEntity) entity.getExecution();
       if (isExecutionRelatedEntityCountEnabled(countingExecutionEntity)) {
@@ -318,5 +317,5 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
   public void setTaskDataManager(TaskDataManager taskDataManager) {
     this.taskDataManager = taskDataManager;
   }
-  
+
 }

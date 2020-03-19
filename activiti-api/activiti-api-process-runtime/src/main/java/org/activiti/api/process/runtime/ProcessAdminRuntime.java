@@ -19,18 +19,7 @@ package org.activiti.api.process.runtime;
 
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.process.model.ProcessInstance;
-import org.activiti.api.process.model.payloads.DeleteProcessPayload;
-import org.activiti.api.process.model.payloads.GetProcessDefinitionsPayload;
-import org.activiti.api.process.model.payloads.GetProcessInstancesPayload;
-import org.activiti.api.process.model.payloads.ReceiveMessagePayload;
-import org.activiti.api.process.model.payloads.RemoveProcessVariablesPayload;
-import org.activiti.api.process.model.payloads.ResumeProcessPayload;
-import org.activiti.api.process.model.payloads.SetProcessVariablesPayload;
-import org.activiti.api.process.model.payloads.SignalPayload;
-import org.activiti.api.process.model.payloads.StartMessagePayload;
-import org.activiti.api.process.model.payloads.StartProcessPayload;
-import org.activiti.api.process.model.payloads.SuspendProcessPayload;
-import org.activiti.api.process.model.payloads.UpdateProcessPayload;
+import org.activiti.api.process.model.payloads.*;
 import org.activiti.api.runtime.shared.query.Page;
 import org.activiti.api.runtime.shared.query.Pageable;
 
@@ -100,7 +89,7 @@ public interface ProcessAdminRuntime {
      * Resume a suspended process instance
      */
     ProcessInstance resume(ResumeProcessPayload resumeProcessPayload);
-    
+
     /**
      * Update a Process Instance
      */
@@ -112,6 +101,6 @@ public interface ProcessAdminRuntime {
     void removeVariables(RemoveProcessVariablesPayload removeProcessVariablesPayload);
 
     void receive(ReceiveMessagePayload messagePayload);
-    
+
     ProcessInstance start(StartMessagePayload messagePayload);
 }

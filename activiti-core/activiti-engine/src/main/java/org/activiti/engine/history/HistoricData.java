@@ -1,8 +1,7 @@
 package org.activiti.engine.history;
 
-import org.activiti.engine.api.internal.Internal;
-
 import java.util.Date;
+import org.activiti.engine.api.internal.Internal;
 
 /**
  */

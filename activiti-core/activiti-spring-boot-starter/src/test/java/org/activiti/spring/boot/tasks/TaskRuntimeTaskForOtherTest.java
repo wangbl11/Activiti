@@ -8,20 +8,12 @@ import org.activiti.api.task.runtime.TaskAdminRuntime;
 import org.activiti.api.task.runtime.TaskRuntime;
 import org.activiti.spring.boot.security.util.SecurityUtil;
 import org.activiti.spring.boot.test.util.TaskCleanUpUtil;
-import org.junit.After;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class TaskRuntimeTaskForOtherTest {
 
@@ -37,7 +29,7 @@ public class TaskRuntimeTaskForOtherTest {
     @Autowired
     private TaskCleanUpUtil taskCleanUpUtil;
 
-    @After
+    @AfterEach
     public void taskCleanUp(){
         taskCleanUpUtil.cleanUpWithAdmin();
     }

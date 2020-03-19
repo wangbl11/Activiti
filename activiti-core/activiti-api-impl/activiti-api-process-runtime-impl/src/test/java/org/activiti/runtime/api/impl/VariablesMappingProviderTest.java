@@ -1,12 +1,5 @@
 package org.activiti.runtime.api.impl;
 
-import static org.activiti.runtime.api.impl.MappingExecutionContext.buildMappingExecutionContext;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
@@ -16,15 +9,21 @@ import java.util.List;
 import java.util.Map;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.delegate.DelegateExecution;
+import static org.activiti.runtime.api.impl.MappingExecutionContext.buildMappingExecutionContext;
 import org.activiti.spring.process.ProcessExtensionService;
 import org.activiti.spring.process.model.Extension;
 import org.activiti.spring.process.model.ProcessExtensionModel;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+@ExtendWith(MockitoExtension.class)
 public class VariablesMappingProviderTest {
 
     @InjectMocks
@@ -32,11 +31,6 @@ public class VariablesMappingProviderTest {
 
     @Mock
     private ProcessExtensionService processExtensionService;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void calculateInputVariablesShouldDoMappingWhenThereIsMappingSet() throws Exception {
@@ -421,7 +415,7 @@ public class VariablesMappingProviderTest {
                                                                  "static_value_1"));
     }
 
-    @Test(expected = ActivitiIllegalArgumentException.class)
+    @Test
     public void should_throwActivitiIllegalArgumentException_when_expressionIsOutputMapping() throws Exception {
         DelegateExecution execution = initExpressionResolverTest("expression-in-mapping-output-value.json",
             "Process_expressionMappingOutputValue");
@@ -432,12 +426,12 @@ public class VariablesMappingProviderTest {
         taskVariables.put("task_input_variable_name_2",
                           "${expression}");
 
-        variablesMappingProvider.calculateOutPutVariables(buildMappingExecutionContext(execution),
-                                                          taskVariables);
+        assertThatExceptionOfType(ActivitiIllegalArgumentException.class)
+            .isThrownBy(() -> variablesMappingProvider.calculateOutPutVariables(buildMappingExecutionContext(execution), taskVariables));
     }
 
     @Test
-    public void should_returnEmptyOutputMapping_when_thereIsNoAvaliableVariableInTask() throws Exception {
+    public void should_returnEmptyOutputMapping_when_thereIsNoAvailableVariableInTask() throws Exception {
         DelegateExecution execution = initExpressionResolverTest("expression-in-mapping-output-value.json",
             "Process_expressionMappingOutputValue");
 

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,6 +12,7 @@
  */
 package org.activiti.engine.impl.bpmn.behavior;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.DynamicBpmnConstants;
 import org.activiti.engine.delegate.BpmnError;
@@ -24,11 +25,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 /**
  * activity implementation of the BPMN 2.0 script task.
- * 
+ *
 
 
 
@@ -60,7 +59,7 @@ public class ScriptTaskActivityBehavior extends TaskActivityBehavior {
   public void execute(DelegateExecution execution) {
 
     ScriptingEngines scriptingEngines = Context.getProcessEngineConfiguration().getScriptingEngines();
-    
+
     if (Context.getProcessEngineConfiguration().isEnableProcessDefinitionInfoCache()) {
       ObjectNode taskElementProperties = Context.getBpmnOverrideElementProperties(scriptTaskId, execution.getProcessDefinitionId());
       if (taskElementProperties != null && taskElementProperties.has(DynamicBpmnConstants.SCRIPT_TASK_SCRIPT)) {

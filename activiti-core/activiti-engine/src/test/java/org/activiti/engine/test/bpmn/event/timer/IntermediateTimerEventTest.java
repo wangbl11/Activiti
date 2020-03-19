@@ -13,12 +13,7 @@
 package org.activiti.engine.test.bpmn.event.timer;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-
+import java.util.*;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
 import org.activiti.engine.runtime.Job;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -91,7 +86,7 @@ public class IntermediateTimerEventTest extends PluggableActivitiTestCase {
     taskService.complete(task.getId());
 
     assertProcessEnded(pi.getProcessInstanceId());
-    
+
     processEngineConfiguration.getClock().reset();
   }
 

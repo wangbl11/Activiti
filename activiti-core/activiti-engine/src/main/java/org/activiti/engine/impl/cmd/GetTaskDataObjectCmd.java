@@ -13,8 +13,9 @@
 
 package org.activiti.engine.impl.cmd;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.Serializable;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.SubProcess;
 import org.activiti.bpmn.model.ValuedDataObject;
@@ -31,9 +32,6 @@ import org.activiti.engine.impl.persistence.entity.VariableInstance;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 import org.activiti.engine.runtime.DataObject;
 import org.activiti.engine.task.Task;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class GetTaskDataObjectCmd implements Command<DataObject>, Serializable {
 
@@ -89,7 +87,7 @@ public class GetTaskDataObjectCmd implements Command<DataObject>, Serializable {
             foundDataObject = dataObjectDefinition;
             break;
           }
-        } 
+        }
       } else {
         SubProcess subProcess = (SubProcess) bpmnModel.getFlowElement(executionEntity.getActivityId());
         for (ValuedDataObject dataObjectDefinition : subProcess.getDataObjects()) {
@@ -101,9 +99,9 @@ public class GetTaskDataObjectCmd implements Command<DataObject>, Serializable {
       }
 
       if (locale != null && foundDataObject != null) {
-        ObjectNode languageNode = Context.getLocalizationElementProperties(locale, foundDataObject.getId(), 
+        ObjectNode languageNode = Context.getLocalizationElementProperties(locale, foundDataObject.getId(),
             task.getProcessDefinitionId(), withLocalizationFallback);
-        
+
         if (languageNode != null) {
           JsonNode nameNode = languageNode.get(DynamicBpmnConstants.LOCALIZATION_NAME);
           if (nameNode != null) {
@@ -117,7 +115,7 @@ public class GetTaskDataObjectCmd implements Command<DataObject>, Serializable {
       }
 
       if (foundDataObject != null) {
-        dataObject = new DataObjectImpl(variableEntity.getName(), variableEntity.getValue(), foundDataObject.getDocumentation(), 
+        dataObject = new DataObjectImpl(variableEntity.getName(), variableEntity.getValue(), foundDataObject.getDocumentation(),
             foundDataObject.getType(), localizedName, localizedDescription, foundDataObject.getId());
       }
     }

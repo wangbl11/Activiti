@@ -2,7 +2,6 @@ package org.activiti.engine.impl;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricDetail;
 import org.activiti.engine.history.NativeHistoricDetailQuery;
 import org.activiti.engine.impl.interceptor.CommandContext;

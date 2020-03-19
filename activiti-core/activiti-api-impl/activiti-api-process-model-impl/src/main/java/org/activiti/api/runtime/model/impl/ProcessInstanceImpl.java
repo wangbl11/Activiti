@@ -18,7 +18,6 @@ package org.activiti.api.runtime.model.impl;
 
 import java.util.Date;
 import java.util.Objects;
-
 import org.activiti.api.process.model.ProcessInstance;
 
 public class ProcessInstanceImpl extends ApplicationElementImpl implements ProcessInstance {
@@ -86,7 +85,7 @@ public class ProcessInstanceImpl extends ApplicationElementImpl implements Proce
     public Integer getProcessDefinitionVersion() {
         return processDefinitionVersion;
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -122,7 +121,7 @@ public class ProcessInstanceImpl extends ApplicationElementImpl implements Proce
     public void setParentId(String parentId) {
         this.parentId = parentId;
     }
-    
+
     public void setProcessDefinitionVersion(Integer processDefinitionVersion) {
         this.processDefinitionVersion = processDefinitionVersion;
     }

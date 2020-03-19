@@ -20,16 +20,16 @@ import org.activiti.api.task.runtime.events.TaskCompletedEvent;
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
 import org.activiti.engine.task.Task;
 import org.activiti.runtime.api.model.impl.APITaskConverter;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class ToTaskCompletedConverterTest {
 
     @InjectMocks
@@ -37,11 +37,6 @@ public class ToTaskCompletedConverterTest {
 
     @Mock
     private APITaskConverter taskConverter;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void fromShouldReturnAPIEventContainingConvertedTask() {

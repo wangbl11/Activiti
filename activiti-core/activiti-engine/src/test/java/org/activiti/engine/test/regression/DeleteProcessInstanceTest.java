@@ -2,7 +2,6 @@ package org.activiti.engine.test.regression;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.impl.history.HistoryLevel;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -11,9 +10,10 @@ import org.activiti.engine.runtime.Job;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.test.Deployment;
-//SLF4J
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+//SLF4J
 
 //JUnit
 

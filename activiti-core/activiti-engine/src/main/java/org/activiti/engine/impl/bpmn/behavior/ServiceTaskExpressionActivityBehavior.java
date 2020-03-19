@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,6 +13,7 @@
 
 package org.activiti.engine.impl.bpmn.behavior;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.DynamicBpmnConstants;
 import org.activiti.engine.delegate.BpmnError;
@@ -23,11 +24,9 @@ import org.activiti.engine.impl.bpmn.helper.SkipExpressionUtil;
 import org.activiti.engine.impl.context.Context;
 import org.apache.commons.lang3.StringUtils;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 /**
  * ActivityBehavior that evaluates an expression when executed. Optionally, it sets the result of the expression as a variable on the execution.
- * 
+ *
 
 
 
@@ -37,7 +36,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class ServiceTaskExpressionActivityBehavior extends TaskActivityBehavior {
 
   private static final long serialVersionUID = 1L;
-  
+
   protected String serviceTaskId;
   protected Expression expression;
   protected Expression skipExpression;
@@ -55,7 +54,7 @@ public class ServiceTaskExpressionActivityBehavior extends TaskActivityBehavior 
     try {
       boolean isSkipExpressionEnabled = SkipExpressionUtil.isSkipExpressionEnabled(execution, skipExpression);
       if (!isSkipExpressionEnabled || (isSkipExpressionEnabled && !SkipExpressionUtil.shouldSkipFlowElement(execution, skipExpression))) {
-        
+
         if (Context.getProcessEngineConfiguration().isEnableProcessDefinitionInfoCache()) {
           ObjectNode taskElementProperties = Context.getBpmnOverrideElementProperties(serviceTaskId, execution.getProcessDefinitionId());
           if (taskElementProperties != null && taskElementProperties.has(DynamicBpmnConstants.SERVICE_TASK_EXPRESSION)) {
@@ -65,7 +64,7 @@ public class ServiceTaskExpressionActivityBehavior extends TaskActivityBehavior 
             }
           }
         }
-        
+
         value = expression.getValue(execution);
         if (resultVariable != null) {
           execution.setVariable(resultVariable, value);

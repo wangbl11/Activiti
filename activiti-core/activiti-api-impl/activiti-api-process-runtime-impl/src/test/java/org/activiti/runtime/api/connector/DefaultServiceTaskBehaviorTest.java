@@ -18,17 +18,17 @@ package org.activiti.runtime.api.connector;
 
 import org.activiti.api.process.runtime.connector.Connector;
 import org.activiti.engine.delegate.DelegateExecution;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationContext;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
-
+@ExtendWith(MockitoExtension.class)
 public class DefaultServiceTaskBehaviorTest {
 
     @InjectMocks
@@ -36,11 +36,6 @@ public class DefaultServiceTaskBehaviorTest {
 
     @Mock
     private ApplicationContext context;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void hasConnectorBeanShouldReturnTrueIfABeanOfConnectorTypeIsFound() {

@@ -3,7 +3,6 @@ package org.activiti.api.task.model.payloads;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 import org.activiti.api.model.shared.Payload;
 
 public class CreateTaskPayload implements Payload {

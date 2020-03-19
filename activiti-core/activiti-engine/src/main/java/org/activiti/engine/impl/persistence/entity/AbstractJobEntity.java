@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.persistence.entity;
 
 import java.util.Date;
-
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.impl.db.HasRevision;
 import org.activiti.engine.runtime.Job;
@@ -52,7 +51,7 @@ public interface AbstractJobEntity extends Job, Entity, HasRevision {
   String getJobType();
 
   void setJobType(String jobType);
-  
+
   String getRepeat();
 
   void setRepeat(String repeat);
@@ -64,7 +63,7 @@ public interface AbstractJobEntity extends Job, Entity, HasRevision {
   int getMaxIterations();
 
   void setMaxIterations(int maxIterations);
-  
+
   String getExceptionStacktrace();
 
   void setExceptionStacktrace(String exception);

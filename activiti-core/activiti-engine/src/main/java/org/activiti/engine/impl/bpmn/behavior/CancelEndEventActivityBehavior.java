@@ -13,6 +13,9 @@
 
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import org.activiti.bpmn.model.BoundaryEvent;
 import org.activiti.bpmn.model.CancelEventDefinition;
 import org.activiti.bpmn.model.FlowElement;
@@ -26,10 +29,6 @@ import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
 import org.activiti.engine.impl.util.CollectionUtil;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
 

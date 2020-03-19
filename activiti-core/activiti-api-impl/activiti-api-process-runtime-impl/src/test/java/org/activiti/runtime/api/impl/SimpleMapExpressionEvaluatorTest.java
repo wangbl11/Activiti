@@ -16,20 +16,20 @@
 
 package org.activiti.runtime.api.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import java.util.Collections;
 import java.util.Map;
 import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.impl.el.ExpressionManager;
 import org.activiti.engine.impl.interceptor.DelegateInterceptor;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.BDDMockito.given;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class SimpleMapExpressionEvaluatorTest {
 
     @Mock
@@ -37,11 +37,6 @@ public class SimpleMapExpressionEvaluatorTest {
 
     @Mock
     private DelegateInterceptor delegateInterceptor;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void evaluate_should_returnResultOfGetValueWithMap() {

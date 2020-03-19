@@ -17,6 +17,9 @@
 package org.activiti.core.common.spring.connector.autoconfigure;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import org.activiti.core.common.model.connector.ConnectorDefinition;
 import org.activiti.core.common.spring.connector.ConnectorDefinitionService;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,10 +28,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClas
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.ResourcePatternResolver;
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
 
 @Configuration
 public class ConnectorAutoConfiguration {

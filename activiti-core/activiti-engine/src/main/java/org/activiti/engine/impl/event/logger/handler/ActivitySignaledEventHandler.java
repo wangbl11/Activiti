@@ -2,7 +2,6 @@ package org.activiti.engine.impl.event.logger.handler;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.delegate.event.ActivitiSignalEvent;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.EventLogEntryEntity;
@@ -23,7 +22,7 @@ public class ActivitySignaledEventHandler extends AbstractDatabaseEventLoggerEve
     putInMapIfNotNull(data, Fields.PROCESS_INSTANCE_ID, signalEvent.getProcessInstanceId());
     putInMapIfNotNull(data, Fields.EXECUTION_ID, signalEvent.getExecutionId());
     putInMapIfNotNull(data, Fields.ACTIVITY_TYPE, signalEvent.getActivityType());
-    
+
     putInMapIfNotNull(data, Fields.SIGNAL_NAME, signalEvent.getSignalName());
     putInMapIfNotNull(data, Fields.SIGNAL_DATA, signalEvent.getSignalData());
 

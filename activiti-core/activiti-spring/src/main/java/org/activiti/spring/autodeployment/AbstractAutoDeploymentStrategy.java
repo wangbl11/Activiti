@@ -15,7 +15,6 @@ package org.activiti.spring.autodeployment;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.core.common.spring.project.ApplicationUpgradeContextService;

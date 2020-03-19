@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,20 +12,12 @@
  */
 package org.activiti.editor.language.json.converter;
 
-import java.util.List;
-import java.util.Map;
-
-import org.activiti.bpmn.model.BaseElement;
-import org.activiti.bpmn.model.CancelEventDefinition;
-import org.activiti.bpmn.model.EndEvent;
-import org.activiti.bpmn.model.ErrorEventDefinition;
-import org.activiti.bpmn.model.EventDefinition;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.TerminateEventDefinition;
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.List;
+import java.util.Map;
+import org.activiti.bpmn.model.*;
+import org.apache.commons.lang3.StringUtils;
 
 /**
 
@@ -84,17 +76,17 @@ public class EndEventJsonConverter extends BaseBpmnJsonConverter {
       endEvent.getEventDefinitions().add(eventDefinition);
     } else if (STENCIL_EVENT_END_TERMINATE.equals(stencilId)) {
       TerminateEventDefinition eventDefinition = new TerminateEventDefinition();
-      
+
       String terminateAllStringValue = getPropertyValueAsString(PROPERTY_TERMINATE_ALL, elementNode);
       if (StringUtils.isNotEmpty(terminateAllStringValue)) {
      		eventDefinition.setTerminateAll("true".equals(terminateAllStringValue));
       }
-      
+
       String terminateMiStringValue = getPropertyValueAsString(PROPERTY_TERMINATE_MULTI_INSTANCE, elementNode);
       if (StringUtils.isNotEmpty(terminateMiStringValue)) {
         eventDefinition.setTerminateMultiInstance("true".equals(terminateMiStringValue));
       }
-      
+
       endEvent.getEventDefinitions().add(eventDefinition);
     }
     return endEvent;

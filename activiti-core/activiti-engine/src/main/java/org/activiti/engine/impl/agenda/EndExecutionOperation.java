@@ -1,14 +1,10 @@
 package org.activiti.engine.impl.agenda;
 
-import org.activiti.bpmn.model.Activity;
-import org.activiti.bpmn.model.BoundaryEvent;
-import org.activiti.bpmn.model.CompensateEventDefinition;
-import org.activiti.bpmn.model.EndEvent;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.FlowNode;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.Transaction;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.ExecutionListener;
 import org.activiti.engine.delegate.event.ActivitiEventType;
@@ -25,10 +21,6 @@ import org.activiti.engine.impl.util.CollectionUtil;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * This operations ends an execution and follows the typical BPMN rules to continue the process (if possible).

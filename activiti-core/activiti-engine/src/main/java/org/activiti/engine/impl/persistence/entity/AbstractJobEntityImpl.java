@@ -17,7 +17,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.impl.db.BulkDeleteable;
@@ -42,14 +41,14 @@ public abstract class AbstractJobEntityImpl extends AbstractEntity implements Ab
   protected boolean isExclusive = DEFAULT_EXCLUSIVE;
 
   protected int retries;
-  
+
   protected int maxIterations;
   protected String repeat;
   protected Date endDate;
 
   protected String jobHandlerType;
   protected String jobHandlerConfiguration;
-  
+
   protected ByteArrayRef exceptionByteArrayRef;
   protected String exceptionMessage;
 
@@ -61,11 +60,11 @@ public abstract class AbstractJobEntityImpl extends AbstractEntity implements Ab
     persistentState.put("retries", retries);
     persistentState.put("duedate", duedate);
     persistentState.put("exceptionMessage", exceptionMessage);
-    
+
     if (exceptionByteArrayRef != null) {
       persistentState.put("exceptionByteArrayId", exceptionByteArrayRef.getId());
     }
-    
+
     return persistentState;
   }
 
@@ -148,7 +147,7 @@ public abstract class AbstractJobEntityImpl extends AbstractEntity implements Ab
   public void setMaxIterations(int maxIterations) {
     this.maxIterations = maxIterations;
   }
-  
+
   public String getJobHandlerType() {
     return jobHandlerType;
   }
@@ -168,11 +167,11 @@ public abstract class AbstractJobEntityImpl extends AbstractEntity implements Ab
   public String getJobType() {
     return jobType;
   }
-  
+
   public void setJobType(String jobType) {
     this.jobType = jobType;
   }
-  
+
   public String getTenantId() {
     return tenantId;
   }
@@ -180,17 +179,17 @@ public abstract class AbstractJobEntityImpl extends AbstractEntity implements Ab
   public void setTenantId(String tenantId) {
     this.tenantId = tenantId;
   }
-  
+
   public String getExceptionStacktrace() {
     if (exceptionByteArrayRef == null) {
       return null;
     }
-    
+
     byte[] bytes = exceptionByteArrayRef.getBytes();
     if (bytes == null) {
       return null;
     }
-    
+
     try {
       return new String(bytes, "UTF-8");
     } catch (UnsupportedEncodingException e) {
@@ -216,7 +215,7 @@ public abstract class AbstractJobEntityImpl extends AbstractEntity implements Ab
   public ByteArrayRef getExceptionByteArrayRef() {
     return exceptionByteArrayRef;
   }
-  
+
   protected byte[] getUtf8Bytes(String str) {
     if (str == null) {
       return null;
@@ -227,7 +226,7 @@ public abstract class AbstractJobEntityImpl extends AbstractEntity implements Ab
       throw new ActivitiException("UTF-8 is not a supported encoding");
     }
   }
-  
+
   @Override
   public String toString() {
     return getClass().getName() + " [id=" + id + "]";

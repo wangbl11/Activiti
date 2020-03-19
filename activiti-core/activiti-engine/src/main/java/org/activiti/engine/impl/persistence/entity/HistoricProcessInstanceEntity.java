@@ -15,7 +15,6 @@
 package org.activiti.engine.impl.persistence.entity;
 
 import java.util.List;
-
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.history.HistoricProcessInstance;
 
@@ -38,13 +37,13 @@ public interface HistoricProcessInstanceEntity extends HistoricScopeInstanceEnti
   void setTenantId(String tenantId);
 
   void setName(String name);
-  
+
   void setLocalizedName(String localizedName);
-  
+
   void setDescription(String description);
-  
+
   void setLocalizedDescription(String localizedDescription);
-  
+
   String getProcessDefinitionKey();
 
   void setProcessDefinitionKey(String processDefinitionKey);

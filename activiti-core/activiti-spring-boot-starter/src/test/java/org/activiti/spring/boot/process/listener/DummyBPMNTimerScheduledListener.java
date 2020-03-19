@@ -18,25 +18,24 @@ package org.activiti.spring.boot.process.listener;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import org.activiti.api.process.model.events.BPMNTimerScheduledEvent;
 import org.activiti.api.process.runtime.events.listener.BPMNElementEventListener;
 import org.springframework.boot.test.context.TestComponent;
 
 @TestComponent
-public class DummyBPMNTimerScheduledListener implements BPMNElementEventListener<BPMNTimerScheduledEvent> { 
+public class DummyBPMNTimerScheduledListener implements BPMNElementEventListener<BPMNTimerScheduledEvent> {
 
     private List<BPMNTimerScheduledEvent> events = new LinkedList<>();
-    
+
     @Override
     public void onEvent(BPMNTimerScheduledEvent event) {
         events.add(event);
     }
-     
+
     public List<BPMNTimerScheduledEvent> getEvents() {
         return events;
     }
-    
+
     public void clear(){
         events.clear();
     }

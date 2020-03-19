@@ -16,7 +16,6 @@ package org.activiti.engine.impl.persistence.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import org.activiti.engine.impl.context.Context;
 
 /**

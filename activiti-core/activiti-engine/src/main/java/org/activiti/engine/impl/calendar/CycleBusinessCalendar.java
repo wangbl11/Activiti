@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.calendar;
 
 import java.util.Date;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.runtime.ClockReader;

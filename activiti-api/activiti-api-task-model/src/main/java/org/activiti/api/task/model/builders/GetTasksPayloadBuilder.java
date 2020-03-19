@@ -2,7 +2,6 @@ package org.activiti.api.task.model.builders;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.activiti.api.task.model.payloads.GetTasksPayload;
 
 public class GetTasksPayloadBuilder {

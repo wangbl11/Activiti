@@ -14,29 +14,28 @@
 package org.activiti.runtime.api.impl;
 
 import java.util.Map;
-
 import org.activiti.engine.impl.event.EventSubscriptionPayloadMappingProvider;
 import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntity;
 
 public class EventSubscriptionVariablesMappingProvider implements EventSubscriptionPayloadMappingProvider {
-    
+
     private final VariablesMappingProvider variablesMappingProvider;
 
     public EventSubscriptionVariablesMappingProvider(VariablesMappingProvider variablesMappingProvider) {
         this.variablesMappingProvider = variablesMappingProvider;
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public <T> T apply(Object payload, EventSubscriptionEntity eventSubscription) {
         if (Map.class.isInstance(payload)) {
             MappingExecutionContext context = new MappingExecutionContext(eventSubscription.getProcessDefinitionId(),
                                                                           eventSubscription.getActivityId());
-            
+
             return (T) variablesMappingProvider.calculateOutPutVariables(context, (Map<String, Object>) payload);
         } else {
             return EventSubscriptionPayloadMappingProvider.super.apply(payload, eventSubscription);
         }
     }
-    
+
 }

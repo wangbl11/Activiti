@@ -2,7 +2,6 @@ package org.activiti.standalone.parsing;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.impl.test.ResourceActivitiTestCase;

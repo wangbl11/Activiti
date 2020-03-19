@@ -17,7 +17,6 @@
 package org.activiti.api.process.runtime.conf;
 
 import java.util.List;
-
 import org.activiti.api.process.runtime.events.listener.ProcessRuntimeEventListener;
 import org.activiti.api.runtime.shared.events.VariableEventListener;
 

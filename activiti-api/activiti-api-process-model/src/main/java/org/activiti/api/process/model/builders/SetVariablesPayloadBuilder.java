@@ -2,7 +2,6 @@ package org.activiti.api.process.model.builders;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.payloads.SetProcessVariablesPayload;
 

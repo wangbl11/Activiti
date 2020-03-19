@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,6 +13,9 @@
 
 package org.activiti.engine.impl.cmd;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiObjectNotFoundException;
 import org.activiti.engine.impl.interceptor.Command;
@@ -21,10 +24,6 @@ import org.activiti.engine.impl.persistence.entity.EventSubscriptionEntityManage
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.SignalEventSubscriptionEntity;
 import org.activiti.engine.runtime.Execution;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
 
@@ -43,7 +42,7 @@ public class SignalEventReceivedCmd implements Command<Void> {
     this.executionId = executionId;
     if (processVariables != null) {
       this.payload = new HashMap<String, Object>(processVariables);
-      
+
     } else {
       this.payload = null;
     }
@@ -60,7 +59,7 @@ public class SignalEventReceivedCmd implements Command<Void> {
   }
 
   public Void execute(CommandContext commandContext) {
-    
+
     List<SignalEventSubscriptionEntity> signalEvents = null;
 
     EventSubscriptionEntityManager eventSubscriptionEntityManager = commandContext.getEventSubscriptionEntityManager();
@@ -77,7 +76,7 @@ public class SignalEventReceivedCmd implements Command<Void> {
       if (execution.isSuspended()) {
         throw new ActivitiException("Cannot throw signal event '" + eventName + "' because execution '" + executionId + "' is suspended");
       }
-      
+
       signalEvents = eventSubscriptionEntityManager.findSignalEventSubscriptionsByNameAndExecution(eventName, executionId);
 
       if (signalEvents.isEmpty()) {

@@ -18,11 +18,9 @@ package org.activiti.test.matchers;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.activiti.api.process.model.events.BPMNSignalEvent;
 import org.activiti.api.process.model.events.BPMNSignalReceivedEvent;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignalMatchers {
 

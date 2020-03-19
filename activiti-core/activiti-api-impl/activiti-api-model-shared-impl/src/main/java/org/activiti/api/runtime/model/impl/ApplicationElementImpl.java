@@ -17,7 +17,6 @@
 package org.activiti.api.runtime.model.impl;
 
 import java.util.Objects;
-
 import org.activiti.api.model.shared.model.ApplicationElement;
 
 public class ApplicationElementImpl implements ApplicationElement {

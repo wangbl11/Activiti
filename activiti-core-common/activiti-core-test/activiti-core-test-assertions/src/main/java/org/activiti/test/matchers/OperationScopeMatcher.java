@@ -17,7 +17,6 @@
 package org.activiti.test.matchers;
 
 import java.util.List;
-
 import org.activiti.api.model.shared.event.RuntimeEvent;
 
 public interface OperationScopeMatcher {

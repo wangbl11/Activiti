@@ -1,14 +1,11 @@
 package org.activiti.editor.language;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.Lane;
 import org.activiti.bpmn.model.Pool;
 import org.activiti.bpmn.model.Process;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class PoolConverterTest extends AbstractConverterTest {
 

@@ -2,9 +2,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.bpmn.model.ValuedDataObject;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.ActivitiObjectNotFoundException;
@@ -59,10 +58,10 @@ public class StartProcessInstanceCmd<T> implements Command<ProcessInstance>, Ser
   }
 
   public StartProcessInstanceCmd(ProcessInstanceBuilderImpl processInstanceBuilder) {
-    this(processInstanceBuilder.getProcessDefinitionKey(), 
-        processInstanceBuilder.getProcessDefinitionId(), 
-        processInstanceBuilder.getBusinessKey(), 
-        processInstanceBuilder.getVariables(), 
+    this(processInstanceBuilder.getProcessDefinitionKey(),
+        processInstanceBuilder.getProcessDefinitionId(),
+        processInstanceBuilder.getBusinessKey(),
+        processInstanceBuilder.getVariables(),
         processInstanceBuilder.getTenantId());
     this.processInstanceName = processInstanceBuilder.getProcessInstanceName();
     this.transientVariables = processInstanceBuilder.getTransientVariables();
@@ -104,11 +103,11 @@ public class StartProcessInstanceCmd<T> implements Command<ProcessInstance>, Ser
     return processInstance;
   }
 
-  protected ProcessInstance createAndStartProcessInstance(ProcessDefinition processDefinition, String businessKey, String processInstanceName, 
+  protected ProcessInstance createAndStartProcessInstance(ProcessDefinition processDefinition, String businessKey, String processInstanceName,
       Map<String,Object> variables, Map<String, Object> transientVariables) {
     return processInstanceHelper.createAndStartProcessInstance(processDefinition, businessKey, processInstanceName, variables, transientVariables);
   }
-  
+
   protected Map<String, Object> processDataObjects(Collection<ValuedDataObject> dataObjects) {
     Map<String, Object> variablesMap = new HashMap<String, Object>();
     // convert data objects to process variables

@@ -14,7 +14,6 @@ package org.activiti.engine.impl.runtime;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.impl.RuntimeServiceImpl;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.runtime.ProcessInstanceBuilder;

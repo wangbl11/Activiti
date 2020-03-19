@@ -12,6 +12,7 @@
  */
 package org.activiti.engine.impl.bpmn.behavior;
 
+import java.util.Collection;
 import org.activiti.bpmn.model.CallActivity;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.delegate.DelegateExecution;
@@ -21,8 +22,6 @@ import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
 import org.activiti.engine.impl.util.CollectionUtil;
-
-import java.util.Collection;
 
 /**
 

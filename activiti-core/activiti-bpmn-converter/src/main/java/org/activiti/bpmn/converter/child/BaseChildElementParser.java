@@ -15,9 +15,7 @@ package org.activiti.bpmn.converter.child;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.xml.stream.XMLStreamReader;
-
 import org.activiti.bpmn.constants.BpmnXMLConstants;
 import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.BpmnModel;
@@ -54,21 +52,21 @@ public abstract class BaseChildElementParser implements BpmnXMLConstants {
   public boolean accepts(BaseElement element) {
     return element != null;
   }
-  
-  protected List<ExtensionAttribute> parseExtensionAttributes(XMLStreamReader xtr, 
-                                                              BaseElement parentElement, 
+
+  protected List<ExtensionAttribute> parseExtensionAttributes(XMLStreamReader xtr,
+                                                              BaseElement parentElement,
                                                               BpmnModel model) {
     List<ExtensionAttribute> attributes = new LinkedList<>();
-      
+
     for(int i=0; i < xtr.getAttributeCount(); i++) {
       if(ACTIVITI_EXTENSIONS_NAMESPACE.equals(xtr.getAttributeNamespace(i))) {
-        ExtensionAttribute attr = new ExtensionAttribute(ACTIVITI_EXTENSIONS_NAMESPACE, 
+        ExtensionAttribute attr = new ExtensionAttribute(ACTIVITI_EXTENSIONS_NAMESPACE,
                                                          xtr.getAttributeLocalName(i));
         attr.setValue(xtr.getAttributeValue(i));
         attributes.add(attr);
       }
     }
-      
+
     return Collections.unmodifiableList(attributes);
-  }  
+  }
 }

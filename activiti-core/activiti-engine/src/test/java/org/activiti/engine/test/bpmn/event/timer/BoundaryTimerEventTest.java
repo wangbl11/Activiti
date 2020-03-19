@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.ExecutionListener;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -50,9 +49,9 @@ public class BoundaryTimerEventTest extends PluggableActivitiTestCase {
 
   /*
    * Test for when multiple boundary timer events are defined on the same user task
-   * 
+   *
    * Configuration: - timer 1 -> 2 hours -> secondTask - timer 2 -> 1 hour -> thirdTask - timer 3 -> 3 hours -> fourthTask
-   * 
+   *
    * See process image next to the process xml resource
    */
   @Deployment
@@ -127,14 +126,14 @@ public class BoundaryTimerEventTest extends PluggableActivitiTestCase {
     // which means the process has ended
     assertProcessEnded(pi.getId());
   }
-  
+
 
   @Deployment
   public void testNullExpressionOnTimer(){
-	  
+
     HashMap<String, Object> variables = new HashMap<String, Object>();
     variables.put("duration", null);
-    
+
     // After process start, there should be a timer created
     ProcessInstance pi = runtimeService.startProcessInstanceByKey("testNullExpressionOnTimer", variables);
 
@@ -151,8 +150,8 @@ public class BoundaryTimerEventTest extends PluggableActivitiTestCase {
     	      .singleResult();
     assertNotNull(processInstance);
   }
-  
-  
+
+
   @Deployment
   public void testTimerInSingleTransactionProcess() {
     // make sure that if a PI completes in single transaction, JobEntities
@@ -179,41 +178,41 @@ public class BoundaryTimerEventTest extends PluggableActivitiTestCase {
     assertEquals(1, managementService.createTimerJobQuery().count());
     assertEquals(1, taskService.createTaskQuery().count());
   }
-  
+
   @Deployment
 	public void testInfiniteRepeatingTimer() throws Exception {
-		
+
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyy.MM.dd hh:mm");
 		Date currentTime = simpleDateFormat.parse("2015.10.01 11:01");
 		processEngineConfiguration.getClock().setCurrentTime(currentTime);
-		
+
 		Map<String, Object> vars = new HashMap<String, Object>();
 		vars.put("timerString", "R/2015-10-01T11:00:00/PT24H");
 		runtimeService.startProcessInstanceByKey("testTimerErrors", vars);
-		
-		long twentyFourHours = 24L * 60L * 60L * 1000L; 
+
+		long twentyFourHours = 24L * 60L * 60L * 1000L;
 
 		Date previousDueDate = null;
-		
+
 		// Move clock, job should fire
 		for (int i=0; i<30; i++) {
 			Job job = managementService.createTimerJobQuery().singleResult();
-			
+
 			// Verify due date
 			if (previousDueDate != null) {
 				assertTrue(job.getDuedate().getTime() - previousDueDate.getTime() >= twentyFourHours);
 			}
 			previousDueDate = job.getDuedate();
-			
+
 			currentTime = new Date(currentTime.getTime() + twentyFourHours + (60 * 1000));
 			processEngineConfiguration.getClock().setCurrentTime(currentTime);
 			String jobId = managementService.createTimerJobQuery().singleResult().getId();
 			managementService.moveTimerToExecutableJob(jobId);
 			managementService.executeJob(jobId);
 		}
-		
+
 	}
-  
+
   @Deployment
   public void testRepeatTimerDuration() throws Exception {
 
@@ -223,7 +222,7 @@ public class BoundaryTimerEventTest extends PluggableActivitiTestCase {
 
     runtimeService.startProcessInstanceByKey("repeattimertest");
 
-    long twentyFourHours = 24L * 60L * 60L * 1000L; 
+    long twentyFourHours = 24L * 60L * 60L * 1000L;
 
     Date previousDueDate = null;
 

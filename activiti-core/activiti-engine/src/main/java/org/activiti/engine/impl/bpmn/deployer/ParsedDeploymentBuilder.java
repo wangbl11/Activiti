@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.engine.impl.bpmn.parser.BpmnParse;
 import org.activiti.engine.impl.bpmn.parser.BpmnParser;
 import org.activiti.engine.impl.cmd.DeploymentSettings;
@@ -35,7 +34,7 @@ public class ParsedDeploymentBuilder {
   protected BpmnParser bpmnParser;
   protected Map<String, Object> deploymentSettings;
 
-  public ParsedDeploymentBuilder(DeploymentEntity deployment, 
+  public ParsedDeploymentBuilder(DeploymentEntity deployment,
       BpmnParser bpmnParser, Map<String, Object> deploymentSettings) {
     this.deployment = deployment;
     this.bpmnParser = bpmnParser;
@@ -44,9 +43,9 @@ public class ParsedDeploymentBuilder {
 
   public ParsedDeployment build() {
     List<ProcessDefinitionEntity> processDefinitions = new ArrayList<ProcessDefinitionEntity>();
-    Map<ProcessDefinitionEntity, BpmnParse> processDefinitionsToBpmnParseMap 
+    Map<ProcessDefinitionEntity, BpmnParse> processDefinitionsToBpmnParseMap
       = new LinkedHashMap<ProcessDefinitionEntity, BpmnParse>();
-    Map<ProcessDefinitionEntity, ResourceEntity> processDefinitionsToResourceMap 
+    Map<ProcessDefinitionEntity, ResourceEntity> processDefinitionsToResourceMap
       = new LinkedHashMap<ProcessDefinitionEntity, ResourceEntity>();
 
     for (ResourceEntity resource : deployment.getResources().values()) {
@@ -61,7 +60,7 @@ public class ParsedDeploymentBuilder {
       }
     }
 
-    return new ParsedDeployment(deployment, processDefinitions, 
+    return new ParsedDeployment(deployment, processDefinitions,
         processDefinitionsToBpmnParseMap, processDefinitionsToResourceMap);
   }
 
@@ -92,7 +91,7 @@ public class ParsedDeploymentBuilder {
       bpmnParse.setValidateSchema(false);
       bpmnParse.setValidateProcess(false);
     }
-    
+
     bpmnParse.execute();
     return bpmnParse;
   }

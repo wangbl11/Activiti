@@ -17,7 +17,6 @@
 package org.activiti.runtime.api.event.internal;
 
 import java.util.List;
-
 import org.activiti.api.process.model.events.BPMNMessageSentEvent;
 import org.activiti.api.process.runtime.events.listener.BPMNElementEventListener;
 import org.activiti.engine.delegate.event.ActivitiEvent;

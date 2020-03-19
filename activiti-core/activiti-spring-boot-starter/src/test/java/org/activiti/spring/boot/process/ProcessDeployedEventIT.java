@@ -16,21 +16,16 @@
 
 package org.activiti.spring.boot.process;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import java.io.File;
+import java.util.List;
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.spring.boot.process.listener.DeployedProcessesListener;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
-import java.util.List;
-
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @Import(DeployedProcessesListener.class)
 public class ProcessDeployedEventIT {

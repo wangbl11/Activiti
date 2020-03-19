@@ -16,44 +16,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
-
 import org.activiti.bpmn.constants.BpmnXMLConstants;
 import org.activiti.bpmn.converter.child.BaseChildElementParser;
 import org.activiti.bpmn.converter.export.ActivitiListenerExport;
 import org.activiti.bpmn.converter.export.FailedJobRetryCountExport;
 import org.activiti.bpmn.converter.export.MultiInstanceExport;
 import org.activiti.bpmn.converter.util.BpmnXMLUtil;
-import org.activiti.bpmn.model.Activity;
-import org.activiti.bpmn.model.Artifact;
-import org.activiti.bpmn.model.BaseElement;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.CancelEventDefinition;
-import org.activiti.bpmn.model.CompensateEventDefinition;
-import org.activiti.bpmn.model.DataObject;
-import org.activiti.bpmn.model.ErrorEventDefinition;
-import org.activiti.bpmn.model.Event;
-import org.activiti.bpmn.model.EventDefinition;
-import org.activiti.bpmn.model.ExtensionAttribute;
-import org.activiti.bpmn.model.ExtensionElement;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.FlowNode;
-import org.activiti.bpmn.model.FormProperty;
-import org.activiti.bpmn.model.FormValue;
-import org.activiti.bpmn.model.Gateway;
-import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.SequenceFlow;
-import org.activiti.bpmn.model.SignalEventDefinition;
-import org.activiti.bpmn.model.StartEvent;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.TerminateEventDefinition;
-import org.activiti.bpmn.model.ThrowEvent;
-import org.activiti.bpmn.model.TimerEventDefinition;
-import org.activiti.bpmn.model.UserTask;
-import org.activiti.bpmn.model.ValuedDataObject;
+import org.activiti.bpmn.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -206,15 +178,15 @@ public abstract class BaseBpmnXMLConverter implements BpmnXMLConstants {
     }
 
     writeIncomingOutgoingFlowElements(baseElement, model, xtw);
-    
+
     if (baseElement instanceof Activity) {
         final Activity activity = (Activity) baseElement;
         MultiInstanceExport.writeMultiInstance(activity, xtw);
 
     }
-    
+
     writeAdditionalChildElements(baseElement, model, xtw);
-    
+
     xtw.writeEndElement();
   }
 
@@ -231,8 +203,8 @@ public abstract class BaseBpmnXMLConverter implements BpmnXMLConstants {
   }
 
   protected abstract void writeAdditionalChildElements(BaseElement element, BpmnModel model, XMLStreamWriter xtw) throws Exception;
-  
-  
+
+
 
   // To BpmnModel converter convenience methods
 
@@ -538,11 +510,11 @@ public abstract class BaseBpmnXMLConverter implements BpmnXMLConstants {
   protected void writeQualifiedAttribute(String attributeName, String value, XMLStreamWriter xtw) throws Exception {
     BpmnXMLUtil.writeQualifiedAttribute(attributeName, value, xtw);
   }
-  
+
   protected void writeIncomingOutgoingFlowElements(BaseElement element, BpmnModel model, XMLStreamWriter xtw) throws Exception {
       if(FlowNode.class.isAssignableFrom(element.getClass())) {
-          BpmnXMLUtil.writeIncomingAndOutgoingFlowElement((FlowNode) element, xtw);   
-      } 
+          BpmnXMLUtil.writeIncomingAndOutgoingFlowElement((FlowNode) element, xtw);
+      }
   }
-  
+
 }

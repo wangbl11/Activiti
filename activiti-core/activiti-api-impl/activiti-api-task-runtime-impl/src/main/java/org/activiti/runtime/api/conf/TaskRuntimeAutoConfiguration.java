@@ -18,56 +18,21 @@ package org.activiti.runtime.api.conf;
 
 import java.util.Collections;
 import java.util.List;
-
 import org.activiti.api.runtime.shared.events.VariableEventListener;
 import org.activiti.api.runtime.shared.security.SecurityManager;
 import org.activiti.api.task.runtime.TaskAdminRuntime;
 import org.activiti.api.task.runtime.TaskRuntime;
 import org.activiti.api.task.runtime.conf.TaskRuntimeConfiguration;
-import org.activiti.api.task.runtime.events.TaskActivatedEvent;
-import org.activiti.api.task.runtime.events.TaskAssignedEvent;
-import org.activiti.api.task.runtime.events.TaskCancelledEvent;
-import org.activiti.api.task.runtime.events.TaskCandidateGroupAddedEvent;
-import org.activiti.api.task.runtime.events.TaskCandidateGroupRemovedEvent;
-import org.activiti.api.task.runtime.events.TaskCandidateUserAddedEvent;
-import org.activiti.api.task.runtime.events.TaskCandidateUserRemovedEvent;
-import org.activiti.api.task.runtime.events.TaskCompletedEvent;
-import org.activiti.api.task.runtime.events.TaskCreatedEvent;
-import org.activiti.api.task.runtime.events.TaskSuspendedEvent;
-import org.activiti.api.task.runtime.events.TaskUpdatedEvent;
+import org.activiti.api.task.runtime.events.*;
 import org.activiti.api.task.runtime.events.listener.TaskRuntimeEventListener;
 import org.activiti.common.util.DateFormatterProvider;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.runtime.api.conf.impl.TaskRuntimeConfigurationImpl;
-import org.activiti.runtime.api.event.impl.ToAPITaskAssignedEventConverter;
-import org.activiti.runtime.api.event.impl.ToAPITaskCandidateGroupAddedEventConverter;
-import org.activiti.runtime.api.event.impl.ToAPITaskCandidateUserAddedEventConverter;
-import org.activiti.runtime.api.event.impl.ToAPITaskCreatedEventConverter;
-import org.activiti.runtime.api.event.impl.ToAPITaskUpdatedEventConverter;
-import org.activiti.runtime.api.event.impl.ToTaskActivatedConverter;
-import org.activiti.runtime.api.event.impl.ToTaskCancelledConverter;
-import org.activiti.runtime.api.event.impl.ToTaskCandidateGroupRemovedConverter;
-import org.activiti.runtime.api.event.impl.ToTaskCandidateUserRemovedConverter;
-import org.activiti.runtime.api.event.impl.ToTaskCompletedConverter;
-import org.activiti.runtime.api.event.impl.ToTaskSuspendedConverter;
-import org.activiti.runtime.api.event.internal.TaskActivatedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskAssignedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskCancelledListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskCandidateGroupAddedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskCandidateGroupRemovedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskCandidateUserAddedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskCandidateUserRemovedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskCompletedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskCreatedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskSuspendedListenerDelegate;
-import org.activiti.runtime.api.event.internal.TaskUpdatedListenerDelegate;
-import org.activiti.runtime.api.impl.TaskAdminRuntimeImpl;
-import org.activiti.runtime.api.impl.TaskRuntimeHelper;
-import org.activiti.runtime.api.impl.TaskRuntimeImpl;
-import org.activiti.runtime.api.impl.TaskVariablesPayloadValidator;
-import org.activiti.runtime.api.impl.VariableNameValidator;
+import org.activiti.runtime.api.event.impl.*;
+import org.activiti.runtime.api.event.internal.*;
+import org.activiti.runtime.api.impl.*;
 import org.activiti.runtime.api.model.impl.APITaskCandidateGroupConverter;
 import org.activiti.runtime.api.model.impl.APITaskCandidateUserConverter;
 import org.activiti.runtime.api.model.impl.APITaskConverter;
@@ -130,7 +95,7 @@ public class TaskRuntimeAutoConfiguration {
     public APITaskConverter apiTaskConverter(TaskService taskService) {
         return new APITaskConverter(taskService);
     }
-    
+
     @Bean
     public TaskVariablesPayloadValidator taskVariablesValidator(DateFormatterProvider dateFormatterProvider,
                                                                 VariableNameValidator variableNameValidator) {
@@ -285,5 +250,5 @@ public class TaskRuntimeAutoConfiguration {
                                                                                                    new ToTaskCandidateGroupRemovedConverter(taskCandidateGroupConverter)),
                                                      ActivitiEventType.ENTITY_DELETED);
     }
-    
+
 }

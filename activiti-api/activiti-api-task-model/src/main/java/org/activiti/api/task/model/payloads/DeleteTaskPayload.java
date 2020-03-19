@@ -1,7 +1,6 @@
 package org.activiti.api.task.model.payloads;
 
 import java.util.UUID;
-
 import org.activiti.api.model.shared.Payload;
 
 public class DeleteTaskPayload implements Payload {

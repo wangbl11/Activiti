@@ -20,19 +20,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.core.io.Resource;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.BDDMockito.given;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.mock;
-import static org.mockito.MockitoAnnotations.initMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.io.Resource;
 
+@ExtendWith(MockitoExtension.class)
 public class ApplicationServiceTest {
 
     @InjectMocks
@@ -43,11 +42,6 @@ public class ApplicationServiceTest {
 
     @Mock
     private ApplicationReader applicationReader;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void shouldLoadApplications() throws Exception {

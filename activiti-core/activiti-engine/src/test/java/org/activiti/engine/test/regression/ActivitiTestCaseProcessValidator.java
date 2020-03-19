@@ -1,11 +1,8 @@
 package org.activiti.engine.test.regression;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.Error;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.ServiceTask;

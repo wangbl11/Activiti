@@ -14,7 +14,6 @@
 package org.activiti.runtime.api.impl;
 
 import java.util.List;
-
 import org.activiti.bpmn.model.MapExceptionEntry;
 import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.delegate.Expression;
@@ -39,7 +38,7 @@ public class MappingAwareActivityBehaviorFactory extends DefaultActivityBehavior
         super();
         this.variablesMappingProvider = variablesMappingProvider;
         this.processVariablesInitiator = processVariablesInitiator;
-        
+
         this.setMessagePayloadMappingProviderFactory(new JsonMessagePayloadMappingProviderFactory(variablesMappingProvider));
     }
 

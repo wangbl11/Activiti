@@ -2,7 +2,6 @@ package org.activiti.api.task.model.builders;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.api.task.model.payloads.CompleteTaskPayload;
 
 public class CompleteTaskPayloadBuilder {

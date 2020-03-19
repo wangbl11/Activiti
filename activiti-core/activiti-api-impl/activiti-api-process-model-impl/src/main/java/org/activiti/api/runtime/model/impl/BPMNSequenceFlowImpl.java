@@ -17,7 +17,6 @@
 package org.activiti.api.runtime.model.impl;
 
 import java.util.Objects;
-
 import org.activiti.api.process.model.BPMNSequenceFlow;
 
 public class BPMNSequenceFlowImpl extends BPMNElementImpl implements BPMNSequenceFlow {
@@ -85,7 +84,7 @@ public class BPMNSequenceFlowImpl extends BPMNElementImpl implements BPMNSequenc
     public void setTargetActivityType(String targetActivityType) {
         this.targetActivityType = targetActivityType;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

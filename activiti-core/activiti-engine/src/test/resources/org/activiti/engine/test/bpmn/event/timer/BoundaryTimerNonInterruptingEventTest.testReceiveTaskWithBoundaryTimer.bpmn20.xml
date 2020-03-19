@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions id="definitions"
-             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              targetNamespace="Examples">
 
     <process id="nonInterruptingCycle">
@@ -18,7 +18,7 @@
             </timerEventDefinition>
         </boundaryEvent>
         <sequenceFlow id="flow3" sourceRef="timer" targetRef="timerFiredTask"/>
-        <userTask id="timerFiredTask" />        
+        <userTask id="timerFiredTask" />
         <sequenceFlow id="flow4" sourceRef="timerFiredTask" targetRef="nonInterruptingEnd"/>
         <endEvent id="nonInterruptingEnd"/>
 

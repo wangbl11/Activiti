@@ -16,17 +16,6 @@
 
 package org.activiti.runtime.api.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -52,11 +41,17 @@ import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.runtime.api.model.impl.APIDeploymentConverter;
 import org.activiti.runtime.api.model.impl.APIProcessDefinitionConverter;
 import org.activiti.runtime.api.model.impl.APIProcessInstanceConverter;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Answers;
+import static org.mockito.BDDMockito.given;
 import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class ProcessRuntimeImplTest {
 
     private ProcessRuntimeImpl processRuntime;
@@ -82,10 +77,7 @@ public class ProcessRuntimeImplTest {
     @Mock
     APIProcessDefinitionConverter processDefinitionConverter;
 
-    @Before
     public void setUp() {
-        initMocks(this);
-
         RepositoryServiceImpl repositoryService = new RepositoryServiceImpl();
         repositoryService.setCommandExecutor(commandExecutor);
 

@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,13 +13,8 @@
 package org.activiti.validation.validator.impl;
 
 import java.util.List;
-
-import org.activiti.bpmn.model.Activity;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.DataAssociation;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.MultiInstanceLoopCharacteristics;
 import org.activiti.bpmn.model.Process;
+import org.activiti.bpmn.model.*;
 import org.activiti.validation.ValidationError;
 import org.activiti.validation.validator.Problems;
 import org.activiti.validation.validator.ProcessLevelValidator;
@@ -27,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * A validator for stuff that is shared across all flow elements
- * 
+ *
 
 
  */
@@ -38,16 +33,16 @@ public class FlowElementValidator extends ProcessLevelValidator {
 	@Override
 	protected void executeValidation(BpmnModel bpmnModel, Process process, List<ValidationError> errors) {
 		for (FlowElement flowElement : process.getFlowElements()) {
-			
+
 			if (flowElement instanceof Activity) {
 				Activity activity = (Activity) flowElement;
 				handleConstraints(process, activity, errors);
 				handleMultiInstanceLoopCharacteristics(process, activity, errors);
 				handleDataAssociations(process, activity, errors);
 			}
-			
+
 		}
-		
+
 	}
 
 	protected void handleConstraints(Process process, Activity activity, List<ValidationError> errors) {
@@ -63,7 +58,7 @@ public class FlowElementValidator extends ProcessLevelValidator {
 
 			if (StringUtils.isEmpty(multiInstanceLoopCharacteristics.getLoopCardinality())
 	    		&& StringUtils.isEmpty(multiInstanceLoopCharacteristics.getInputDataItem())) {
-	    	
+
 			  addError(errors, Problems.MULTI_INSTANCE_MISSING_COLLECTION, process, activity,
 	    			"Either loopCardinality or loopDataInputRef/activiti:collection must been set");
 	    }
@@ -75,7 +70,7 @@ public class FlowElementValidator extends ProcessLevelValidator {
 	  if (activity.getDataInputAssociations() != null) {
 	  	for (DataAssociation dataAssociation : activity.getDataInputAssociations()) {
 	  		if (StringUtils.isEmpty(dataAssociation.getTargetRef())) {
-	  			 addError(errors, Problems.DATA_ASSOCIATION_MISSING_TARGETREF, process, activity, 
+	  			 addError(errors, Problems.DATA_ASSOCIATION_MISSING_TARGETREF, process, activity,
 	  					 "Targetref is required on a data association");
 	  	    }
 	  	}
@@ -83,7 +78,7 @@ public class FlowElementValidator extends ProcessLevelValidator {
 	  if (activity.getDataOutputAssociations() != null) {
 	  	for (DataAssociation dataAssociation : activity.getDataOutputAssociations()) {
 	  		if (StringUtils.isEmpty(dataAssociation.getTargetRef())) {
-	  			 addError(errors, Problems.DATA_ASSOCIATION_MISSING_TARGETREF, process, activity, 
+	  			 addError(errors, Problems.DATA_ASSOCIATION_MISSING_TARGETREF, process, activity,
 	  					 "Targetref is required on a data association");
 	  	    }
 	  	}

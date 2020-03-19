@@ -15,26 +15,8 @@
 package org.activiti.engine;
 
 import java.util.List;
-
 import org.activiti.engine.api.internal.Internal;
-import org.activiti.engine.history.HistoricActivityInstance;
-import org.activiti.engine.history.HistoricActivityInstanceQuery;
-import org.activiti.engine.history.HistoricDetail;
-import org.activiti.engine.history.HistoricDetailQuery;
-import org.activiti.engine.history.HistoricIdentityLink;
-import org.activiti.engine.history.HistoricProcessInstance;
-import org.activiti.engine.history.HistoricProcessInstanceQuery;
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.history.HistoricTaskInstanceQuery;
-import org.activiti.engine.history.HistoricVariableInstance;
-import org.activiti.engine.history.HistoricVariableInstanceQuery;
-import org.activiti.engine.history.NativeHistoricActivityInstanceQuery;
-import org.activiti.engine.history.NativeHistoricDetailQuery;
-import org.activiti.engine.history.NativeHistoricProcessInstanceQuery;
-import org.activiti.engine.history.NativeHistoricTaskInstanceQuery;
-import org.activiti.engine.history.NativeHistoricVariableInstanceQuery;
-import org.activiti.engine.history.ProcessInstanceHistoryLog;
-import org.activiti.engine.history.ProcessInstanceHistoryLogQuery;
+import org.activiti.engine.history.*;
 import org.activiti.engine.task.IdentityLink;
 
 /**

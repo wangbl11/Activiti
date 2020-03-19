@@ -1,8 +1,8 @@
 package org.activiti.spring.conformance.util.security;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import java.util.Collection;
 import org.activiti.api.runtime.shared.security.SecurityManager;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -12,8 +12,6 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.Collection;
-
 public class SecurityUtil {
 
     private Logger logger = LoggerFactory.getLogger(SecurityUtil.class);
@@ -21,7 +19,7 @@ public class SecurityUtil {
     private final UserDetailsService userDetailsService;
 
     private final SecurityManager securityManager;
-    
+
     public SecurityUtil(UserDetailsService userDetailsService,
                         SecurityManager securityManager) {
         this.userDetailsService = userDetailsService;

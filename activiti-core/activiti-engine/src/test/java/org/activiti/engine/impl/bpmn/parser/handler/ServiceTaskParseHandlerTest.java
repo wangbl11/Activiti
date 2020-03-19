@@ -20,14 +20,13 @@ import org.activiti.bpmn.model.ServiceTask;
 import org.activiti.engine.impl.bpmn.behavior.ServiceTaskDelegateExpressionActivityBehavior;
 import org.activiti.engine.impl.bpmn.parser.BpmnParse;
 import org.activiti.engine.impl.bpmn.parser.factory.ActivityBehaviorFactory;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ServiceTaskParseHandlerTest {
@@ -61,4 +60,5 @@ public class ServiceTaskParseHandlerTest {
         //then
         assertThat(serviceTask.getBehavior()).isEqualTo(defaultBehavior);
     }
+
 }

@@ -1,15 +1,7 @@
 package org.activiti.engine.test.api.variables;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.activiti.engine.impl.test.PluggableActivitiTestCase;
@@ -21,7 +13,7 @@ import org.joda.time.LocalDate;
 
 /**
  * Testing various constructs with variables. Created to test the changes done in https://jira.codehaus.org/browse/ACT-1900.
- * 
+ *
 
  */
 public class VariablesTest extends PluggableActivitiTestCase {
@@ -56,12 +48,12 @@ public class VariablesTest extends PluggableActivitiTestCase {
     for (int i = 0; i < 10; i++) {
       vars.put("dateVar" + i, new Date());
     }
-    
+
     // 10 joda local dates
     for (int i = 0; i < 10; i++) {
       vars.put("localdateVar" + i, new LocalDate());
     }
-    
+
     // 10 joda local dates
     for (int i = 0; i < 10; i++) {
       vars.put("datetimeVar" + i, new DateTime());
@@ -488,54 +480,54 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals("Override", taskService.getVariable(task.getId(), "stringVar1"));
     assertEquals("Override", taskService.getVariables(task.getId(), varNames).get("stringVar1"));
   }
-  
+
   public void testLocalDateVariable() {
 
     Calendar todayCal = new GregorianCalendar();
     int todayYear = todayCal.get(Calendar.YEAR);
     int todayMonth = todayCal.get(Calendar.MONTH);
     int todayDate = todayCal.get(Calendar.DAY_OF_MONTH);
-    
+
     // Regular getVariables after process instance start
     LocalDate date1 = (LocalDate) runtimeService.getVariable(processInstanceId, "localdateVar1");
     assertEquals(todayYear, date1.getYear());
     assertEquals(todayMonth + 1, date1.getMonthOfYear());
     assertEquals(todayDate, date1.getDayOfMonth());
-    
+
     date1 = new LocalDate(2010, 11, 10);
     runtimeService.setVariable(processInstanceId, "localdateVar1", date1);
     date1 = (LocalDate) runtimeService.getVariable(processInstanceId, "localdateVar1");
     assertEquals(2010, date1.getYear());
     assertEquals(11, date1.getMonthOfYear());
     assertEquals(10, date1.getDayOfMonth());
-    
+
     LocalDate queryDate = new LocalDate(2010, 11, 9);
     ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().variableValueGreaterThan("localdateVar1", queryDate).singleResult();
     assertNotNull(processInstance);
     assertEquals(processInstanceId, processInstance.getId());
-    
+
     queryDate = new LocalDate(2010, 11, 10);
     processInstance = runtimeService.createProcessInstanceQuery().variableValueGreaterThan("localdateVar1", queryDate).singleResult();
     assertNull(processInstance);
-    
+
     processInstance = runtimeService.createProcessInstanceQuery().variableValueGreaterThanOrEqual("localdateVar1", queryDate).singleResult();
     assertNotNull(processInstance);
     assertEquals(processInstanceId, processInstance.getId());
   }
-  
+
   public void testLocalDateTimeVariable() {
 
     Calendar todayCal = new GregorianCalendar();
     int todayYear = todayCal.get(Calendar.YEAR);
     int todayMonth = todayCal.get(Calendar.MONTH);
     int todayDate = todayCal.get(Calendar.DAY_OF_MONTH);
-    
+
     // Regular getVariables after process instance start
     DateTime date1 = (DateTime) runtimeService.getVariable(processInstanceId, "datetimeVar1");
     assertEquals(todayYear, date1.getYear());
     assertEquals(todayMonth + 1, date1.getMonthOfYear());
     assertEquals(todayDate, date1.getDayOfMonth());
-    
+
     date1 = new DateTime(2010, 11, 10, 10, 15);
     runtimeService.setVariable(processInstanceId, "datetimeVar1", date1);
     date1 = (DateTime) runtimeService.getVariable(processInstanceId, "datetimeVar1");
@@ -544,16 +536,16 @@ public class VariablesTest extends PluggableActivitiTestCase {
     assertEquals(10, date1.getDayOfMonth());
     assertEquals(10, date1.getHourOfDay());
     assertEquals(15, date1.getMinuteOfHour());
-    
+
     DateTime queryDate = new DateTime(2010, 11, 10, 9, 15);
     ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().variableValueGreaterThan("datetimeVar1", queryDate).singleResult();
     assertNotNull(processInstance);
     assertEquals(processInstanceId, processInstance.getId());
-    
+
     queryDate = new DateTime(2010, 11, 10, 10, 15);
     processInstance = runtimeService.createProcessInstanceQuery().variableValueGreaterThan("datetimeVar1", queryDate).singleResult();
     assertNull(processInstance);
-    
+
     processInstance = runtimeService.createProcessInstanceQuery().variableValueGreaterThanOrEqual("datetimeVar1", queryDate).singleResult();
     assertNotNull(processInstance);
     assertEquals(processInstanceId, processInstance.getId());

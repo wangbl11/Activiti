@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,12 +12,7 @@
  */
 package org.activiti.engine.test.api.event;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
+import java.util.*;
 import org.activiti.engine.delegate.event.ActivitiActivityEvent;
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
 import org.activiti.engine.delegate.event.ActivitiEvent;
@@ -32,7 +27,7 @@ import org.activiti.engine.test.Deployment;
 
 /**
  * Test case for all {@link ActivitiEvent}s related to jobs.
- * 
+ *
 
  */
 public class JobEventsTest extends PluggableActivitiTestCase {
@@ -86,11 +81,11 @@ public class JobEventsTest extends PluggableActivitiTestCase {
 
     // Check delete-event has been dispatched
     assertEquals(6, listener.getEventsReceived().size());
-    
+
     event = listener.getEventsReceived().get(0);
     assertEquals(ActivitiEventType.ENTITY_CREATED, event.getType());
     checkEventContext(event, theJob);
-    
+
     event = listener.getEventsReceived().get(1);
     assertEquals(ActivitiEventType.ENTITY_INITIALIZED, event.getType());
     checkEventContext(event, theJob);
@@ -126,9 +121,9 @@ public class JobEventsTest extends PluggableActivitiTestCase {
 
     Date now = new Date();
     testClock.setCurrentTime(now);
-    
+
     Calendar nowCalendar = new GregorianCalendar();
-    
+
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("testRepetitionJobEvents");
     Job theJob = managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).singleResult();
     assertNotNull(theJob);
@@ -154,14 +149,14 @@ public class JobEventsTest extends PluggableActivitiTestCase {
     assertEquals(0, listener.getEventsReceived().size());
     assertEquals(1, managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).count());
     Job firstTimerInstance = managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).singleResult();
-    
+
     nowCalendar.add(Calendar.HOUR, 1);
     nowCalendar.add(Calendar.MINUTE, 5);
     testClock.setCurrentTime(nowCalendar.getTime());
-    
+
     // the timer job will be fired for the first time now
     waitForJobExecutorToProcessAllJobs(2000, 200);
-    
+
     // a new timer should be created with the repeat
     assertEquals(1, managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).count());
     Job secondTimerInstance = managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).singleResult();
@@ -186,9 +181,9 @@ public class JobEventsTest extends PluggableActivitiTestCase {
     nowCalendar.add(Calendar.MINUTE, 5);
     testClock.setCurrentTime(nowCalendar.getTime());
     waitForJobExecutorToProcessAllJobs(2000, 200);
-    
+
     assertEquals(0, managementService.createTimerJobQuery().processInstanceId(processInstance.getId()).count());
-    
+
     checkEventCount(1, ActivitiEventType.TIMER_FIRED);
     checkEventContext(filterEvents(ActivitiEventType.TIMER_FIRED).get(0), secondTimerInstance);
     checkEventCount(0, ActivitiEventType.TIMER_SCHEDULED);
@@ -294,7 +289,7 @@ public class JobEventsTest extends PluggableActivitiTestCase {
 
     // Check Timer fired event has been dispatched
     assertEquals(6, listener.getEventsReceived().size());
-    
+
     // timer entity created first
     assertEquals(ActivitiEventType.ENTITY_CREATED, listener.getEventsReceived().get(0).getType());
     // timer entity initialized
@@ -305,7 +300,7 @@ public class JobEventsTest extends PluggableActivitiTestCase {
     assertEquals(ActivitiEventType.TIMER_FIRED, listener.getEventsReceived().get(3).getType());
     // job executed successfully
     assertEquals(ActivitiEventType.JOB_EXECUTION_SUCCESS, listener.getEventsReceived().get(5).getType());
-    
+
     checkEventCount(0, ActivitiEventType.JOB_CANCELED);
   }
 
@@ -343,18 +338,18 @@ public class JobEventsTest extends PluggableActivitiTestCase {
     Calendar tomorrow = Calendar.getInstance();
     tomorrow.add(Calendar.DAY_OF_YEAR, 1);
     processEngineConfiguration.getClock().setCurrentTime(tomorrow.getTime());
-    
+
     Job executableJob = managementService.moveTimerToExecutableJob(theJob.getId());
-    
+
     listener.clearEventsReceived();
-    
+
     try {
       managementService.executeJob(executableJob.getId());
       fail("Expected exception");
     } catch (Exception e) {
       // exception expected
     }
-    
+
     theJob = managementService.createDeadLetterJobQuery().processInstanceId(processInstance.getId()).singleResult();
     assertNotNull(theJob);
 
@@ -380,16 +375,16 @@ public class JobEventsTest extends PluggableActivitiTestCase {
     event = listener.getEventsReceived().get(3);
     assertEquals(ActivitiEventType.ENTITY_CREATED, event.getType());
     checkEventContext(event, theJob);
-    
+
     event = listener.getEventsReceived().get(4);
     assertEquals(ActivitiEventType.ENTITY_INITIALIZED, event.getType());
     checkEventContext(event, theJob);
-    
+
     // original job is deleted
     event = listener.getEventsReceived().get(5);
     assertEquals(ActivitiEventType.ENTITY_DELETED, event.getType());
     checkEventContext(event, theJob);
-    
+
     // timer job updated
     event = listener.getEventsReceived().get(6);
     assertEquals(ActivitiEventType.ENTITY_UPDATED, event.getType());
@@ -400,7 +395,7 @@ public class JobEventsTest extends PluggableActivitiTestCase {
     assertEquals(0, ((Job) ((ActivitiEntityEvent) event).getEntity()).getRetries());
     checkEventContext(event, theJob);
   }
-  
+
   @Deployment
   public void testTerminateEndEvent() throws Exception {
     Clock previousClock = processEngineConfiguration.getClock();
@@ -447,7 +442,7 @@ public class JobEventsTest extends PluggableActivitiTestCase {
     assertEquals("Outside Task", task.getName());
 
     taskService.complete(task.getId());
-    
+
     assertProcessEnded(processInstance.getId());
 
     processEngineConfiguration.setClock(previousClock);

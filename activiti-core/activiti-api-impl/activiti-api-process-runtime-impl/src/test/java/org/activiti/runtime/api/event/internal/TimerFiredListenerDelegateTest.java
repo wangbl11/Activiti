@@ -16,25 +16,22 @@
 
 package org.activiti.runtime.api.event.internal;
 
+import java.util.Collections;
+import java.util.Optional;
 import org.activiti.api.process.model.events.BPMNTimerFiredEvent;
 import org.activiti.api.process.runtime.events.listener.BPMNElementEventListener;
 import org.activiti.api.runtime.event.impl.BPMNTimerFiredEventImpl;
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
 import org.activiti.runtime.api.event.impl.ToTimerFiredConverter;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-
-import java.util.Collections;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class TimerFiredListenerDelegateTest {
 
     private TimerFiredListenerDelegate listenerDelegate;
@@ -45,9 +42,8 @@ public class TimerFiredListenerDelegateTest {
     @Mock
     private ToTimerFiredConverter converter;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        initMocks(this);
         listenerDelegate = new TimerFiredListenerDelegate(Collections.singletonList(listener), converter);
     }
 

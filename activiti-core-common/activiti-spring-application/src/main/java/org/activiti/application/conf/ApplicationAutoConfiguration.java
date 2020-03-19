@@ -19,11 +19,10 @@ package org.activiti.application.conf;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 import org.activiti.application.ApplicationDiscovery;
 import org.activiti.application.ApplicationEntryDiscovery;
-import org.activiti.application.ApplicationService;
 import org.activiti.application.ApplicationReader;
+import org.activiti.application.ApplicationService;
 import org.activiti.application.deployer.ApplicationDeployer;
 import org.activiti.application.deployer.ApplicationEntryDeployer;
 import org.springframework.beans.factory.InitializingBean;

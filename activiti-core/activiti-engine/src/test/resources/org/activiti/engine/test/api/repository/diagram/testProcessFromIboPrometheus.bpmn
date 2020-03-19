@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<semantic:definitions xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:ibo="http://www.ibo.de/XML/BPMN" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="ibo-4f7774f6-c5e9-4d7b-8c97-ffb9d82ed60d" targetNamespace="http://www.ibo.de/BPMN/2.0" exporter="ibo.NET 3.0 (Debug)" exporterVersion="3.0.23.0" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL">
+<semantic:definitions xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                      xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                      xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="ibo-4f7774f6-c5e9-4d7b-8c97-ffb9d82ed60d"
+                      targetNamespace="http://www.ibo.de/BPMN/2.0" exporter="ibo.NET 3.0 (Debug)"
+                      exporterVersion="3.0.23.0" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL">
   <semantic:process id="ibo-7995aeea-4d78-4cbd-881f-2560d11ae141" isExecutable="false">
     <semantic:startEvent id="ibo-5dfcad89-ba81-4556-a1f4-91bdc6e1e7a0" name="">
       <semantic:outgoing>ibo-e3bd0c30-0e91-4637-a8f4-886be5da25d1</semantic:outgoing>

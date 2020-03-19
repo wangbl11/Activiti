@@ -16,22 +16,17 @@
 
 package org.activiti.spring.process;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.MockitoAnnotations.initMocks;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class ProcessExtensionResourceReaderTest {
 
     @InjectMocks
     private ProcessExtensionResourceReader reader;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-    }
 
     @Test
     public void shouldSelectFileWithSuffixHyphenExtensionsDotJson() {

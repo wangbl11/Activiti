@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.runtime;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.api.internal.Internal;
 import org.activiti.engine.query.Query;
@@ -29,19 +28,19 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
 
   /** Only select executions which have the given process definition key. **/
   ExecutionQuery processDefinitionKey(String processDefinitionKey);
-  
+
   /** Only select executions which have process definitions with the given keys. **/
   ExecutionQuery processDefinitionKeys(Set<String> processDefinitionKeys);
-  
+
   /** Only select executions which have the given process definition id. **/
   ExecutionQuery processDefinitionId(String processDefinitionId);
-  
+
   /** Only select executions which have the given process definition category. */
   ExecutionQuery processDefinitionCategory(String processDefinitionCategory);
 
   /** Only select executions which have the given process definition name. */
   ExecutionQuery processDefinitionName(String processDefinitionName);
-  
+
   /**
   * Only select executions which have the given process definition version.
   * Particulary useful when used in combination with {@link #processDefinitionKey(String)}
@@ -56,7 +55,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
 
   /**
    * Only executions with the given business key.
-   * 
+   *
    * Note that only process instances have a business key and as such, child executions will NOT be returned. If you want to return child executions of the process instance with the given business key
    * too, use the {@link #processInstanceBusinessKey(String, boolean)} method with a boolean value of <i>true</i> instead.
    */
@@ -111,7 +110,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
   /**
    * Only select executions which have a local variable with the given value. The type of variable is determined based on the value, using types configured in
    * {@link ProcessEngineConfiguration#getVariableTypes()}. Byte-arrays and {@link Serializable} objects (which are not primitive type wrappers) are not supported.
-   * 
+   *
    * @param name
    *          name of the variable, cannot be null.
    */
@@ -123,7 +122,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
    * This method only works if your database has encoding/collation that supports case-sensitive queries. For example, use "collate UTF-8" on MySQL and for MSSQL, select one of the case-sensitive
    * Collations available (<a href="http://msdn.microsoft.com/en-us/library/ms144250(v=sql.105).aspx" >MSDN Server Collation Reference</a>).
    * </p>
-   * 
+   *
    * @param name
    *          name of the variable, cannot be null.
    * @param value
@@ -140,7 +139,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
   /**
    * Only select executions which have a local variable with the given name, but with a different value than the passed value. Byte-arrays and {@link Serializable} objects (which are not primitive
    * type wrappers) are not supported.
-   * 
+   *
    * @param name
    *          name of the variable, cannot be null.
    */
@@ -152,7 +151,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
    * This method only works if your database has encoding/collation that supports case-sensitive queries. For example, use "collate UTF-8" on MySQL and for MSSQL, select one of the case-sensitive
    * Collations available (<a href="http://msdn.microsoft.com/en-us/library/ms144250(v=sql.105).aspx" >MSDN Server Collation Reference</a>).
    * </p>
-   * 
+   *
    * @param name
    *          name of the variable, cannot be null.
    * @param value
@@ -163,7 +162,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
   /**
    * Only select executions which have a local variable value greater than the passed value. Booleans, Byte-arrays and {@link Serializable} objects (which are not primitive type wrappers) are not
    * supported.
-   * 
+   *
    * @param name
    *          variable name, cannot be null.
    * @param value
@@ -174,7 +173,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
   /**
    * Only select executions which have a local variable value greater than or equal to the passed value. Booleans, Byte-arrays and {@link Serializable} objects (which are not primitive type wrappers)
    * are not supported.
-   * 
+   *
    * @param name
    *          variable name, cannot be null.
    * @param value
@@ -185,7 +184,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
   /**
    * Only select executions which have a local variable value less than the passed value. Booleans, Byte-arrays and {@link Serializable} objects (which are not primitive type wrappers) are not
    * supported.
-   * 
+   *
    * @param name
    *          variable name, cannot be null.
    * @param value
@@ -196,7 +195,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
   /**
    * Only select executions which have a local variable value less than or equal to the passed value. Booleans, Byte-arrays and {@link Serializable} objects (which are not primitive type wrappers) are
    * not supported.
-   * 
+   *
    * @param name
    *          variable name, cannot be null.
    * @param value
@@ -206,24 +205,24 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
 
   /**
    * Only select executions which have a local variable value like the given value. This be used on string variables only.
-   * 
+   *
    * @param name
    *          variable name, cannot be null.
    * @param value
    *          variable value, cannot be null. The string can include the wildcard character '%' to express like-strategy: starts with (string%), ends with (%string) or contains (%string%).
    */
   ExecutionQuery variableValueLike(String name, String value);
-  
-  /** 
+
+  /**
    * Only select executions which have a local variable value like the given value (case insensitive).
    * This be used on string variables only.
    * @param name variable name, cannot be null.
    * @param value variable value, cannot be null. The string can include the
-   * wildcard character '%' to express like-strategy: 
+   * wildcard character '%' to express like-strategy:
    * starts with (string%), ends with (%string) or contains (%string%).
    */
   ExecutionQuery variableValueLikeIgnoreCase(String name, String value);
-  
+
   /**
    * Only select executions which are part of a process that have a variable with the given name set to the given value. Byte-arrays and {@link Serializable} objects (which are not primitive type
    * wrappers) are not supported.
@@ -248,7 +247,7 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
    * This method only works if your database has encoding/collation that supports case-sensitive queries. For example, use "collate UTF-8" on MySQL and for MSSQL, select one of the case-sensitive
    * Collations available (<a href="http://msdn.microsoft.com/en-us/library/ms144250(v=sql.105).aspx" >MSDN Server Collation Reference</a>).
    * </p>
-   * 
+   *
    * @param name
    *          name of the variable, cannot be null.
    * @param value
@@ -262,33 +261,33 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
    * This method only works if your database has encoding/collation that supports case-sensitive queries. For example, use "collate UTF-8" on MySQL and for MSSQL, select one of the case-sensitive
    * Collations available (<a href="http://msdn.microsoft.com/en-us/library/ms144250(v=sql.105).aspx" >MSDN Server Collation Reference</a>).
    * </p>
-   * 
+   *
    * @param name
    *          name of the variable, cannot be null.
    * @param value
    *          value of the variable, cannot be null.
    */
   ExecutionQuery processVariableValueNotEqualsIgnoreCase(String name, String value);
-  
+
   /**
    * Only select executions which are part of a process that have at least one variable like the given value.
    * Byte-arrays and {@link Serializable} objects (which are not primitive type wrappers) are not supported.
    */
   ExecutionQuery processVariableValueLike(String name, String value);
-  
+
   /**
    * Only select executions which are part of a process that have at least one variable like the given value (case insensitive).
    * Byte-arrays and {@link Serializable} objects (which are not primitive type wrappers) are not supported.
    */
   ExecutionQuery processVariableValueLikeIgnoreCase(String name, String value);
-  
+
   // event subscriptions //////////////////////////////////////////////////
 
   /**
    * Only select executions which have a signal event subscription for the given signal name.
-   * 
+   *
    * (The signalName is specified using the 'name' attribute of the signal element in the BPMN 2.0 XML.)
-   * 
+   *
    * @param signalName
    *          the name of the signal the execution has subscribed to
    */
@@ -296,9 +295,9 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
 
   /**
    * Only select executions which have a message event subscription for the given messageName.
-   * 
+   *
    * (The messageName is specified using the 'name' attribute of the message element in the BPMN 2.0 XML.)
-   * 
+   *
    * @param messageName
    *          the name of the message the execution has subscribed to
    */
@@ -308,9 +307,9 @@ public interface ExecutionQuery extends Query<ExecutionQuery, Execution> {
    * Localize execution name and description to specified locale.
    */
   ExecutionQuery locale(String locale);
-  
+
   /**
-   * Instruct localization to fallback to more general locales including the default locale of the JVM if the specified locale is not found. 
+   * Instruct localization to fallback to more general locales including the default locale of the JVM if the specified locale is not found.
    */
   ExecutionQuery withLocalizationFallback();
 

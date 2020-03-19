@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@ package org.activiti.engine.impl.cmd;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import org.activiti.engine.impl.Page;
 import org.activiti.engine.impl.asyncexecutor.AcquiredTimerJobEntities;
 import org.activiti.engine.impl.asyncexecutor.AsyncExecutor;
@@ -48,10 +47,10 @@ public class AcquireTimerJobsCmd implements Command<AcquiredTimerJobEntities> {
   }
 
   protected void lockJob(CommandContext commandContext, TimerJobEntity job, int lockTimeInMillis) {
-    
-    // This will trigger an optimistic locking exception when two concurrent executors 
+
+    // This will trigger an optimistic locking exception when two concurrent executors
     // try to lock, as the revision will not match.
-    
+
     GregorianCalendar gregorianCalendar = new GregorianCalendar();
     gregorianCalendar.setTime(commandContext.getProcessEngineConfiguration().getClock().getCurrentTime());
     gregorianCalendar.add(Calendar.MILLISECOND, lockTimeInMillis);

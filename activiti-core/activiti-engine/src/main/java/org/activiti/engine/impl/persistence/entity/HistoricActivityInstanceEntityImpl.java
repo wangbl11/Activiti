@@ -17,7 +17,6 @@ package org.activiti.engine.impl.persistence.entity;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.activiti.engine.ProcessEngineConfiguration;
 
 /**
@@ -36,9 +35,9 @@ public class HistoricActivityInstanceEntityImpl extends HistoricScopeInstanceEnt
   protected String taskId;
   protected String calledProcessInstanceId;
   protected String tenantId = ProcessEngineConfiguration.NO_TENANT_ID;
-  
+
   public HistoricActivityInstanceEntityImpl() {
-    
+
   }
 
   public Object getPersistentState() {

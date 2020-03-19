@@ -1,5 +1,7 @@
 package org.activiti.engine.impl.util.condition;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.engine.DynamicBpmnConstants;
 import org.activiti.engine.delegate.DelegateExecution;
@@ -8,9 +10,6 @@ import org.activiti.engine.impl.Condition;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.el.UelExpressionCondition;
 import org.apache.commons.lang3.StringUtils;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
 
@@ -26,7 +25,7 @@ public class ConditionUtil {
     } else {
       conditionExpression = sequenceFlow.getConditionExpression();
     }
-    
+
     if (StringUtils.isNotEmpty(conditionExpression)) {
 
       Expression expression = Context.getProcessEngineConfiguration().getExpressionManager().createExpression(conditionExpression);
@@ -42,7 +41,7 @@ public class ConditionUtil {
     }
 
   }
-    
+
   protected static String getActiveValue(String originalValue, String propertyName, ObjectNode elementProperties) {
     String activeValue = originalValue;
     if (elementProperties != null) {

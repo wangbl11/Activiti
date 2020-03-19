@@ -16,17 +16,16 @@
 
 package org.activiti.engine.impl.variable;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 public class JsonTypeConverterTest {
 

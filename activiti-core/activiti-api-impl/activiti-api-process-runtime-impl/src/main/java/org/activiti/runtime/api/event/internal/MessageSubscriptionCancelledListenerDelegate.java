@@ -18,7 +18,6 @@ package org.activiti.runtime.api.event.internal;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.activiti.api.process.model.events.MessageSubscriptionCancelledEvent;
 import org.activiti.api.process.runtime.events.listener.ProcessRuntimeEventListener;
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
@@ -53,7 +52,7 @@ public class MessageSubscriptionCancelledListenerDelegate implements ActivitiEve
     public boolean isFailOnException() {
         return false;
     }
-    
+
     protected boolean isValidEvent(ActivitiEvent event) {
         return Optional.ofNullable(event)
                        .filter(ActivitiEntityEvent.class::isInstance)

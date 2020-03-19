@@ -14,7 +14,6 @@ package org.activiti.examples.bpmn.tasklistener;
 
 import java.util.List;
 import java.util.Map;
-
 import org.activiti.bpmn.model.Task;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.history.HistoricProcessInstance;
@@ -32,7 +31,7 @@ public class MyTransactionalOperationTransactionDependentTaskListener extends Cu
 
     if (Context.getCommandContext().getProcessEngineConfiguration().getHistoryLevel().isAtLeast(HistoryLevel.ACTIVITY)) {
       HistoryService historyService = Context.getCommandContext().getProcessEngineConfiguration().getHistoryService();
-  
+
       // delete first historic instance
       List<HistoricProcessInstance> historicProcessInstances = historyService.createHistoricProcessInstanceQuery().list();
       historyService.deleteHistoricProcessInstance(historicProcessInstances.get(0).getId());

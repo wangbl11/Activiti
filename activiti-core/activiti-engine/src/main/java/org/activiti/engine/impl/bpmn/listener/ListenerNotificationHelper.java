@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,22 +14,9 @@ package org.activiti.engine.impl.bpmn.listener;
 
 import java.util.List;
 import java.util.Map;
-
-import org.activiti.bpmn.model.ActivitiListener;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.HasExecutionListeners;
-import org.activiti.bpmn.model.ImplementationType;
-import org.activiti.bpmn.model.Task;
-import org.activiti.bpmn.model.UserTask;
+import org.activiti.bpmn.model.*;
 import org.activiti.engine.ActivitiException;
-import org.activiti.engine.delegate.BaseExecutionListener;
-import org.activiti.engine.delegate.BaseTaskListener;
-import org.activiti.engine.delegate.CustomPropertiesResolver;
-import org.activiti.engine.delegate.DelegateExecution;
-import org.activiti.engine.delegate.ExecutionListener;
-import org.activiti.engine.delegate.TaskListener;
-import org.activiti.engine.delegate.TransactionDependentExecutionListener;
-import org.activiti.engine.delegate.TransactionDependentTaskListener;
+import org.activiti.engine.delegate.*;
 import org.activiti.engine.impl.bpmn.parser.factory.ListenerFactory;
 import org.activiti.engine.impl.cfg.TransactionContext;
 import org.activiti.engine.impl.cfg.TransactionListener;
@@ -43,7 +30,7 @@ import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 
  */
 public class ListenerNotificationHelper {
-  
+
   public void executeExecutionListeners(HasExecutionListeners elementWithExecutionListeners, DelegateExecution execution, String eventType) {
     List<ActivitiListener> listeners = elementWithExecutionListeners.getExecutionListeners();
     if (listeners != null && listeners.size() > 0) {
@@ -91,7 +78,7 @@ public class ListenerNotificationHelper {
 
     TransactionDependentExecutionListenerExecutionScope scope = new TransactionDependentExecutionListenerExecutionScope(
         execution.getProcessInstanceId(), execution.getId(), execution.getCurrentFlowElement(), executionVariablesToUse, customPropertiesMapToUse);
-    
+
     addTransactionListener(activitiListener, new ExecuteExecutionListenerTransactionListener(executionListener, scope));
   }
 
@@ -105,7 +92,7 @@ public class ListenerNotificationHelper {
       }
     }
   }
-  
+
   public void executeTaskListeners(UserTask userTask, TaskEntity taskEntity, String eventType) {
     for (ActivitiListener activitiListener : userTask.getTaskListeners()) {
       String event = activitiListener.getEvent();
@@ -130,7 +117,7 @@ public class ListenerNotificationHelper {
       }
     }
   }
-  
+
   protected BaseTaskListener createTaskListener(ActivitiListener activitiListener) {
     BaseTaskListener taskListener = null;
 
@@ -150,17 +137,17 @@ public class ListenerNotificationHelper {
     }
     return taskListener;
   }
-  
+
   protected void planTransactionDependentTaskListener(DelegateExecution execution, TransactionDependentTaskListener taskListener, ActivitiListener activitiListener) {
     Map<String, Object> executionVariablesToUse = execution.getVariables();
     CustomPropertiesResolver customPropertiesResolver = createCustomPropertiesResolver(activitiListener);
     Map<String, Object> customPropertiesMapToUse = invokeCustomPropertiesResolver(execution, customPropertiesResolver);
-    
+
     TransactionDependentTaskListenerExecutionScope scope = new TransactionDependentTaskListenerExecutionScope(
         execution.getProcessInstanceId(), execution.getId(), (Task) execution.getCurrentFlowElement(), executionVariablesToUse, customPropertiesMapToUse);
     addTransactionListener(activitiListener, new ExecuteTaskListenerTransactionListener(taskListener, scope));
   }
-  
+
   protected CustomPropertiesResolver createCustomPropertiesResolver(ActivitiListener activitiListener) {
     CustomPropertiesResolver customPropertiesResolver = null;
     ListenerFactory listenerFactory = Context.getProcessEngineConfiguration().getListenerFactory();
@@ -173,7 +160,7 @@ public class ListenerNotificationHelper {
     }
     return customPropertiesResolver;
   }
-  
+
   protected Map<String, Object> invokeCustomPropertiesResolver(DelegateExecution execution, CustomPropertiesResolver customPropertiesResolver) {
     Map<String, Object> customPropertiesMapToUse = null;
     if (customPropertiesResolver != null) {
@@ -181,18 +168,18 @@ public class ListenerNotificationHelper {
     }
     return customPropertiesMapToUse;
   }
-  
+
   protected void addTransactionListener(ActivitiListener activitiListener, TransactionListener transactionListener) {
     TransactionContext transactionContext = Context.getTransactionContext();
     if (TransactionDependentExecutionListener.ON_TRANSACTION_BEFORE_COMMIT.equals(activitiListener.getOnTransaction())) {
       transactionContext.addTransactionListener(TransactionState.COMMITTING, transactionListener);
-      
+
     } else if (TransactionDependentExecutionListener.ON_TRANSACTION_COMMITTED.equals(activitiListener.getOnTransaction())) {
       transactionContext.addTransactionListener(TransactionState.COMMITTED, transactionListener);
-      
+
     } else if (TransactionDependentExecutionListener.ON_TRANSACTION_ROLLED_BACK.equals(activitiListener.getOnTransaction())) {
       transactionContext.addTransactionListener(TransactionState.ROLLED_BACK, transactionListener);
-      
+
     }
   }
 

@@ -19,7 +19,6 @@ package org.activiti.api.task.model.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 import org.activiti.api.runtime.model.impl.ApplicationElementImpl;
 import org.activiti.api.task.model.Task;
 
@@ -219,16 +218,16 @@ public class TaskImpl extends ApplicationElementImpl implements Task {
     public void setDuration(Long duration) {
         this.duration = duration;
     }
-    
+
     @Override
-    public Integer getProcessDefinitionVersion() { 
-        return processDefinitionVersion; 
+    public Integer getProcessDefinitionVersion() {
+        return processDefinitionVersion;
     }
-    
+
     public void setProcessDefinitionVersion(Integer processDefinitionVersion) {
         this.processDefinitionVersion = processDefinitionVersion;
     }
-    
+
     @Override
     public String getBusinessKey() {
         return businessKey;
@@ -242,7 +241,7 @@ public class TaskImpl extends ApplicationElementImpl implements Task {
     public void setBusinessKey(String businessKey) {
         this.businessKey = businessKey;
     }
-    
+
     @Override
     public String getTaskDefinitionKey() {
         return taskDefinitionKey;
@@ -251,7 +250,7 @@ public class TaskImpl extends ApplicationElementImpl implements Task {
     public void setTaskDefinitionKey(String taskDefinitionKey) {
         this.taskDefinitionKey = taskDefinitionKey;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

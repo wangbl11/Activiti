@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,33 +13,6 @@
 
 package org.activiti.bpmn;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.swing.SwingConstants;
-
-import org.activiti.bpmn.model.Artifact;
-import org.activiti.bpmn.model.Association;
-import org.activiti.bpmn.model.BaseElement;
-import org.activiti.bpmn.model.BoundaryEvent;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.bpmn.model.CallActivity;
-import org.activiti.bpmn.model.DataObject;
-import org.activiti.bpmn.model.Event;
-import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.FlowElementsContainer;
-import org.activiti.bpmn.model.Gateway;
-import org.activiti.bpmn.model.GraphicInfo;
-import org.activiti.bpmn.model.Process;
-import org.activiti.bpmn.model.SequenceFlow;
-import org.activiti.bpmn.model.SubProcess;
-import org.activiti.bpmn.model.Task;
-
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
@@ -48,11 +21,14 @@ import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxEdgeStyle;
 import com.mxgraph.view.mxGraph;
-import org.activiti.bpmn.model.TextAnnotation;
+import java.util.*;
+import javax.swing.*;
+import org.activiti.bpmn.model.Process;
+import org.activiti.bpmn.model.*;
 
 /**
  * Auto layouts a {@link BpmnModel}.
- * 
+ *
 
  */
 public class BpmnAutoLayout {
@@ -110,7 +86,7 @@ public class BpmnAutoLayout {
     graph.getModel().beginUpdate();
 
  // Subprocesses are handled in a new instance of BpmnAutoLayout, hence they instantiations of new maps here.
-    
+
     handledFlowElements = new HashMap<String, FlowElement>();
     handledArtifacts = new HashMap<String, Artifact>();
     generatedVertices = new HashMap<String, Object>();
@@ -119,7 +95,7 @@ public class BpmnAutoLayout {
 
     associations = new HashMap<String, Association>(); //Associations are gathered and processed afterwards, because we must be sure we already found source and target
     textAnnotations = new HashMap<String, TextAnnotation>(); // Text Annotations are gathered and processed afterwards, because we must be sure we already found the parent.
-    
+
     sequenceFlows = new HashMap<String, SequenceFlow>(); // Sequence flow are gathered and processed afterwards,because we mustbe sure we already found source and target
     boundaryEvents = new ArrayList<BoundaryEvent>(); // Boundary events are gathered and processed afterwards, because we must be sure we have its parent
 
@@ -506,7 +482,7 @@ public class BpmnAutoLayout {
   /**
    * Since subprocesses are autolayouted independently (see {@link #handleSubProcess(FlowElement)}), the elements have x and y coordinates relative to the bounds of the subprocess (thinking the
    * subprocess is on (0,0). This however, does not work for nested subprocesses, as they need to take in account the x and y coordinates for each of the parent subproceses.
-   * 
+   *
    * This method is to be called after fully layouting one process, since ALL elements need to have x and y.
    */
   protected void translateNestedSubprocesses(Process process) {

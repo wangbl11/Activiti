@@ -16,12 +16,11 @@
 
 package org.activiti.runtime.api.event.impl;
 
+import java.util.Optional;
 import org.activiti.api.process.model.events.BPMNSequenceFlowTakenEvent;
 import org.activiti.api.runtime.event.impl.BPMNSequenceFlowTakenImpl;
 import org.activiti.api.runtime.model.impl.BPMNSequenceFlowImpl;
 import org.activiti.engine.delegate.event.ActivitiSequenceFlowTakenEvent;
-
-import java.util.Optional;
 
 public class ToSequenceFlowTakenConverter implements EventConverter<BPMNSequenceFlowTakenEvent, ActivitiSequenceFlowTakenEvent> {
 

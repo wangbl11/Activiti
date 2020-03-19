@@ -13,7 +13,6 @@
 package org.activiti.engine.impl.bpmn.listener;
 
 import java.util.Map;
-
 import org.activiti.bpmn.model.FlowElement;
 
 /**
@@ -28,7 +27,7 @@ public class TransactionDependentExecutionListenerExecutionScope {
   protected final Map<String, Object> customPropertiesMap;
 
   public TransactionDependentExecutionListenerExecutionScope(String processInstanceId, String executionId,
-                                                             FlowElement flowElement, Map<String, Object> executionVariables, 
+                                                             FlowElement flowElement, Map<String, Object> executionVariables,
                                                              Map<String, Object> customPropertiesMap) {
     this.processInstanceId = processInstanceId;
     this.executionId = executionId;
