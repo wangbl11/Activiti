@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 日志级别 -->
+<!-- TRACE < DEBUG < INFO < WARN < ERROR  -->
+<!-- 根节点<configuration>，包含下面三个属性： -->
+<!-- scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。 -->
+        <!-- scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
+        <!-- debug: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 子节点<contextName>：用来设置上下文名称，每个logger都关联到logger上下文，默认上下文名称为default。但可以使用<contextName>设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改 -->
+    <contextName>helloworld</contextName>
+    <!-- 状态监听器  控制台监听日志-->
+    <!--<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />-->
+    <property name="log.dir" value="target/logs" />
+    <property name="encoding" value="UTF-8" />
+    <property name="std" value="%d{HH:mm:ss.SSS[%thread][%-5level]%msg }" />
+    <property name="normal" value="%d{yyyy-MM-dd:HH:mm:ss.SSS}[%thread]" />
+
+    <!-- 日志级别变更穿透 -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
+
+    <!-- drop duplicate message是用来过滤重复日志的-->
+    <!-- 有时这个会过滤掉一些有用的信息，比如-->
+<!--    <turboFilter class="ch.qos.logback.classic.turbo.DuplicateMessageFilter"/>-->
+
+    <!--<property scope="context" name="logEnv" value="${log.env}" />-->
+<!--    <property scope="context" resource="log.properties"/>-->
+    <!--<property scope="context" name="log.file.path" value="/usr/local/logs" />-->
+    <!--<property scope="context" name="smtp.enable" value="true" />-->
+    <!--<property scope="context" name="smtp.host" value="smtp.126.com" />-->
+    <!--<property scope="context" name="smtp.port" value="25" />-->
+    <!--<property scope="context" name="smtp.username" value="xxx@126.com" />-->
+    <!--<property scope="context" name="smtp.password" value="xxx" />-->
+    <!--<property scope="context" name="smtp.from" value="xxx@126.com" />-->
+    <!--<property scope="context" name="smtp.to" value="xxx@126.com" />-->
+    <!--<property scope="context" name="max.history" value="30" />-->
+    <!--<property scope="context" name="file.html.size" value="512MB" />-->
+    <!--<property scope="context" name="file.html.enable" value="true" />-->
+
+    <!-- 多应用区分 -->
+    <!--<timestamp key="byDay" datePattern="yyyyMMdd" timeReference="contextBirth" />-->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss.SSS}) %magenta([%thread]) %highlight(%-5level) %cyan(%logger{36}) -
+                %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+<!--    &lt;!&ndash; <appender name="EVENT_LOG_STDOUT" class="org.eclipse.virgo.medic.log.logback.ReroutingAwareConsoleAppender">-->
+<!--		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+<!--			<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-28.28thread &lt;%X{medic.eventCode}&gt; %msg %ex%n</Pattern>-->
+<!--		</encoder>-->
+<!--	</appender> &ndash;&gt;-->
+
+<!--    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>${log.file.path}/query.log</file>-->
+<!--        <append>true</append>-->
+<!--        &lt;!&ndash; set immediateFlush to false for much higher logging throughput &ndash;&gt;-->
+<!--        <immediateFlush>true</immediateFlush>-->
+
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; daily rollover &ndash;&gt;-->
+<!--            <fileNamePattern>${log.file.path}/query.%d{yyyy-MM-dd}.log.gz</fileNamePattern>-->
+
+<!--            &lt;!&ndash; keep 30 days' worth of history capped at 3GB total size &ndash;&gt;-->
+<!--            <maxHistory>${max.history:-30}</maxHistory>-->
+<!--            &lt;!&ndash;<totalSizeCap>3GB</totalSizeCap>&ndash;&gt;-->
+
+<!--        </rollingPolicy>-->
+
+<!--        &lt;!&ndash; encoders are assigned the type-->
+<!--             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default &ndash;&gt;-->
+<!--        <encoder>-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    &lt;!&ndash; <appender name="EVENT_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--		<file>serviceability/eventlogs/eventlog.log</file>-->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+<!--			<FileNamePattern>serviceability/eventlogs/eventlog_%i.log</FileNamePattern>-->
+<!--			<MinIndex>1</MinIndex>-->
+<!--			<MaxIndex>13</MaxIndex>-->
+<!--		</rollingPolicy>-->
+<!--		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--			<MaxFileSize>10MB</MaxFileSize>-->
+<!--		</triggeringPolicy>-->
+<!--		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+<!--			<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-28.28thread &lt;%X{medic.eventCode}&gt; %msg %ex%n</Pattern>-->
+<!--		</encoder>-->
+<!--	</appender> &ndash;&gt;-->
+
+<!--    <appender name="HTML_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+
+<!--        <file>${log.file.path}/query.jsp</file>-->
+<!--        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">-->
+<!--            <evaluator class="ch.qos.logback.classic.boolex.GEventEvaluator">-->
+<!--                <expression>-->
+<!--                    ${file.html.enable} =~ /true/-->
+<!--                </expression>-->
+<!--            </evaluator>-->
+<!--            <OnMismatch>DENY</OnMismatch>-->
+<!--            <OnMatch>ACCEPT</OnMatch>-->
+<!--        </filter>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; rollover daily &ndash;&gt;-->
+<!--            <fileNamePattern>${log.file.path}/query.%d{yyyy-MM-dd}.%i.html</fileNamePattern>-->
+<!--            <maxFileSize>${file.html.size:-512MB}</maxFileSize>-->
+<!--            <maxHistory>1</maxHistory>-->
+<!--            <totalSizeCap>${file.html.size:-512MB}</totalSizeCap>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">-->
+<!--            <layout class="ch.qos.logback.classic.html.HTMLLayout">-->
+<!--                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg</pattern>-->
+<!--            </layout>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    &lt;!&ndash; <appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--		<file>serviceability/logs/log.log</file>-->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+<!--			<FileNamePattern>serviceability/logs/log_%i.log</FileNamePattern>-->
+<!--			<MinIndex>1</MinIndex>-->
+<!--			<MaxIndex>13</MaxIndex>-->
+<!--		</rollingPolicy>-->
+<!--		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--			<MaxFileSize>10MB</MaxFileSize>-->
+<!--		</triggeringPolicy>-->
+<!--		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+<!--			<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level %-28.28thread %-64.64logger{64} %X{medic.eventCode} %msg %ex%n</Pattern>-->
+<!--		</encoder>-->
+<!--	</appender> &ndash;&gt;-->
+
+<!--    &lt;!&ndash;discriminator鉴别器，根据taskId这个key对应的value鉴别日志事件，然后委托给具体appender写日志&ndash;&gt;-->
+
+<!--    &lt;!&ndash; <appender name="SIFTED_LOG_FILE" class="ch.qos.logback.classic.sift.SiftingAppender">-->
+<!--		<discriminator>-->
+<!--			<Key>applicationName</Key>-->
+<!--			<DefaultValue>virgo-server</DefaultValue>-->
+<!--		</discriminator>-->
+<!--		<sift>-->
+<!--			<appender name="${applicationName}_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--				<file>serviceability/logs/${applicationName}/log.log</file>-->
+<!--				<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+<!--					<FileNamePattern>serviceability/logs/${applicationName}/log_%i.log</FileNamePattern>-->
+<!--					<MinIndex>1</MinIndex>-->
+<!--					<MaxIndex>13</MaxIndex>-->
+<!--				</rollingPolicy>-->
+<!--				<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--					<MaxFileSize>10MB</MaxFileSize>-->
+<!--				</triggeringPolicy>-->
+<!--				<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+<!--					<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level %-28.28thread %-64.64logger{64} %X{medic.eventCode} %msg %ex%n</Pattern>-->
+<!--				</encoder>-->
+<!--			</appender>-->
+<!--		</sift>-->
+<!--	</appender> &ndash;&gt;-->
+
+<!--    &lt;!&ndash; marker email send &ndash;&gt;-->
+<!--    <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">-->
+<!--        &lt;!&ndash; event描述信息 &ndash;&gt;-->
+<!--        <discriminator class="ch.qos.logback.classic.sift.MDCBasedDiscriminator">-->
+<!--            <key>host</key>-->
+<!--            <defaultValue>none</defaultValue>-->
+<!--        </discriminator>-->
+<!--        &lt;!&ndash; email  &ndash;&gt;-->
+<!--        <smtpHost>${smtp.host}</smtpHost>-->
+<!--        <smtpPort>${smtp.port}</smtpPort>-->
+<!--        <username>${smtp.username}</username>-->
+<!--        <password>${smtp.password}</password>-->
+<!--        <to>${smtp.to}</to>-->
+<!--        <from>${smtp.from}</from>-->
+<!--        <subject>【ERROR】: %logger{0} from %X{host}</subject>-->
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <pattern>%date %-5level %logger{35} - %message%n</pattern>-->
+<!--        </layout>-->
+<!--        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">-->
+<!--            <evaluator class="ch.qos.logback.classic.boolex.GEventEvaluator">-->
+<!--                <expression>-->
+<!--                    ${smtp.enable} =~ /true/-->
+<!--                </expression>-->
+<!--            </evaluator>-->
+<!--            <OnMismatch>DENY</OnMismatch>-->
+<!--            <OnMatch>ACCEPT</OnMatch>-->
+<!--        </filter>-->
+<!--        <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">-->
+<!--            <marker>NOTIFY</marker>-->
+<!--            &lt;!&ndash; you specify add as many markers as you want &ndash;&gt;-->
+<!--            &lt;!&ndash;<marker>TRANSACTION_FAILURE</marker>&ndash;&gt;-->
+<!--        </evaluator>-->
+<!--        <cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">-->
+<!--            &lt;!&ndash; send just one log entry per email &ndash;&gt;-->
+<!--            <bufferSize>1</bufferSize>-->
+<!--        </cyclicBufferTracker>-->
+<!--    </appender>-->
+
+<!--    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>${log.file.path}/query-error.log</file>-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>ERROR</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; daily rollover &ndash;&gt;-->
+<!--            <fileNamePattern>${log.file.path}/query-error.%d{yyyy-MM-dd}.log.gz</fileNamePattern>-->
+<!--            <maxHistory>${max.history:-30}</maxHistory>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder>-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    <logger name="com.derunbang" level="${log.level:-info}">-->
+<!--        <appender-ref ref="ERROR"/>-->
+<!--    </logger>-->
+    <logger name="com.derunbang">
+        <level value="DEBUG"/>
+    </logger>
+
+    <root level="${log.level:-info}">
+        <appender-ref ref="STDOUT"/>
+<!--        <appender-ref ref="FILE"/>-->
+<!--        <appender-ref ref="HTML_FILE"/>-->
+<!--        <appender-ref ref="EMAIL"/>-->
+    </root>
+    <!--<if condition='p("logEnv").contains("dev")'>-->
+    <!--<then>-->
+    <!--<root level="info">-->
+    <!--<appender-ref ref="STDOUT" />-->
+    <!--</root>-->
+    <!--</then>-->
+    <!--<else>-->
+    <!--<root level="debug">-->
+    <!--<appender-ref ref="STDOUT" />-->
+    <!--</root>-->
+    <!--</else>-->
+    <!--</if>-->
+
+    <!-- <logger level="INFO" additivity="false" name="org.eclipse.virgo.medic.eventlog.localized">
+		<appender-ref ref="EVENT_LOG_STDOUT" />
+		<appender-ref ref="EVENT_LOG_FILE" />
+	</logger>
+
+	<logger level="INFO" additivity="false" name="org.eclipse.virgo.medic.eventlog.default">
+		<appender-ref ref="SIFTED_LOG_FILE" />
+		<appender-ref ref="LOG_FILE" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="SIFTED_LOG_FILE" />
+		<appender-ref ref="LOG_FILE" />
+</root>
+ -->
+</configuration>

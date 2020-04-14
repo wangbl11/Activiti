@@ -1,0 +1,8 @@
+liquibase:
+  enabled: false
+server:
+  port: 9999
+  context-path: "/activiti-app"
+spring:
+  freemarker:
+    check-template-location: false
